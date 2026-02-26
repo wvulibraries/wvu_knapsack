@@ -25,3 +25,6 @@ ansible/files/id_rsa
 ansible/ghcr-token.yml
 .bash_history
 /.cache
+/data
+/env
+

@@ -26,5 +26,4 @@ ansible/ghcr-token.yml
 .bash_history
 /.cache
 /data
-/env
 

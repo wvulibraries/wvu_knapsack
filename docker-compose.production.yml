@@ -36,6 +36,7 @@ services:
       - ./data/zk:/datalog
 
   solr:
+    platform: linux/amd64
     image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
     extends:
       file: hyrax-webapp/docker-compose.production.yml
@@ -54,6 +55,7 @@ services:
       - ./data/fcrepo:/data
 
   db:
+    platform: linux/amd64
     env_file:
       - .env
       - .env.production
@@ -115,6 +117,7 @@ services:
       service: initialize_app
 
   redis:
+    platform: linux/amd64
     extends:
       file: hyrax-webapp/docker-compose.production.yml
       service: redis

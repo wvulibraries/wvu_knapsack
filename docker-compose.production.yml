@@ -104,12 +104,6 @@ services:
       - ./data/cache:/app/samvera/hyrax-webapp/tmp/cache:cached
       - .:/app/samvera
 
-  check_volumes:
-    <<: *app
-    extends:
-      file: hyrax-webapp/docker-compose.production.yml
-      service: check_volumes
-
   initialize_app:
     <<: *app
     extends:

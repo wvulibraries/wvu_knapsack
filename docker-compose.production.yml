@@ -4,6 +4,7 @@
 
 x-app: &app
   env_file:
+    - .env
     - .env.production
   build:
     context: .
@@ -48,7 +49,8 @@ services:
 
   fcrepo:
     env_file:
-      - env/.env.production
+      - .env
+      - .env.production
     extends:
       file: hyrax-webapp/docker-compose.production.yml
       service: fcrepo
@@ -57,7 +59,8 @@ services:
 
   db:
     env_file:
-      - env/.env.production
+      - .env
+      - .env.production
     extends:
       file: hyrax-webapp/docker-compose.production.yml
       service: db

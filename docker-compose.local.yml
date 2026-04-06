@@ -54,7 +54,8 @@ services:
 
   solr:
     # container_name: solr
-    image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
+    # Use a Solr version with patched Log4j to address CVE-2021-44228
+    image: ghcr.io/samvera/hyku/solr:cd9d0534
     restart: on-failure
     env_file:
       - .env.solr

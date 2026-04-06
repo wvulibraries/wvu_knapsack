@@ -29,3 +29,9 @@ notes.txt
 /.cache
 /data
 
+
+# Okta application config — contains production client IDs/secrets, never commit
+okta-*.json
+
+# VS Code workspace settings — local editor config, not project config
+.vscode/

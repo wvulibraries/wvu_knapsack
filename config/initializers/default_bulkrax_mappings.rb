@@ -17,6 +17,7 @@
 
 ## Set custom default bulkrax parser field mappings for app
 parser_mappings = {
+ "alt_text"=>{"from"=>["alt_text"], "split"=>true},
  "abstract"=>{"from"=>["abstract"], "split"=>true},
  "accessibility_feature"=>{"from"=>["accessibility_feature"], "split"=>"\\|"},
  "accessibility_hazard"=>{"from"=>["accessibility_hazard"], "split"=>"\\|"},

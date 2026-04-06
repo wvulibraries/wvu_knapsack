@@ -33,6 +33,7 @@ volumes:
   uploads:
   zk:
   zoo:
+  ollama:
 
 networks:
   default:
@@ -136,3 +137,18 @@ services:
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: chrome
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    environment:
+      - OLLAMA_ORIGINS=*
+      # Must match OLLAMA_NUM_PARALLEL in .env.development so the server-side
+      # slot count aligns with the GoodJob ai_remediation queue thread cap.
+      - OLLAMA_NUM_PARALLEL=${OLLAMA_NUM_PARALLEL:-2}
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    networks:
+      - default

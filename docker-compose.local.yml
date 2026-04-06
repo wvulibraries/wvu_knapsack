@@ -56,6 +56,7 @@ services:
     # container_name: solr
     image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
     restart: on-failure
+    platform: linux/amd64
     env_file:
       - .env.solr
     user: root

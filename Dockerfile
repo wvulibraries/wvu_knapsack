@@ -3,6 +3,17 @@ FROM ghcr.io/samvera/hyrax/hyrax-base:$HYRAX_IMAGE_VERSION AS hyku-web
 
 USER root
 RUN git config --system --add safe.directory \*
+
+# Install ocrmypdf for PDF accessibility remediation (adds OCR text layer + PDF tags).
+# tesseract-ocr provides the binary; ghostscript is required by ocrmypdf's PDF/A output.
+# The high-quality trained data (eng_best.traineddata) is downloaded below via ADD.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      ghostscript \
+      ocrmypdf \
+      tesseract-ocr \
+      tesseract-ocr-eng \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV PATH="/app/samvera/bin:${PATH}"
 
 USER app

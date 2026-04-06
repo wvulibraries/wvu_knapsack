@@ -16,20 +16,22 @@ class RemediateAltTextJob < ApplicationJob
   # @param file_set_id [String, Integer]
   def perform(file_set_id)
     return unless ENV['AI_ENABLED'] == 'true'
-    file_set = FileSet.find_by(id: file_set_id)
-    return unless file_set
+    begin
+      file_set = Hyrax.query_service.find_by(id: Valkyrie::ID.new(file_set_id))
+    rescue Valkyrie::Persistence::ObjectNotFoundError
+      return
+    end
     return unless file_set.alt_text.blank? && file_set.description.present?
     begin
       summary = AltTextGeneratorService.call(file_set.description.first)
       if summary.present?
-        file_set.alt_text = [summary]  # alt_text is an ActiveTriples array property
-        file_set.save(validate: false)
-        file_set.update_index
+        file_set.alt_text = [summary]
+        Hyrax.persister.save(resource: file_set)
+        Hyrax.index_adapter.save(resource: file_set)
         Rails.logger.info("[RemediateAltTextJob] Alt text updated for FileSet #{file_set_id}")
       end
     rescue Faraday::ConnectionFailed, Faraday::TimeoutError => e
-      work_id = file_set.try(:work_id) || file_set.try(:parent)&.id || 'unknown'
-      log_failure(file_set_id, work_id, e)
+      log_failure(file_set_id, 'unknown', e)
     rescue StandardError => e
       Rails.logger.error("[RemediateAltTextJob] Error for FileSet #{file_set_id}: #{e.message}")
     end

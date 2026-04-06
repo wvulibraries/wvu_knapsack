@@ -26,12 +26,19 @@ class RemediatePdfJob < ApplicationJob
   def perform(file_set_id)
     return unless ENV['AI_ENABLED'] == 'true'
 
-    file_set = FileSet.find_by(id: file_set_id)
-    return unless file_set
+    begin
+      file_set = Hyrax.query_service.find_by(id: Valkyrie::ID.new(file_set_id))
+    rescue Valkyrie::Persistence::ObjectNotFoundError
+      return
+    end
     return unless file_set.alt_text.blank?
-    return unless file_set.mime_type == 'application/pdf'
+    begin
+      mime_type = Hyrax.custom_queries.find_original_file(file_set: file_set).mime_type.to_s rescue ''
+    rescue StandardError
+      mime_type = ''
+    end
+    return unless mime_type == 'application/pdf'
 
-    # Path 1: description field present — summarise it (avoids Fedora file read)
     summary = if file_set.description.present?
                 AltTextGeneratorService.call(file_set.description.first)
               else
@@ -40,11 +47,11 @@ class RemediatePdfJob < ApplicationJob
 
     if summary.present?
       file_set.alt_text = [summary]
-      file_set.save(validate: false)
-      file_set.update_index
+      Hyrax.persister.save(resource: file_set)
+      Hyrax.index_adapter.save(resource: file_set)
       Rails.logger.info("[RemediatePdfJob] Alt text set for PDF FileSet #{file_set_id}")
     else
-      Rails.logger.warn("[RemediatePdfJob] No alt text generated for PDF FileSet #{file_set_id} — all paths returned nil")
+      Rails.logger.warn("[RemediatePdfJob] No alt text generated for PDF FileSet #{file_set_id} 4 all paths returned nil")
     end
   rescue StandardError => e
     Rails.logger.tagged('AI_REMEDIATION_FAILURE') do

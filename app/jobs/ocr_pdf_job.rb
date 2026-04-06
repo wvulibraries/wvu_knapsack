@@ -27,11 +27,25 @@ class OcrPdfJob < ApplicationJob
   def perform(file_set_id)
     return unless ENV['AI_ENABLED'] == 'true'
 
-    file_set = FileSet.find_by(id: file_set_id)
-    return unless file_set
-    return unless file_set.mime_type == 'application/pdf'
+    begin
+      file_set = Hyrax.query_service.find_by(id: Valkyrie::ID.new(file_set_id))
+    rescue Valkyrie::Persistence::ObjectNotFoundError
+      return
+    end
+    begin
+      file_metadata = Hyrax.custom_queries.find_original_file(file_set: file_set)
+      mime_type = file_metadata.mime_type.to_s
+    rescue StandardError
+      mime_type = ''
+      file_metadata = nil
+    end
+    return unless mime_type == 'application/pdf'
 
-    content = file_set.original_file&.content
+    content = begin
+      file_metadata ? Valkyrie::StorageAdapter.find_by(id: file_metadata.file_identifier).read : nil
+    rescue StandardError
+      nil
+    end
     unless content.present?
       Rails.logger.warn("[OcrPdfJob] FileSet #{file_set_id} has no attached file — skipping.")
       return
@@ -39,26 +53,19 @@ class OcrPdfJob < ApplicationJob
 
     existing_text = extract_text(content)
     if existing_text.present?
-      # Already has an embedded text layer — Acrobat-processed or previously OCR'd.
-      # Skip the expensive ocrmypdf step and go straight to alt_text generation.
       Rails.logger.info("[OcrPdfJob] FileSet #{file_set_id} already has a text layer — cascading to RemediatePdfJob.")
       RemediatePdfJob.perform_later(file_set_id)
       return
     end
 
-    # Scanned / image-only PDF — needs OCR.
     ocr_bytes = run_ocrmypdf(content, file_set_id)
     if ocr_bytes.present?
-      replace_fedora_content(file_set, ocr_bytes)
-      Rails.logger.info("[OcrPdfJob] FileSet #{file_set_id} OCR'd and saved to Fedora (#{ocr_bytes.bytesize} bytes).")
+      replace_fedora_content(file_set, ocr_bytes, file_metadata)
+      Rails.logger.info("[OcrPdfJob] FileSet #{file_set_id} OCR'd and saved to storage (#{ocr_bytes.bytesize} bytes).")
     else
-      # ocrmypdf failed (missing binary, corrupt PDF, etc.) — log and continue.
-      # RemediatePdfJob will fall back to the pdftoppm→VisionService path.
       Rails.logger.warn("[OcrPdfJob] ocrmypdf failed for FileSet #{file_set_id} — cascading to RemediatePdfJob with vision fallback.")
     end
 
-    # Always cascade regardless of OCR outcome so alt_text is attempted via
-    # PdfAccessibilityService (which has its own text/vision fallback logic).
     RemediatePdfJob.perform_later(file_set_id)
   rescue StandardError => e
     Rails.logger.tagged('AI_REMEDIATION_FAILURE') do
@@ -125,12 +132,18 @@ class OcrPdfJob < ApplicationJob
     pdf_out&.close!
   end
 
-  # Replaces the PDF file content stored in Fedora with the OCR'd version.
-  # ActiveFedora persists the new content on #save; Fedora retains version history.
-  def replace_fedora_content(file_set, new_bytes)
-    original = file_set.original_file
-    original.content   = new_bytes
-    original.mime_type = 'application/pdf'
-    original.save
+  # Replaces the PDF file content stored in storage with the OCR'd version (Valkyrie).
+  # Uploads new bytes as a new storage file and updates file_metadata.
+  def replace_fedora_content(file_set, new_bytes, file_metadata)
+    new_file = Valkyrie::StorageAdapter.save(
+      file: ActionDispatch::Http::UploadedFile.new(
+        tempfile: StringIO.new(new_bytes),
+        filename: 'ocr_output.pdf',
+        type: 'application/pdf'
+      ),
+      resource_class: Hyrax::FileMetadata
+    )
+    file_metadata.file_identifier = new_file.id
+    Hyrax.persister.save(resource: file_metadata)
   end
 end

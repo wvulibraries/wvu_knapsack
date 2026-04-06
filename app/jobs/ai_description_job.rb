@@ -17,16 +17,19 @@ class AiDescriptionJob < ApplicationJob
   # @param file_set_id [String, Integer]
   def perform(file_set_id)
     return unless ENV['AI_ENABLED'] == 'true'
-    file_set = FileSet.find_by(id: file_set_id)
-    return unless file_set
+    begin
+      file_set = Hyrax.query_service.find_by(id: Valkyrie::ID.new(file_set_id))
+    rescue Valkyrie::Persistence::ObjectNotFoundError
+      return
+    end
     return unless file_set.alt_text.blank?
-    return if file_set.description.present?  # description path is RemediateAltTextJob's lane
+    return if file_set.description.present?
 
     summary = VisionService.call(file_set)
     if summary.present?
       file_set.alt_text = [summary]
-      file_set.save(validate: false)
-      file_set.update_index
+      Hyrax.persister.save(resource: file_set)
+      Hyrax.index_adapter.save(resource: file_set)
       Rails.logger.info("[AiDescriptionJob] Vision alt text set for FileSet #{file_set_id}")
     end
   rescue StandardError => e

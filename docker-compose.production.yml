@@ -57,7 +57,8 @@ services:
 
   solr:
     container_name: solr
-    image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
+    # Use a Solr version with patched Log4j to address CVE-2021-44228
+    image: ghcr.io/samvera/hyku/solr:cd9d0534
     restart: on-failure
     platform: linux/amd64
     env_file:
@@ -72,7 +73,7 @@ services:
       - ./solr-setup:/solr-setup
       - ./startup-solr.sh:/scripts/startup.sh
     healthcheck:
-#      test: "curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/admin/collections?action=LIST"
+      # test: "curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/admin/collections?action=LIST"
       test: ["CMD-SHELL", "curl -sf http://localhost:8983/solr/ || exit 1"]
       start_period: 300s
       interval: 10s

@@ -13,8 +13,14 @@ set -e
 # hyrax-webapp/.env.production must exist — can be empty for Stack Car dev.
 [ -f hyrax-webapp/.env.production ] || touch hyrax-webapp/.env.production
 
-# Rebuild web and worker from scratch, then bring up the full stack.
-docker compose build --no-cache web worker
+# Rebuild web and worker images.
+# Use --no-cache only when Gemfile or system packages changed (forces full reinstall).
+# For code-only changes, omit --no-cache — Docker invalidates the COPY layer automatically.
+if [[ "${NOCACHE:-}" == "1" ]]; then
+  docker compose build --no-cache web worker solr
+else
+  docker compose build web worker solr
+fi
 
 # Proxy must be up before web and worker, otherwise they won't be able to connect to it.
 sc proxy up
@@ -51,12 +57,28 @@ echo "Model ready: ${OLLAMA_MODEL}"
 # Bring up the full stack in detached mode.
 sc up -d
 
+# Ensure JS dependencies are installed — required for the Universal Viewer and
+# other Webpacker assets. The node_modules volume persists across restarts so
+# this is fast after the first run.
+# Wait for the web container to be running before exec-ing into it.
+echo ""
+echo "Waiting for web container to be running..."
+for i in $(seq 1 30); do
+  if docker compose exec -T web echo ok > /dev/null 2>&1; then
+    break
+  fi
+  [ "$i" -eq 30 ] && { echo "WARNING: web container did not start in time — skipping yarn install."; }
+  sleep 2
+done
+echo "Running yarn install..."
+docker compose exec -T web yarn install --silent && echo "yarn install complete." || echo "WARNING: yarn install failed — run manually: docker compose exec web yarn install"
+
 echo ""
 echo "Stack is starting. Watch web logs:"
-echo "  sc logs web -f"
+echo "  docker compose logs web -f"
 echo ""
 echo "When web shows 'Listening on http://0.0.0.0:3000' it is ready."
 echo ""
 echo "AI remediation is enabled (AI_ENABLED=true, model=${OLLAMA_MODEL})."
 echo "Watch worker logs for AI_REMEDIATION_FAILURE tags:"
-echo "  sc logs worker -f | grep -E 'AI_REMEDIATION|RemediateAlt|AiDescription'"
+echo "  docker compose logs worker -f | grep -E 'AI_REMEDIATION|RemediateAlt|AiDescription'"

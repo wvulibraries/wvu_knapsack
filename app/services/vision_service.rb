@@ -7,7 +7,7 @@ require 'json'
 class VisionService
   OLLAMA_URL   = ENV.fetch('OLLAMA_URL', 'http://ollama:11434/api/generate')
   OLLAMA_MODEL = ENV.fetch('OLLAMA_MODEL', 'moondream')
-  PROMPT = 'Briefly describe what is shown in this image in one concise sentence under 125 characters.'
+  PROMPT = 'Describe this image briefly.'
 
   # Only MIME types Moondream/LLaVA can accept as base64 image input.
   SUPPORTED_MIME_TYPES = %w[

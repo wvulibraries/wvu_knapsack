@@ -60,6 +60,11 @@ services:
     image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
     restart: on-failure
     platform: linux/amd64
+    environment:
+      # CVE-2021-44228 (Log4Shell) mitigation — Solr 8.3.1 ships with log4j-core 2.11.2.
+      # Disables JNDI message lookups entirely. Remove once Solr image is upgraded to
+      # a version that ships with log4j-core >= 2.17.0.
+      - SOLR_OPTS=-Dlog4j2.formatMsgNoLookups=true
     env_file:
       - .env.solr
     user: root

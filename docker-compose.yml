@@ -3,11 +3,11 @@ x-app: &app
     context: .
     target: hyku-web
     cache_from:
-      - ghcr.io/wvulibraries/wvu_knapsack:latest
+      - ghcr.io/wvulibraries/wvu_knapsack/web:latest
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
-  image: ghcr.io/wvulibraries/wvu_knapsack:${TAG:-latest}
+  image: ghcr.io/wvulibraries/wvu_knapsack/web:${TAG:-latest}
   env_file:
     - .env
     - .env.development

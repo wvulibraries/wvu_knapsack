@@ -46,7 +46,7 @@ module HykuKnapsack
         if defined?(Hyrax) && Hyrax.respond_to?(:config)
           Hyrax.config.work_include_metadata = false
           Hyrax.config.collection_include_metadata = false
-          Hyrax.config.file_set_include_metadata = false
+          Hyrax.config.file_set_include_metadata = true
           Hyrax.config.admin_set_include_metadata = false
         end
       end

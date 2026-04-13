@@ -1,0 +1,26 @@
+<!-- OVERRIDE: WVU Knapsack — Use alt_text for FileSet thumbnails, fallback to title. See 2026-04-07-HIGH-FEATURE-GALLERY-ALT-TEXT.md -->
+<% model = document.hydra_model %>
+
+<% if params['q'].present? && document.any_highlighting_in_all_text_fields? %>
+  <% additional_options = params.slice('q').merge( { :highlight=>'true' } ) %>
+<% elsif params['q'].present? %>
+  <% additional_options  = params.slice('q') %>
+<% else %>
+  <% additional_options = {} %>
+<% end %>
+
+<div class="col-md-3">
+  <% if model == Hyrax::PcdmCollection || model < Hyrax::PcdmCollection %>
+    <%= document_presenter(document)&.thumbnail&.thumbnail_tag({ alt: thumbnail_alt_text_for(document, block_name: 'default_collection_image_text') }, suppress_link: true) %>
+  <% else %>
+    <% if document.hydra_model == Hyrax::FileSet || document.hydra_model < Hyrax::FileSet %>
+      <% file_set = Hyrax.query_service.find_by(id: Valkyrie::ID.new(document.id)) rescue nil %>
+      <% alt_text = file_set&.alt_text&.first.presence || document.title&.first %>
+    <% else %>
+      <% alt_text = thumbnail_alt_text_for(document) %>
+    <% end %>
+    <div class="list-thumbnail">
+      <%= document_presenter(document)&.thumbnail&.thumbnail_tag({ alt: alt_text }, additional_options ) %>
+    </div>
+  <% end %>
+</div>

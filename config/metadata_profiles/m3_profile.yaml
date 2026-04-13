@@ -228,7 +228,7 @@ properties:
       sources:
       - 'null'
     display_label:
-      default: blacklight.search.fields.index.alt_text_tesim
+      default: Alt Text
     index_documentation: displayable, searchable
     indexing:
     - alt_text_sim

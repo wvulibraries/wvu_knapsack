@@ -3,11 +3,11 @@ x-app: &app
     context: .
     target: hyku-web
     cache_from:
-      - ghcr.io/wvulibraries/wvu_knapsack/web:latest
+      - ghcr.io/notch8/wvu_knapsack:latest
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
-  image: ghcr.io/wvulibraries/wvu_knapsack/web:${TAG:-latest}
+  image: ghcr.io/notch8/wvu_knapsack:${TAG:-latest}
   env_file:
     - .env
     - .env.development
@@ -20,6 +20,7 @@ x-app: &app
     - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    - ./data/ingest:/app/samvera/ingest:cached
     - .:/app/samvera
 
 volumes:
@@ -50,11 +51,24 @@ services:
       service: zoo
 
   solr:
-    image: ghcr.io/wvulibraries/wvu_knapsack/solr:${TAG:-latest}
-    platform: linux/amd64
+    image: ghcr.io/notch8/wvu_knapsack/solr:${TAG:-latest}
+    build:
+      context: ./hyrax-webapp
+      target: hyku-solr
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
+    environment:
+      # CVE-2021-44228 (Log4Shell) mitigation — Solr 8.3.1 ships with log4j-core 2.11.2.
+      # Disables JNDI message lookups entirely. Remove once Solr image is upgraded to
+      # a version that ships with log4j-core >= 2.17.0.
+      - SOLR_OPTS=-Dlog4j2.formatMsgNoLookups=true
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8983/solr/ || exit 1"]
+      start_period: 300s
+      interval: 10s
+      timeout: 10s
+      retries: 30
     ports:
       - "8983:8983"
 
@@ -94,20 +108,21 @@ services:
       context: .
       target: hyku-worker
       cache_from:
-        - ghcr.io/wvulibraries/wvu_knapsack/worker:latest
+        - ghcr.io/notch8/wvu_knapsack/worker:latest
       args:
         BUILDKIT_INLINE_CACHE: 1
         APP_PATH: ./hyrax-webapp
         BASE_TAG: ${BASE_TAG:-latest}
-    image: ghcr.io/wvulibraries/wvu_knapsack/worker:${TAG:-latest}
+    image: ghcr.io/notch8/wvu_knapsack/worker:${TAG:-latest}
     # Uncomment command to access container with out starting bin/worker. Useful for debugging or updating Gemfile.lock
     # command: sleep infinity
-    volumes:
-      - node_modules:/app/samvera/hyrax-webapp/node_modules:cached
-      - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
-      - assets:/app/samvera/hyrax-webapp/public/assets:cached
-      - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
-      - .:/app/samvera
+    # volumes:
+    #   - node_modules:/app/samvera/hyrax-webapp/node_modules:cached
+    #   - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
+    #   - assets:/app/samvera/hyrax-webapp/public/assets:cached
+    #   - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    #   - ./data/ingest:/app/samvera/ingest:cached
+    #   - .:/app/samvera
 
   check_volumes:
     <<: *app

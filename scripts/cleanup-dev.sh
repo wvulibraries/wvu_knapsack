@@ -18,6 +18,11 @@ cd "$SCRIPT_DIR/.."
 echo "==> Stopping Stack Car dev stack and removing project volumes + images..."
 docker compose down --rmi local -v --remove-orphans 2>/dev/null || true
 
+# Explicitly remove solr volume which may persist due to dual compose file scoping
+docker volume rm wvu_knapsack_solr 2>/dev/null || true
+# Remove any solr volume matching project name pattern
+docker volume ls --format '{{.Name}}' | grep solr | xargs -r docker volume rm 2>/dev/null || true
+
 echo "==> Pruning dangling images and build cache..."
 docker image prune -f
 docker builder prune -f

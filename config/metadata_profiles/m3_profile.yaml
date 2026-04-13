@@ -1,11 +1,1705 @@
 ---
 m3_version: 1.0.beta2
 profile:
-  date_modified: '2025-11-18'
+  date_modified: '2026-04-13'
   responsibility: https://wvu.edu
   responsibility_statement: WVU Default Metadata Profile
   type: WVU Default Metadata Profile
   version: 1
+classes:
+  Document:
+    display_label: Document
+  BornDigital:
+    display_label: Born Digital
+  Congressional:
+    display_label: Congressional
+  FolkMusic:
+    display_label: Folk Music
+  Medicine:
+    display_label: Medicine
+  OralHistory:
+    display_label: Oral History
+  AdminSetResource:
+    display_label: AdminSetResource
+  CollectionResource:
+    display_label: CollectionResource
+  Hyrax::FileSet:
+    display_label: FileSet
+contexts:
+  flexible_context:
+    display_label: Flexible Metadata Example
+  special_context:
+    display_label: Special Context
+mappings:
+  blacklight:
+    name: Additional Blacklight Solr Mappings
+  metatags:
+    name: Metatags
+  mods_oai_pmh:
+    name: MODS OAI PMH
+  qualified_dc_pmh:
+    name: Qualified DC OAI PMH
+  simple_dc_pmh:
+    name: Simple DC OAI PMH
+properties:
+  title:
+    available_on:
+      class:
+      - AdminSetResource
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Primary title of a resource, whether published or assigned by creator
+        of digital resource
+    display_label:
+      en: Title
+      es: Título
+      default: blacklight.search.fields.show.title_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - title_sim
+    - title_tesim
+    form:
+      required: true
+      primary: true
+      multiple: false
+    mappings:
+      metatags: twitter:title, og:title
+      mods_oai_pmh: mods:titleInfo/mods:title
+      qualified_dc_pmh: dcterms:title
+      simple_dc_pmh: dc:title
+    property_uri: http://purl.org/dc/terms/title
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - Senator John D. (Jay) Rockefeller at the Senate Swearing-In Ceremony
+    view:
+      html_dl: true
+  date_modified:
+    available_on:
+      class:
+      - AdminSetResource
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#dateTime
+      sources:
+      - 'null'
+    display_label:
+      default: blacklight.search.fields.show.date_modified_dtsi
+    index_documentation: displayable, searchable
+    indexing:
+    - date_modified_dtsi
+    property_uri: http://purl.org/dc/terms/modified
+    range: http://www.w3.org/2001/XMLSchema#dateTime
+    sample_values:
+    - '2025-04-01T12:00:00Z'
+    view:
+      html_dl: true
+  date_uploaded:
+    available_on:
+      class:
+      - AdminSetResource
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#dateTime
+      sources:
+      - 'null'
+    display_label:
+      default: blacklight.search.fields.show.date_uploaded_dtsi
+    index_documentation: displayable, searchable
+    indexing:
+    - date_uploaded_dtsi
+    property_uri: http://purl.org/dc/terms/dateSubmitted
+    range: http://www.w3.org/2001/XMLSchema#dateTime
+    sample_values:
+    - '2025-04-01T12:00:00Z'
+  depositor:
+    available_on:
+      class:
+      - AdminSetResource
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    display_label:
+      default: Depositor
+    index_documentation: searchable
+    indexing:
+    - depositor_tesim
+    - depositor_ssim
+    property_uri: http://id.loc.gov/vocabulary/relators/dpt
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - admin@example.org
+  alternative_title:
+    available_on:
+      class:
+      - AdminSetResource
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Alternative title of a resource
+    display_label:
+      en: Alternative Title
+      es: Título Alternativo
+      default: blacklight.search.fields.index.alternative_title_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - alternative_title_sim
+    - alternative_title_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/alternative
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Alternate Title Example
+    view:
+      html_dl: true
+  alt_text:
+    available_on:
+      class:
+      - Hyrax::FileSet
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    display_label:
+      default: blacklight.search.fields.index.alt_text_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - alt_text_sim
+    - alt_text_tesim
+    form:
+      primary: true
+    property_uri: https://schema.org/description
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - A description of the file for accessibility purposes.
+    view:
+      html_dl: true
+  creator:
+    available_on:
+      class:
+      - AdminSetResource
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Any agent, personal or corporate, considered the primary creator(s)
+        of the resource
+    display_label:
+      default: blacklight.search.fields.show.creator_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - creator_sim
+    - creator_tesim
+    form:
+      required: true
+      primary: true
+    property_uri: http://purl.org/dc/elements/1.1/creator
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - Rockefeller, John D., IV (John Davison), 1937-
+    view:
+      render_as: faceted
+      html_dl: true
+  contributor:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Any agent, personal or corporate, contributing to the creation of the
+        resource, but not considered the primary creator(s)
+    display_label:
+      default: blacklight.search.fields.show.contributor_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - contributor_tesim
+    - contributor_sim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/contributor
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Pierpont, Francis Harrison, 1814-1899
+    view:
+      render_as: faceted
+      html_dl: true
+  description:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'An account of the resource. Description may include but is not limited
+        to: an abstract, a table of contents, a graphical representation, or a free-text
+        account of the resource. Describe aspects of the resource critical to user
+        search and understanding that may not be clear from the title or subject headings.'
+    display_label:
+      default: blacklight.search.fields.show.description_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - description_sim
+    - description_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/description
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - This is a description.
+    view:
+      html_dl: true
+  abstract:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Brief description of the content of the resource, not including a table
+        of contents
+    display_label:
+      default: Abstract
+    index_documentation: displayable, searchable
+    indexing:
+    - abstract_sim
+    - abstract_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/abstract
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - CD track listing, chapter markers
+    view:
+      html_dl: true
+  keyword:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Additional terms to describe the resource, deriving from controlled
+        vocabulary sources other than LCTGM and LCNAF
+    display_label:
+      default: blacklight.search.fields.show.keyword_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - keyword_sim
+    - keyword_tesim
+    form:
+      primary: false
+    property_uri: http://schema.org/keywords
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Metadata
+    view:
+      render_as: faceted
+      html_dl: true
+  label:
+    available_on:
+      class:
+      - Hyrax::FileSet
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    display_label:
+      default: Label
+    index_documentation: displayable, searchable
+    indexing:
+    - label_sim
+    - label_tesim
+    form:
+      primary: false
+    property_uri: info:fedora/fedora-system:def/model#downloadFilename
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - file_label.txt
+  license:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - licenses
+    definition:
+      default: A legal document giving official permission to do something with the
+        resource
+    display_label:
+      default: blacklight.search.fields.index.license_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - license_sim
+    - license_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/license
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - http://creativecommons.org/licenses/by/3.0/us/
+    view:
+      render_as: external_link
+      html_dl: true
+  rights_notes:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: note for any additional information about rights'
+    display_label:
+      default: Rights Notes
+    index_documentation: displayable, searchable
+    indexing:
+    - rights_notes_sim
+    - rights_notes_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/rights
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Internal note for any additional information about rights
+    view:
+      html_dl: true
+  rights_statement:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - rights_statements
+    definition:
+      default: Typically, rights information includes a statement about various property
+        rights associated with the resource, including intellectual property rights.
+        Recommended practice is to refer to a rights statement with a URI.
+    display_label:
+      default: blacklight.search.fields.index.rights_statement_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - rights_statement_sim
+    - rights_statement_tesim
+    form:
+      primary: true
+      required: true
+    property_uri: http://www.w3.org/2000/01/rdf-schema#seeAlso
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - http://rightsstatements.org/vocab/InC/1.0/
+    view:
+      html_dl: true
+      render_as: rights_statement
+  access_rights:
+    available_on:
+      class:
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Information about who has permission to access the resource or an indication
+        of its security status
+    display_label:
+      default: Access Rights
+    index_documentation: displayable, searchable
+    indexing:
+    - access_rights_sim
+    - access_rights_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/accessRights
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Information about who has permission to access the resource or an indication
+      of its security status
+    view:
+      html_dl: true
+  publisher:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Any agent, personal or corporate, formally publishing the resource.
+        Not to be used for institution of origination unless they are recognized as
+        the publisher of material.
+    display_label:
+      default: blacklight.search.fields.show.publisher_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - publisher_sim
+    - publisher_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/publisher
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Any agent, personal or corporate, formally publishing the resource
+    view:
+      render_as: faceted
+      html_dl: true
+  date_created:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Significant date in the creation of the resource. Could apply to date
+        of creation, publication, issuance, etc., however, should be considered the
+        primary date. Expect to see only one date or date range applied to resource
+    display_label:
+      default: blacklight.search.fields.show.date_created_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - date_created_sim
+    - date_created_tesim
+    form:
+      primary: true
+      required: true
+    property_uri: http://purl.org/dc/terms/created
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - '1985'
+    - 1985-01
+    - '1985-01-17'
+    view:
+      render_as: linked
+      search_field: date_created_tesim
+      html_dl: true
+  subject:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Topic related to the content of the resource. Can include temporal
+        or geographic dimensions.
+    display_label:
+      default: blacklight.search.fields.show.subject_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - subject_sim
+    - subject_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/subject
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Topic related to the content of the resource
+    view:
+      render_as: faceted
+      html_dl: true
+  language:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - loc/iso639-2
+    definition:
+      default: Language of the resource
+    display_label:
+      default: blacklight.search.fields.show.language_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - language_sim
+    - language_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/language
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - eng
+    - spa
+    - fra
+    view:
+      render_as: faceted
+      html_dl: true
+  identifier:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: A unique identifier for the resource
+    display_label:
+      default: blacklight.search.fields.show.identifier_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - identifier_sim
+    - identifier_tesim
+    form:
+      primary: true
+      required: true
+    property_uri: http://purl.org/dc/terms/identifier
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - am1897_disc_01
+    - am3470_b1_f7_01
+    view:
+      render_as: linked
+      search_field: identifier_tesim
+      html_dl: true
+  location:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Spatial characteristics of a resource
+    display_label:
+      default: blacklight.search.fields.show.based_near_label_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - location_sim
+    - location_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/spatial
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Spatial characteristics of a resource
+    view:
+      html_dl: true
+  related_url:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: URL of a related resource
+    display_label:
+      default: Use for related exhibits, etc.
+    index_documentation: displayable, searchable
+    indexing:
+    - related_url_sim
+    - related_url_tesim
+    form:
+      primary: false
+    property_uri: http://www.w3.org/2000/01/rdf-schema#seeAlso
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - http://example.com/related
+    view:
+      render_as: external_link
+      html_dl: true
+  bibliographic_citation:
+    available_on:
+      class:
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: A bibliographic reference for the resource
+    display_label:
+      default: Bibliographic Citation
+    index_documentation: displayable, searchable
+    indexing:
+    - bibliographic_citation_sim
+    - bibliographic_citation_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/bibliographicCitation
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - A bibliographic reference for the resource
+    view:
+      html_dl: true
+  source:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: A related resource from which the described resource is derived.
+    display_label:
+      default: Source
+    index_documentation: displayable, searchable
+    indexing:
+    - source_sim
+    - source_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/source
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - A&M 4050, Box 1, folder 5
+    view:
+      html_dl: true
+  admin_note:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: Additional notes about the item that are available'
+    display_label:
+      default: blacklight.search.fields.index.admin_note_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - admin_note_sim
+    - admin_note_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/provenance
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Comments on any modifications (for instance, redactions, specific takedown requests
+      and resulting actions, etc.)
+    view:
+      html_dl: true
+  extent:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: The size or duration of the resource, including length of an audio
+        track, number of pages.
+    display_label:
+      default: blacklight.search.fields.show.extent_tesim
+    index_documentation: displayable, searchable
+    indexing:
+    - extent_sim
+    - extent_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/elements/1.1/extent
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - 47 minutes
+    - 177 pages
+    - 12x20 cm
+    - 100 MB
+    view:
+      html_dl: true
+  collection:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Collection from which the resource originated.
+    display_label:
+      default: Collection
+    index_documentation: displayable, searchable
+    indexing:
+    - collection_sim
+    - collection_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/isPartOf
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - A&M 4050: Senator John D. (Jay) Rockefeller IV papers
+    view:
+      html_dl: true
+  format:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: The file format, physical medium, or dimensions of the resource
+    display_label:
+      default: blacklight.search.fields.index.format_tesim
+    index_documentation: searchable
+    indexing:
+    - format_tesim
+    form:
+      required: false
+      primary: false
+      multiple: false
+    property_uri: http://purl.org/dc/terms/format
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - The file format, physical medium, or dimensions of the resource
+    view:
+      html_dl: true
+  people_represented:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Names of people pictured or represented in a resource
+    display_label:
+      default: People Represented
+    index_documentation: displayable, searchable
+    indexing:
+    - people_represented_sim
+    - people_represented_tesim
+    form:
+      primary: false
+    property_uri: http://xmlns.com/foaf/0.1/name
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Names of people pictured or represented in a resource
+    view:
+      html_dl: true
+  finding_aid:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: URL of ArchivesSpace record
+    display_label:
+      default: Finding Aid
+    index_documentation: displayable, searchable
+    indexing:
+    - finding_aid_sim
+    - finding_aid_tesim
+    form:
+      primary: false
+    property_uri: http://id.loc.gov/ontologies/bibframe/findingAid
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - URL of ArchivesSpace record
+    view:
+      render_as: external_link
+      html_dl: true
+  repository:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Name of repository (include physical address)
+    display_label:
+      default: Repository
+    index_documentation: displayable, searchable
+    indexing:
+    - repository_sim
+    - repository_tesim
+    form:
+      primary: true
+      required: true
+    property_uri: http://purl.org/dc/elements/1.1/publisher
+    range: http://www.w3.org/2001/XMLSchema#string
+    requirement: required
+    sample_values:
+    - West Virginia & Regional History Center
+    view:
+      html_dl: true
+  digital_location:
+    available_on:
+      class:
+      - BornDigital
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: location(s) of digital copies'
+    display_label:
+      default: Digital Location
+    index_documentation: displayable, searchable
+    indexing:
+    - digital_location_sim
+    - digital_location_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/hasVersion
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Internal: location(s) of digital copies
+    view:
+      html_dl: true
+  digital_object_identifier:
+    available_on:
+      class:
+      - BornDigital
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: ASpace DO identifier number'
+    display_label:
+      default: Digital Object Identifier
+    index_documentation: displayable, searchable
+    indexing:
+    - digital_object_identifier_sim
+    - digital_object_identifier_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/ontology/bibo/doi
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Internal: ASpace DO identifier number
+    view:
+      html_dl: true
+  technical_requirements:
+    available_on:
+      class:
+      - BornDigital
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Information about software, operating system, or other requirements
+        for accessing a resource
+    display_label:
+      default: Technical Requirements
+    index_documentation: displayable, searchable
+    indexing:
+    - technical_requirements_sim
+    - technical_requirements_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/requires
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Information about software, operating system, or other requirements for accessing
+      a resource
+    view:
+      html_dl: true
+  congress:
+    available_on:
+      class:
+      - Congressional
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - congress
+    definition:
+      default: The Congress in which the resource was created
+    display_label:
+      default: Congress
+    index_documentation: displayable, searchable
+    indexing:
+    - congress_sim
+    - congress_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/temporal
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - 93rd (1973-1975)
+    view:
+      html_dl: true
+  policy_area:
+    available_on:
+      class:
+      - Congressional
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - Policy Area Vocabulary
+    definition:
+      default: The policy area represented in the resource
+    display_label:
+      default: Policy Area
+    index_documentation: displayable, searchable
+    indexing:
+    - policy_area_sim
+    - policy_area_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/coverage
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Select from 32 broad terms in the vocabulary
+    view:
+      render_as: faceted
+      html_dl: true
+  roud_number:
+    available_on:
+      class:
+      - FolkMusic
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: A related resource of which the described resource is a version, edition,
+        or adaptation.
+    display_label:
+      default: Roud Number
+    index_documentation: displayable, searchable
+    indexing:
+    - roud_number_sim
+    - roud_number_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/isVersionOf
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Numbers provided by Steve Roud, creator of the Roud Index
+    view:
+      html_dl: true
+  bibliographical_information:
+    available_on:
+      class:
+      - FolkMusic
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Describes the Genre of the asset, which can be defined as a categorical
+        description informed by the topical nature or a particular style or form of
+        the content.
+    display_label:
+      default: Bibliographical Information
+    index_documentation: displayable, searchable
+    indexing:
+    - bibliographical_information_sim
+    - bibliographical_information_tesim
+    form:
+      primary: false
+    property_uri: http://pbcore.org/pbcore/pbcoreGenre
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Used to identify Child ballads, Laws ballads, etc.
+    view:
+      html_dl: true
+  key_topics:
+    available_on:
+      class:
+      - FolkMusic
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Used to assign topic headings or keywords that portray the intellectual
+        content of the asset. A subject is expressed by keywords, key phrases, or
+        even specific classification codes.
+    display_label:
+      default: Key Topics
+    index_documentation: displayable, searchable
+    indexing:
+    - key_topics_sim
+    - key_topics_tesim
+    form:
+      primary: false
+    property_uri: http://pbcore.org/pbcore/pbcoreSubject
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Use controlled topics assigned in the Cuthbert guide
+    view:
+      render_as: faceted
+      html_dl: true
+  performance_media:
+    available_on:
+      class:
+      - FolkMusic
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: The nature or genre of the content of the resource.
+    display_label:
+      default: Performance Media
+    index_documentation: displayable, searchable
+    indexing:
+    - performance_media_sim
+    - performance_media_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/medium
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Use controlled performance media assigned in the Cuthbert guide
+    view:
+      render_as: faceted
+      html_dl: true
+  subject_mesh:
+    available_on:
+      class:
+      - Medicine
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: The set of labeled concepts specified by the Medical Subject Headings.
+    display_label:
+      default: Subject (MeSH)
+    index_documentation: displayable, searchable
+    indexing:
+    - subject_mesh_sim
+    - subject_mesh_tesim
+    form:
+      primary: false
+    property_uri: http://purl.org/dc/terms/MESH
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Medical Subject Headings controlled vocabulary terms
+    view:
+      render_as: faceted
+      html_dl: true
+  interviewer:
+    available_on:
+      class:
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Person conducting the interview
+    display_label:
+      default: Interviewer
+    index_documentation: displayable, searchable
+    indexing:
+    - interviewer_sim
+    - interviewer_tesim
+    form:
+      primary: false
+    property_uri: http://id.loc.gov/vocabulary/relators/ivr
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Person conducting the interview
+    view:
+      render_as: faceted
+      html_dl: true
+  interviewee:
+    available_on:
+      class:
+      - OralHistory
+    cardinality:
+      minimum: 0
+    data_type: array
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Person being interviewed
+    display_label:
+      default: Interviewee
+    index_documentation: displayable, searchable
+    indexing:
+    - interviewee_sim
+    - interviewee_tesim
+    form:
+      primary: false
+    property_uri: http://id.loc.gov/vocabulary/relators/ive
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - Person being interviewed
+    view:
+      render_as: faceted
+      html_dl: true
+  bulkrax_identifier:
+    available_on:
+      class:
+      - Hyrax::FileSet
+      - CollectionResource
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: Bulkrax identifier'
+    display_label:
+      default: Bulkrax Identifier
+    index_documentation: displayable, searchable
+    indexing:
+    - bulkrax_identifier_tesi
+    - bulkrax_identifier_ssi
+    form:
+      display: false
+      primary: false
+      required: false
+      multiple: false
+    property_uri: https://hykucommons.org/terms/bulkrax_identifier
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - example-bulkrax-identifier
+  show_pdf_viewer:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#bool
+      sources:
+      - 'null'
+    display_label:
+      default: Show PDF Viewer
+    index_documentation: displayable, searchable
+    indexing:
+    - show_pdf_viewer_bsi
+    form:
+      display: false
+      primary: false
+      required: false
+      multiple: false
+    property_uri: http://id.loc.gov/vocabulary/identifiers/show_pdf_viewer
+    range: http://www.w3.org/2001/XMLSchema#bool
+    sample_values:
+    - '0'
+    - '1'
+  show_pdf_download_button:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#bool
+      sources:
+      - 'null'
+    definition:
+      default: Show PDF Download Button
+    display_label:
+      default: Show PDF Download Button
+    index_documentation: displayable, searchable
+    indexing:
+    - show_pdf_download_button_bsi
+    form:
+      display: false
+      primary: false
+      required: false
+      multiple: false
+    property_uri: http://id.loc.gov/vocabulary/identifiers/show_pdf_download_button
+    range: http://www.w3.org/2001/XMLSchema#bool
+    sample_values:
+    - '0'
+    - '1'
+  video_embed:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: Video Embed
+    display_label:
+      default: Video Embed
+    index_documentation: searchable
+    indexing:
+    - video_embed_tesi
+    form:
+      display: true
+      primary: false
+      required: false
+      multiple: false
+    property_uri: https://atla.com/terms/video_embed
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - https://player.vimeo.com/video/467264493?h=b089de0eab
+    - https://www.youtube.com/embed/Znf73dsFdC8
+  is_child:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#bool
+      sources:
+      - 'null'
+    display_label:
+      default: Is Child
+    index_documentation: displayable, searchable
+    indexing:
+    - is_child_bsi
+    form:
+      display: false
+      required: false
+      primary: false
+      multiple: false
+    property_uri: http://id.loc.gov/vocabulary/identifiers/isChild
+    range: http://www.w3.org/2001/XMLSchema#bool
+    sample_values:
+    - true
+    - false
+  split_from_pdf_id:
+    available_on:
+      class:
+      - Document
+      - BornDigital
+      - Congressional
+      - FolkMusic
+      - Medicine
+      - OralHistory
+    cardinality:
+      minimum: 0
+      maximum: 1
+    data_type: string
+    controlled_values:
+      format: http://www.w3.org/2001/XMLSchema#string
+      sources:
+      - 'null'
+    definition:
+      default: 'Internal: Split from PDF ID'
+    display_label:
+      default: Split from PDF ID
+    index_documentation: searchable
+    indexing:
+    - split_from_pdf_id_ssi
+    form:
+      display: false
+      required: false
+      primary: false
+      multiple: false
+    property_uri: http://id.loc.gov/vocabulary/identifiers/splitFromPdfId
+    range: http://www.w3.org/2001/XMLSchema#string
+    sample_values:
+    - example-split-from-pdf-id
 classes:
   Document:
     display_label: Document

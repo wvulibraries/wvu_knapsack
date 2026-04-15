@@ -11,7 +11,7 @@ sc proxy up
 set -e
 
 # Ensure submodule is initialised and up to date.
-git submodule update --init --recursive
+# git submodule update --init --recursive
 
 # hyrax-webapp/.env.production must exist — can be empty for Stack Car dev.
 [ -f hyrax-webapp/.env.production ] || touch hyrax-webapp/.env.production

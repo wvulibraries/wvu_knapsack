@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pdf-ocr:
+    build:
+      context: .
+      dockerfile: Dockerfile.ocr
+    working_dir: /home/pdfupdate
+    volumes:
+      - ./scripts:/home/pdfupdate/scripts
+      - ./data/injest:/home/pdfupdate/data/injest
+    stdin_open: true
+    tty: true

@@ -1,0 +1,38 @@
+# Standalone PDF OCR Processing Container
+# Based on Ubuntu with OCR tools for PDF text extraction and processing
+FROM ubuntu:20.04
+
+# Install system dependencies and OCR tools
+RUN apt-get update -qq && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    libffi-dev \
+    libxml2-dev \
+    libxslt-dev \
+    poppler-utils \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    ghostscript \
+    imagemagick \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install OCRmyPDF (Python-based PDF OCR tool)
+RUN pip3 install --no-cache-dir ocrmypdf
+
+# Configure ImageMagick for PDF processing
+RUN sed -i 's/policy domain="coder" rights="none" pattern="PDF"/policy domain="coder" rights="read|write" pattern="PDF"/' /etc/ImageMagick-6/policy.xml
+
+# Create working directory
+WORKDIR /app
+
+# Copy any processing scripts (if needed)
+# COPY process_pdf.sh /app/
+
+# Set environment variables for OCR
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata/
+
+# Default command - can be overridden
+CMD ["bash"]

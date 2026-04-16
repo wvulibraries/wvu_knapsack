@@ -24,6 +24,7 @@ x-app: &app
     - ./data/assets:/app/samvera/hyrax-webapp/public/assets:cached
     - ./data/cache:/app/samvera/hyrax-webapp/tmp/cache:cached
     - ./data/logs/rails:/app/samvera/hyrax-webapp/log:cached
+    - ./data/ingest:/app/samvera/ingest:cached
     - .:/app/samvera
   networks:
     - internal

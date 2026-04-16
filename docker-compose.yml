@@ -20,6 +20,7 @@ x-app: &app
     - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    - ./data/ingest:/app/samvera/ingest:cached
     - .:/app/samvera
 
 volumes:
@@ -100,14 +101,6 @@ services:
         APP_PATH: ./hyrax-webapp
         BASE_TAG: ${BASE_TAG:-latest}
     image: ghcr.io/wvulibraries/wvu_knapsack/worker:${TAG:-latest}
-    # Uncomment command to access container with out starting bin/worker. Useful for debugging or updating Gemfile.lock
-    # command: sleep infinity
-    volumes:
-      - node_modules:/app/samvera/hyrax-webapp/node_modules:cached
-      - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
-      - assets:/app/samvera/hyrax-webapp/public/assets:cached
-      - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
-      - .:/app/samvera
 
   check_volumes:
     <<: *app

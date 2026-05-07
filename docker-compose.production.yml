@@ -20,6 +20,7 @@ x-app: &app
     - BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true
     - BUNDLE_BUNDLER_INJECT__GEM_PATH=/app/samvera/bundler.d
   volumes:
+    - ./google-analytics.json:/etc/hyku/google-analytics.json
     - ./data/bundle:/usr/local/bundle:cached
     - ./data/node_modules:/app/samvera/hyrax-webapp/node_modules:cached
     - ./data/uploads:/app/samvera/hyrax-webapp/public/uploads:cached

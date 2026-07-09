@@ -209,3 +209,8 @@ services:
         condition: service_started
       initialize_app:
         condition: service_completed_successfully
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "3"

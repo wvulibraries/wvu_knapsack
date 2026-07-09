@@ -129,10 +129,21 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   config.log_formatter = ::Logger::Formatter.new
 
+  # Always log to file (for volume mount capture on production)
+  file_logger = ActiveSupport::Logger.new(
+    Rails.root.join('log', 'production.log')
+  )
+  file_logger.formatter = config.log_formatter
+
+  # Log to STDOUT if enabled + also to file (dual logging)
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
+    stdout_logger = ActiveSupport::Logger.new(STDOUT)
+    stdout_logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(
+      ActiveSupport::Logger.broadcast(file_logger).broadcast(stdout_logger)
+    )
+  else
+    config.logger = ActiveSupport::TaggedLogging.new(file_logger)
   end
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

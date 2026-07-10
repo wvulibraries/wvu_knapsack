@@ -74,8 +74,9 @@ services:
       - ./solr-setup:/solr-setup
       - ./startup-solr.sh:/scripts/startup.sh
     healthcheck:
-#      test: "curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/admin/collections?action=LIST"
-      test: ["CMD-SHELL", "curl -sf http://localhost:8983/solr/ || exit 1"]
+      test: >
+        curl -sf -u $$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD
+        http://localhost:8983/solr/admin/info/system >/dev/null || exit 1
       start_period: 300s
       interval: 10s
       timeout: 10s

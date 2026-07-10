@@ -146,5 +146,4 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Allow localhost.direct subdomains and plain localhost for local production compose testing
   config.hosts << /\.localhost\.direct(:\d+)?\z/
   config.hosts << /\Alocalhost(:\d+)?\z/
-
 end

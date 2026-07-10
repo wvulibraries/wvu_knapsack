@@ -48,8 +48,13 @@ Rails.application.config.after_initialize do
   im7_image_patch = Module.new do
     # @param filename [String] source file path passed by the derivatives pipeline
     def create_image_derivatives(filename)
-      mime = Array(file_set.mime_type).first.to_s rescue ''
-      ext  = File.extname(filename.to_s).downcase
+      mime =
+        begin
+          Array(file_set.mime_type).first.to_s
+        rescue StandardError
+          ''
+        end
+      ext = File.extname(filename.to_s).downcase
 
       # Only multi-layer formats need the layer: 0 directive.
       # Passing it for JPEG/PNG/etc. causes MiniMagick 4.x + IM7 to fail
@@ -58,10 +63,10 @@ Rails.application.config.after_initialize do
                     ['.tiff', '.tif', '.pdf'].include?(ext)
 
       outputs = [{
-        label:  :thumbnail,
+        label: :thumbnail,
         format: 'jpg',
-        size:   '600x450>',
-        url:    derivative_url('thumbnail')
+        size: '600x450>',
+        url: derivative_url('thumbnail')
       }]
       outputs.first[:layer] = 0 if needs_layer
 

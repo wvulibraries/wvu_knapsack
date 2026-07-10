@@ -8,6 +8,6 @@ module CatalogControllerDecorator
 
     # adjust pagination
     config.per_page = [6, 12, 24, 48, 96]
-    config.default_per_page = 12    
+    config.default_per_page = 12
   end
 end

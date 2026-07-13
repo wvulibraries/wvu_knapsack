@@ -5,7 +5,10 @@
 Rails.application.config.after_initialize do |app|
   next unless ENV["RAILS_LOG_TO_STDOUT"].present?
 
-  log_path = Rails.root.join("log", "development.log")
+  # Use shared data/logs/rails directory for consistency with production
+  logs_dir = Rails.root.join("data", "logs", "rails")
+  logs_dir.mkpath unless logs_dir.exist?
+  log_path = logs_dir.join("development.log")
   
   # Create file logger
   file_logger = ActiveSupport::Logger.new(log_path)

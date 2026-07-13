@@ -6,7 +6,8 @@ Rails.application.config.after_initialize do |app|
   next unless ENV["RAILS_LOG_TO_STDOUT"].present?
 
   # Use shared data/logs/rails directory for consistency with production
-  logs_dir = Rails.root.join("data", "logs", "rails")
+  # Note: Rails.root = /app/samvera/hyrax-webapp, so parent gets us to /app/samvera
+  logs_dir = Rails.root.parent.join("data", "logs", "rails")
   logs_dir.mkpath unless logs_dir.exist?
   log_path = logs_dir.join("development.log")
   

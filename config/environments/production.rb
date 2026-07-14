@@ -137,11 +137,35 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   # Log to STDOUT if enabled + also to file (dual logging)
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    stdout_logger = ActiveSupport::Logger.new(STDOUT)
-    stdout_logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(
-      ActiveSupport::Logger.broadcast(file_logger).broadcast(stdout_logger)
-    )
+    # Use an IO fan-out wrapper instead of ActiveSupport::Logger.broadcast,
+    # which is unavailable in this runtime.
+    class DualIO
+      def initialize(file, stdout)
+        @file = file
+        @stdout = stdout
+      end
+
+      def write(msg)
+        @file.write(msg)
+        @stdout.write(msg)
+      end
+
+      def flush
+        @file.flush
+        @stdout.flush
+      end
+
+      def close
+        # Keep handles open for the app lifecycle.
+      end
+    end
+
+    file = File.open(Rails.root.join('log', 'production.log'), 'a')
+    file.sync = true
+    dual_io = DualIO.new(file, STDOUT)
+    logger = ActiveSupport::Logger.new(dual_io)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   else
     config.logger = ActiveSupport::TaggedLogging.new(file_logger)
   end

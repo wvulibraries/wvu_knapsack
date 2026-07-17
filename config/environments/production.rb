@@ -130,8 +130,12 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   config.log_formatter = ::Logger::Formatter.new
 
   # Always log to file (for volume mount capture on production)
+  # Use parent directory to write to /app/samvera/data/logs/rails/ instead of hyrax-webapp/log/
+  logs_dir = Rails.root.parent.join("data", "logs", "rails")
+  FileUtils.mkdir_p(logs_dir)
+  
   file_logger = ActiveSupport::Logger.new(
-    Rails.root.join('log', 'production.log')
+    logs_dir.join('production.log')
   )
   file_logger.formatter = config.log_formatter
 
@@ -160,7 +164,7 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
       end
     end
 
-    file = File.open(Rails.root.join('log', 'production.log'), 'a')
+    file = File.open(logs_dir.join('production.log'), 'a')
     file.sync = true
     dual_io = DualIO.new(file, STDOUT)
     logger = ActiveSupport::Logger.new(dual_io)

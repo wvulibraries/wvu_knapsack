@@ -53,6 +53,9 @@ services:
       timeout: "8s"
 
   solr:
+    # platform: linux/amd64 required — custom Solr image is amd64-only.
+    # Without this, Docker tries to run it natively on arm64 and fails silently.
+    platform: linux/amd64
     # container_name: solr
     image: ghcr.io/wvulibraries/wvu_knapsack/solr:${TAG:-latest}
     restart: on-failure
@@ -135,7 +138,12 @@ services:
   fix_permissions:
     image: busybox
     user: root
-    command: sh -c "chmod -R 777 /usr/local/bundle"
+    command: >
+      sh -c "
+        chmod -R 777 /usr/local/bundle 2>/dev/null || true;
+        chmod 1777 /usr/local/bundle/plugin 2>/dev/null || true;
+        chmod 1777 /usr/local/bundle/plugin/gems 2>/dev/null || true
+      "
     volumes:
       - ./data/bundle:/usr/local/bundle
     restart: "no"

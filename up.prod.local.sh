@@ -10,8 +10,11 @@
 #   docker compose -f docker-compose.local.yml exec web sh /app/samvera/scripts/setup.sh
 set -e
 
-# Ensure submodule is initialised and up to date.
-git submodule update --init --recursive
+# Keep submodule pinned to the commit checked out locally.
+# Do not auto-update on each run; this mirrors up.sh behavior and avoids
+# unintentionally resetting local hotfixes during smoke tests.
+# Run manually only when intentionally updating the submodule:
+#   git submodule update --init --recursive
 
 # hyrax-webapp/.env.production must exist — can be empty, real vars come from
 # the knapsack root .env.production via the x-app anchor's env_file.

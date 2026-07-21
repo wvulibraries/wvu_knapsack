@@ -87,6 +87,15 @@ All three optimization phases implemented, tested, and working:
   - Ensures permissions are set automatically on every startup
 - **Status:** ✅ Committed & pushed
 
+### Symlink Preservation in Cleanup Script ✅ APPLIED
+- **Commit:** `68e3d55` - fix(devops): preserve symlink in cleanup-prod.sh for VM deployments
+- **Purpose:** Make `cleanup-prod.sh` safe for development VMs with mounted volumes
+- **Implementation:**
+  - If `./data` is a symlink: preserve it, clean only the target directory contents
+  - If `./data` is a real directory: proceed with normal cleanup (local dev)
+  - This allows DevOps to run cleanup on dev VMs without destroying the volume binding
+- **Status:** ✅ Committed & pushed, tested and verified
+
 ### Local Production Smoke Test ✅ WORKING
 - **docker-compose.local.yml:** Aligned to match production volumes exactly
 - **`.env.production`:** DISABLE_FORCE_SSL=true loaded and active

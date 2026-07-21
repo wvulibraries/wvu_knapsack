@@ -22,9 +22,11 @@ ADD https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata?raw
 ENV HOME=/app/samvera
 # This is specifically NOT $APP_PATH but the parent directory
 
-# Copy Gemfile and Gemfile.lock only (small, rarely changes)
+# Copy Gemfile, gemspec, and minimal lib (small, rarely changes)
 COPY --chown=1001:101 Gemfile* /app/samvera/
+COPY --chown=1001:101 *.gemspec /app/samvera/
 COPY --chown=1001:101 bundler.d/ /app/samvera/bundler.d/
+COPY --chown=1001:101 lib/hyku_knapsack/ /app/samvera/lib/hyku_knapsack/
 
 ENV BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
 ENV BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true

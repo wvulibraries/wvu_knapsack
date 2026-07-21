@@ -35,15 +35,28 @@ echo "==> Stopping stack ($COMPOSE_FILE) and removing project volumes + images..
 docker compose $ENV_FILE_ARGS -f "$COMPOSE_FILE" down --rmi "$RMI_MODE" -v --remove-orphans 2>/dev/null || true
 
 echo "==> Wiping ./data bind mounts (DB, Solr, Fedora, uploads, bundle cache, etc.)..."
-rm -rf ./data
 
-# Pre-create ./data/bundle with world-writable permissions so the container's uid 1001
-# can write gems on first run regardless of whether any prior step ran as root.
-# (Docker Desktop creates bind-mount dirs as root:root on first mount; if the image was
-# ever built with --build and bundle install ran as root inside initialize_app, subsequent
-# runs as uid 1001 fail with Gem::FilePermissionError. This prevents that entirely.)
-mkdir -p ./data/bundle
-chmod 777 ./data/bundle
+# Symlink-aware cleanup: if ./data is a symlink (VM with mounted volume), preserve it.
+# Otherwise, remove and recreate ./data.
+if [ -L ./data ]; then
+  # ./data is a symlink — preserve it and clean the target directory
+  DATA_TARGET=$(readlink ./data)
+  echo "  ./data is symlink to '$DATA_TARGET' — preserving symlink, cleaning target contents..."
+  rm -rf "$DATA_TARGET"/*
+  # Recreate bundle directory in target (for cached gems on next run)
+  mkdir -p "$DATA_TARGET/bundle"
+  chmod 777 "$DATA_TARGET/bundle"
+else
+  # ./data is a real directory or doesn't exist — remove and recreate
+  rm -rf ./data
+  # Pre-create ./data/bundle with world-writable permissions so the container's uid 1001
+  # can write gems on first run regardless of whether any prior step ran as root.
+  # (Docker Desktop creates bind-mount dirs as root:root on first mount; if the image was
+  # ever built with --build and bundle install ran as root inside initialize_app, subsequent
+  # runs as uid 1001 fail with Gem::FilePermissionError. This prevents that entirely.)
+  mkdir -p ./data/bundle
+  chmod 777 ./data/bundle
+fi
 
 echo "==> Pruning dangling images and build cache..."
 docker image prune -f

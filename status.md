@@ -57,12 +57,20 @@ All three optimization phases implemented, tested, and working:
 
 ## 🚀 Previous Fixes (VERIFIED & STABLE)
 
-### Symlink Deletion Issue ✅ FIXED
+## ✅ Previous Fixes (VERIFIED & STABLE)
+
+### Symlink Deletion Issue ✅ ROOT CAUSE IDENTIFIED (Needs VM verification)
 - **Root Cause:** docker-compose.production.yml volume consolidation
-- **Fix:** Restored from main branch with full 11-volume mount structure
-- **Verification:** Tested with simulated mounted volume (2026-07-21) ✅ PASSED
-  - Symlink `data -> data_volume` persisted through full Docker Compose startup
-  - `readlink data` confirmed symlink active
+  - Old: Single `./data` volume mount (consolidated all subdirs)
+  - Result: Docker converts symlink to real directory on startup
+  - This happens ONLY on Linux VMs with mounted volumes, not locally
+- **Fix Applied:** Restored from main branch with full 11-volume mount structure
+  - Now includes: `./data/logs`, `./data/storage/*`, `./data/tmp`, `./data/cache`, `./google-analytics.json`
+  - With full structure defined, Docker should preserve symlinks
+- **Local Verification:** ✅ Confirmed `data/` is real directory (correct for local dev)
+- **Pending:** Production VM test on hykudev (157.182.150.9)
+  - When `data/` is actually mounted from host, test: `readlink data` should return target (not "Is a directory")
+  - This ONLY happens on production where volume is mounted, not locally
 
 ### Local Production Smoke Test ✅ WORKING
 - **docker-compose.local.yml:** Aligned to match production volumes exactly
@@ -75,41 +83,53 @@ All three optimization phases implemented, tested, and working:
 
 **✅ Tests That Have Passed**
 
-| Test | Status | Date | Evidence |
-|------|--------|------|----------|
+| Test | Status | Date | Notes |
+|------|--------|------|-------|
 | Local smoke test stack startup | ✅ PASS | 2026-07-21 | All 8 containers healthy, migrations complete |
-| Symlink persistence on mounted volumes | ✅ PASS | 2026-07-21 | Verified with readlink through full initialization |
+| Symlink persistence (root cause identified) | 🔍 NEEDS VM | 2026-07-21 | Local `data/` correctly a real directory. VM test needed where `data/` is mounted volume |
 | Admin login & session handling | ✅ PASS | 2026-07-21 | Multiple logout/login cycles successful |
 | Database migrations | ✅ PASS | 2026-07-21 | 50+ migrations completed, no errors |
 | BuildKit re-enablement | ✅ PASS | 2026-07-21 | Local build context reduction verified |
-| **Phase 3 layer reordering** | **✅ PASS** | **2026-07-21** | **Bundle install completed with 84 gems (25.4s)** |
+| Phase 3 layer reordering | ✅ PASS | 2026-07-21 | Bundle install completed with 84 gems (25.4s) |
 
 ---
 
-## ⏳ NEXT: hykudev VM Deployment Test
+## ⏳ NEXT: hykudev VM Deployment Test — CRITICAL
 
-**Status:** All local testing complete. Phase 3 Dockerfile fix verified working.
+**Status:** All local testing complete. Code ready. Symlink fix needs production verification.
 
-**Next:** Deploy to hykudev VM to validate production performance gains.
+**Why VM testing is critical:** Symlink issue only manifests on Linux with mounted volumes. Local macOS testing with real `data/` directory does NOT replicate production behavior.
 
 **Objectives:**
 1. Deploy latest code (`./up.sh`) to hykudev VM (157.182.150.9)
-2. Verify symlink `./data` persists (not converted to real directory)
-3. Measure actual build time with all three optimizations
-4. Confirm all containers healthy and services accessible
+2. **TEST SYMLINK IMMEDIATELY** (before containers start)
+   - Check: `ls -lad data/` — should show `l` for symlink, NOT `d` for directory
+   - Verify: `readlink data/` — should return mounted volume path
+3. Run full stack startup and verify all services healthy
+4. Measure actual build time with all three optimizations
+5. Confirm admin login working
 
 **Acceptance Criteria:**
-- ✅ `readlink data` returns symlink target (not "Is a directory")
+- ✅ **SYMLINK:** `ls -lad data/` shows `l` (symlink), NOT `d` (directory) — **CRITICAL**
+- ✅ `readlink data/` returns volume path (not "Is a directory" error)
 - ✅ Build completes in 10-12 minutes (40-50% faster than baseline)
 - ✅ All containers healthy: web, worker, solr, fcrepo, db, redis, zoo
 - ✅ https://admin-hykudev.lib.wvu.edu accessible & login working
 
-**Command to run on VM:**
+**Exact commands to run on VM:**
 ```bash
 cd /path/to/wvu_knapsack
 git pull origin fix/facet-links-and-hide-type-facet
+
+# CRITICAL: Check symlink BEFORE starting stack
+ls -lad data/    # MUST show symlink (l) not directory (d)
+readlink data/   # MUST show volume path
+
+# Then proceed with timed startup
 time ./up.sh
 ```
+
+**If symlink test FAILS** (shows directory): The docker-compose.production.yml fix didn't work on this VM—need to investigate mounted volume configuration.
 
 ---
 

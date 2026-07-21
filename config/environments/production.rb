@@ -129,50 +129,10 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
 
   config.log_formatter = ::Logger::Formatter.new
 
-  # Always log to file (for volume mount capture on production)
-  # Use parent directory to write to /app/samvera/data/logs/rails/ instead of hyrax-webapp/log/
-  logs_dir = Rails.root.parent.join("data", "logs", "rails")
-  # Directory should be created by entrypoint.sh, but ensure it exists as defensive measure
-  FileUtils.mkdir_p(logs_dir)
-
-  file_logger = ActiveSupport::Logger.new(
-    logs_dir.join('production.log')
-  )
-  file_logger.formatter = config.log_formatter
-
-  # Log to STDOUT if enabled + also to file (dual logging)
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    # Use an IO fan-out wrapper instead of ActiveSupport::Logger.broadcast,
-    # which is unavailable in this runtime.
-    class DualIO
-      def initialize(file, stdout)
-        @file = file
-        @stdout = stdout
-      end
-
-      def write(msg)
-        @file.write(msg)
-        @stdout.write(msg)
-      end
-
-      def flush
-        @file.flush
-        @stdout.flush
-      end
-
-      def close
-        # Keep handles open for the app lifecycle.
-      end
-    end
-
-    file = File.open(logs_dir.join('production.log'), 'a')
-    file.sync = true
-    dual_io = DualIO.new(file, STDOUT)
-    logger = ActiveSupport::Logger.new(dual_io)
+    logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
-  else
-    config.logger = ActiveSupport::TaggedLogging.new(file_logger)
   end
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

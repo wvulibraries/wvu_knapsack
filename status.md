@@ -6,9 +6,9 @@
 
 ---
 
-## 🎯 Active Work: Build Optimization Implementation
+## 🎯 Active Work: Build Optimization Implementation — ✅ COMPLETE
 
-### ✅ COMPLETED
+All three optimization phases implemented, tested, and working:
 
 #### Phase 1: `.dockerignore` Optimization
 - **Commit:** `420dece` — `build(optimization): optimize .dockerignore to reduce build context by 40-50%`
@@ -31,14 +31,16 @@
 - **Status:** ✅ Committed & pushed
 - **Risk:** 🟡 MEDIUM (was causing EOF errors before Phase 1; now safe)
 
-#### Phase 3: Dockerfile Layer Reordering
-- **Commit:** `0947552` (same commit as Phase 2)
+#### Phase 3: Dockerfile Layer Reordering ✅ FIXED
+- **Commit:** `0947552` + `210d784` (fix for gemspec)
 - **Impact:** 2-3 min savings on incremental builds (10% reduction)
 - **Changes:** Reordered `Dockerfile` layers
-  - COPY `Gemfile*` + `bundler.d/` FIRST (~500KB)
+  - COPY `Gemfile*`, `*.gemspec`, `bundler.d/`, `lib/hyku_knapsack/` FIRST (~1MB total)
   - RUN `bundle install` (can be cached)
   - COPY full source tree AFTER (reuses bundle layer if Gemfile unchanged)
-- **Status:** ✅ Committed & pushed
+- **Status:** ✅ Committed & pushed (bundle install now succeeds)
+- **Fix Applied:** Added `*.gemspec` and `lib/hyku_knapsack/` to early COPY because Gemfile references local gem
+- **Verification:** Bundle install completed successfully with 84 gems installed
 - **Risk:** 🟢 LOW (no runtime impact)
 
 ---
@@ -71,7 +73,7 @@
 
 ---
 
-## ✅ Tests That Have Passed
+**✅ Tests That Have Passed**
 
 | Test | Status | Date | Evidence |
 |------|--------|------|----------|
@@ -80,10 +82,15 @@
 | Admin login & session handling | ✅ PASS | 2026-07-21 | Multiple logout/login cycles successful |
 | Database migrations | ✅ PASS | 2026-07-21 | 50+ migrations completed, no errors |
 | BuildKit re-enablement | ✅ PASS | 2026-07-21 | Local build context reduction verified |
+| **Phase 3 layer reordering** | **✅ PASS** | **2026-07-21** | **Bundle install completed with 84 gems (25.4s)** |
 
 ---
 
 ## ⏳ NEXT: hykudev VM Deployment Test
+
+**Status:** All local testing complete. Phase 3 Dockerfile fix verified working.
+
+**Next:** Deploy to hykudev VM to validate production performance gains.
 
 **Objectives:**
 1. Deploy latest code (`./up.sh`) to hykudev VM (157.182.150.9)
@@ -132,8 +139,10 @@ Branch: fix/facet-links-and-hide-type-facet
 Remote: https://github.com/wvulibraries/wvu_knapsack.git
 
 Latest commits:
+210d784 - fix(optimization): include gemspec and lib in early Dockerfile layers
+fb47b4f - docs(status): track build optimization completion and VM testing readiness
 0947552 - build(optimization): implement Phase 2 & 3 build optimizations
 420dece - build(optimization): optimize .dockerignore to reduce build context by 40-50%
 ```
 
-All changes committed and pushed. Ready for VM testing.
+**Status:** ✅ All 3 phases complete, tested, and verified working. Ready for production VM deployment.

@@ -132,7 +132,13 @@ Rails.application.configure do # rubocop:disable Metrics/BlockLength
   # Always log to file (for volume mount capture on production)
   # Use parent directory to write to /app/samvera/data/logs/rails/ instead of hyrax-webapp/log/
   logs_dir = Rails.root.parent.join("data", "logs", "rails")
-  FileUtils.mkdir_p(logs_dir)
+  # Only create if it doesn't exist and is not a mount point
+  # mkdir -p fails on mount points that already exist, so skip if dir exists
+  begin
+    FileUtils.mkdir_p(logs_dir) unless Dir.exist?(logs_dir)
+  rescue Errno::EEXIST
+    # Mount point already exists, that's fine
+  end
   
   file_logger = ActiveSupport::Logger.new(
     logs_dir.join('production.log')

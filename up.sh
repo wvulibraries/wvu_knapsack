@@ -49,4 +49,15 @@ git pull
 # we do not want Solr disabled in production regardless.
 rm -f ./hyrax-webapp/config/initializers/disable_solr.rb
 
+# ---
+# BuildKit Configuration — Phase 2 Build Optimization
+# Enables Docker BuildKit for parallel layer execution (~3-5 min additional savings)
+# DOCKER_BUILDKIT=1: Enable BuildKit backend (parallel builds, better caching)
+# DOCKER_BUILDKIT_PROGRESS=plain: Clear output without animation (easier debugging)
+# BUILDKIT_STEP_LOG_MAX_SIZE=10000000: Increase log buffer to prevent truncation (~10MB)
+# ---
+export DOCKER_BUILDKIT=1
+export DOCKER_BUILDKIT_PROGRESS=plain
+export BUILDKIT_STEP_LOG_MAX_SIZE=10000000
+
 docker compose --env-file .env.production -f docker-compose.production.yml up -d

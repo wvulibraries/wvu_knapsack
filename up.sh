@@ -47,12 +47,15 @@ if [ -d ./data ] && [ ! -L ./data ]; then
     ./data/logs/rails
   chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache ./data/logs/rails
 elif [ -L ./data ]; then
-  # data/ is a symlink (production with mounted volume) — assume target already exists
-  # Do NOT run mkdir -p as it would resolve and break the symlink
+  # data/ is a symlink (production with mounted volume)
   echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
   
-  # But still ensure permissions on the mounted volume target
   DATA_TARGET=$(readlink ./data)
+  
+  # Create subdirectories directly on the target (not through symlink)
+  mkdir -p "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/uploads" "$DATA_TARGET/db" "$DATA_TARGET/solr" "$DATA_TARGET/zoo" "$DATA_TARGET/zk" "$DATA_TARGET/fcrepo" "$DATA_TARGET/redis" "$DATA_TARGET/logs/solr" "$DATA_TARGET/logs/rails"
+  
+  # Set permissions on appropriate directories for container
   chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails"
 fi
 

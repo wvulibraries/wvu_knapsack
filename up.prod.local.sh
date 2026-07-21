@@ -42,7 +42,8 @@ if [ -d ./data ] && [ ! -L ./data ]; then
     ./data/zk \
     ./data/fcrepo \
     ./data/redis \
-    ./data/logs/solr
+    ./data/logs/solr \
+    ./data/logs/rails
   chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache
 elif [ -L ./data ]; then
   # data/ is a symlink (production with mounted volume) — assume target already exists
@@ -62,7 +63,8 @@ else
     ./data/zk \
     ./data/fcrepo \
     ./data/redis \
-    ./data/logs/solr
+    ./data/logs/solr \
+    ./data/logs/rails
   chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache
 fi
 

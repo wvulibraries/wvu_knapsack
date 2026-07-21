@@ -22,27 +22,34 @@ git pull
 [ -f hyrax-webapp/.env.production ] || touch hyrax-webapp/.env.production
 
 
-# ---
-# NOTE: The following mkdir and chown commands are commented out intentionally.
-# Running 'chown -R' on every up.sh run is slow and unnecessary, as it processes all files recursively.
-# Only use these commands after a fresh clone or if you encounter permission errors (e.g.,
-# 'Permission denied @ dir_s_mkdir - /usr/local/bundle').
+# Pre-create bind-mount directories with symlink protection.
+# If data/ is a symlink (production VM with mounted volume), preserve it.
+# Otherwise, create directories if data/ is a real directory or doesn't exist yet.
 #
-# mkdir -p \
-#   ./data/bundle \
-#   ./data/node_modules \
-#   ./data/assets \
-#   ./data/cache \
-#   ./data/uploads \
-#   ./data/db \
-#   ./data/solr \
-#   ./data/zoo \
-#   ./data/zk \
-#   ./data/fcrepo \
-#   ./data/redis \
-#   ./data/logs/solr
-# chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache
-# ---
+# Note: mkdir -p ./data/bundle on a symlink resolves the symlink and converts it
+# to a real directory, breaking the mounted volume binding. This is the fix for
+# the symlink deletion issue where data/ would become a real dir after ./up.sh.
+if [ -d ./data ] && [ ! -L ./data ]; then
+  # data/ exists and is NOT a symlink — safe to create subdirectories
+  mkdir -p \
+    ./data/bundle \
+    ./data/node_modules \
+    ./data/assets \
+    ./data/cache \
+    ./data/uploads \
+    ./data/db \
+    ./data/solr \
+    ./data/zoo \
+    ./data/zk \
+    ./data/fcrepo \
+    ./data/redis \
+    ./data/logs/solr
+  chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache
+elif [ -L ./data ]; then
+  # data/ is a symlink (production with mounted volume) — assume target already exists
+  # Do NOT run mkdir -p as it would resolve and break the symlink
+  echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
+fi
 
 # Remove broken initializer from hyrax-webapp submodule if present.
 # disable_solr.rb has a syntax error that aborts assets:precompile, and

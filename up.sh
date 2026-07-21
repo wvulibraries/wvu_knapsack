@@ -50,6 +50,10 @@ elif [ -L ./data ]; then
   # data/ is a symlink (production with mounted volume) — assume target already exists
   # Do NOT run mkdir -p as it would resolve and break the symlink
   echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
+  
+  # But still ensure permissions on the mounted volume target
+  DATA_TARGET=$(readlink ./data)
+  chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails"
 fi
 
 # Remove broken initializer from hyrax-webapp submodule if present.

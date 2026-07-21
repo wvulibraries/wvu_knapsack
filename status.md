@@ -78,6 +78,15 @@ All three optimization phases implemented, tested, and working:
   
 - **Commit:** `83670d1` - fix(critical): preserve symlink in mkdir logic
 
+### DevOps: `/data/logs/rails` Permission Fix ✅ APPLIED
+- **Commit:** `d841d66` - fix(devops): set 1001:101 permissions on data/logs/rails
+- **Request:** DevOps asked for automatic permission setting on `/home/git_pulls/wvu_knapsack/data/logs/rails`
+- **Implementation:** 
+  - Both `up.sh` and `up.prod.local.sh` now create `./data/logs/rails` directory
+  - `up.sh` uses `chown -R 1001:101 ./data/logs` to set permissions on all logs subdirectories (solr + rails)
+  - Ensures permissions are set automatically on every startup
+- **Status:** ✅ Committed & pushed
+
 ### Local Production Smoke Test ✅ WORKING
 - **docker-compose.local.yml:** Aligned to match production volumes exactly
 - **`.env.production`:** DISABLE_FORCE_SSL=true loaded and active

@@ -52,11 +52,13 @@ elif [ -L ./data ]; then
   
   DATA_TARGET=$(readlink ./data)
   
-  # Create subdirectories directly on the target (not through symlink)
-  mkdir -p "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/uploads" "$DATA_TARGET/db" "$DATA_TARGET/solr" "$DATA_TARGET/zoo" "$DATA_TARGET/zk" "$DATA_TARGET/fcrepo" "$DATA_TARGET/redis" "$DATA_TARGET/logs/solr" "$DATA_TARGET/logs/rails"
-  
-  # Set permissions on appropriate directories for container
-  chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails"
+  # If target exists, create subdirectories and set permissions
+  if [ -d "$DATA_TARGET" ]; then
+    mkdir -p "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/uploads" "$DATA_TARGET/db" "$DATA_TARGET/solr" "$DATA_TARGET/zoo" "$DATA_TARGET/zk" "$DATA_TARGET/fcrepo" "$DATA_TARGET/redis" "$DATA_TARGET/logs/solr" "$DATA_TARGET/logs/rails" 2>/dev/null
+    chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails" 2>/dev/null || true
+  else
+    echo "⚠ data/ symlink target '$DATA_TARGET' not found — skipping directory creation (docker compose may handle this)"
+  fi
 fi
 
 # Remove broken initializer from hyrax-webapp submodule if present.

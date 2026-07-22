@@ -5,7 +5,8 @@
 # the logger setup from hyrax-webapp's config/environments/*.rb.
 return unless ENV["RAILS_LOG_TO_STDOUT"].present?
 
-logs_dir = Rails.root.parent.join("data", "logs", "rails")
+# Use the actual log directory where the volume is mounted
+logs_dir = Rails.root.join("log")
 begin
   FileUtils.mkdir_p(logs_dir)
 rescue Errno::EEXIST

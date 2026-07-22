@@ -6,7 +6,11 @@
 return unless ENV["RAILS_LOG_TO_STDOUT"].present?
 
 logs_dir = Rails.root.parent.join("data", "logs", "rails")
-FileUtils.mkdir_p(logs_dir)
+begin
+  FileUtils.mkdir_p(logs_dir)
+rescue Errno::EEXIST
+  # Directory already exists as a mount point, which is fine
+end
 
 # DualIO wrapper writes to both file and STDOUT
 class DualIO

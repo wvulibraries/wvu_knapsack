@@ -2,7 +2,8 @@
 
 **Last Updated:** 2026-07-21  
 **Current Branch:** `fix/facet-links-and-hide-type-facet`  
-**Testing Status:** ⏳ Ready for VM deployment test
+**Testing Status:** ✅ **DEPLOYED & RUNNING ON hykudev** — Admin tenant accessible
+**Build Time:** 1185.3s (~19.8 min) with Phase 1-3 optimizations
 
 ---
 
@@ -103,6 +104,16 @@ All three optimization phases implemented, tested, and working:
 - **Session handling:** ✅ Confirmed through multiple logout/login cycles
 - **All containers:** Healthy and responsive
 
+### Rails Initialization Fixes (Production VM) ✅ DEPLOYED
+- **dual_logging.rb Path Fix:** Updated to use correct mount path `/app/samvera/hyrax-webapp/log`
+  - Issue: Initializer was trying wrong path, causing ENOENT
+  - Commit: `2cfa21b` - fix: use correct log path for dual_logging initializer
+- **tmp Directory Permission Fix:** Added tmp to chown commands in startup scripts
+  - Issue: `./data/tmp` was created but not chowned to uid 1001:101, causing permission denied
+  - Files: `up.sh`, `up.prod.local.sh`
+  - Commit: `e00c4aa` - fix: add tmp directory to chown in production setup scripts
+- **Status:** ✅ Both fixes deployed and verified on hykudev (admin tenant accessible)
+
 ---
 
 **✅ Tests That Have Passed**
@@ -181,10 +192,12 @@ Branch: fix/facet-links-and-hide-type-facet
 Remote: https://github.com/wvulibraries/wvu_knapsack.git
 
 Latest commits:
+e00c4aa - fix: add tmp directory to chown in production setup scripts
+2cfa21b - fix: use correct log path for dual_logging initializer
+d2b05c5 - fix: handle EEXIST when dual_logging tries to mkdir on mount point
 210d784 - fix(optimization): include gemspec and lib in early Dockerfile layers
-fb47b4f - docs(status): track build optimization completion and VM testing readiness
 0947552 - build(optimization): implement Phase 2 & 3 build optimizations
 420dece - build(optimization): optimize .dockerignore to reduce build context by 40-50%
 ```
 
-**Status:** ✅ All 3 phases complete, tested, and verified working. Ready for production VM deployment.
+**Status:** ✅ All 3 phases complete + Rails init fixes deployed. **RUNNING SUCCESSFULLY on hykudev** with admin tenant accessible.

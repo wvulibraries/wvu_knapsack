@@ -39,10 +39,6 @@ COPY --chown=1001:101 . /app/samvera
 # disable_solr.rb has a Ruby syntax error at line 16 that aborts assets:precompile.
 # We also do not want Solr disabled in production — Solr must remain enabled.
 RUN rm -f /app/samvera/hyrax-webapp/config/initializers/disable_solr.rb
-
-# Pre-create /app/samvera/data directory so Rails doesn't try to mkdir it later.
-# When this is a volume mount, Rails trying to mkdir causes Errno::EEXIST.
-RUN mkdir -p /app/samvera/data
 ############## END KNAPSACK SPECIFIC CODE ################
 
 # assets:precompile is NOT run here — it runs at container startup via initialize_app

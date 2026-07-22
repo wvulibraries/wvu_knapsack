@@ -43,8 +43,9 @@ if [ -d ./data ] && [ ! -L ./data ]; then
     ./data/fcrepo \
     ./data/redis \
     ./data/logs/solr \
-    ./data/logs/rails
-  chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache
+    ./data/logs/rails \
+    ./data/tmp
+  chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache ./data/tmp
 elif [ -L ./data ]; then
   # data/ is a symlink (production with mounted volume) — assume target already exists
   # Do NOT run mkdir -p as it would resolve and break the symlink
@@ -64,8 +65,9 @@ else
     ./data/fcrepo \
     ./data/redis \
     ./data/logs/solr \
-    ./data/logs/rails
-  chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache
+    ./data/logs/rails \
+    ./data/tmp
+  chmod 777 ./data/bundle ./data/node_modules ./data/assets ./data/cache ./data/tmp
 fi
 
 docker compose -f docker-compose.local.yml up -d

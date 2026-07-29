@@ -2,7 +2,7 @@
 set -e
 
 # Pull latest knapsack code before bringing up containers.
-git pull
+#git pull
 
 
 # ---

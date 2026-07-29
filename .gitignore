@@ -28,7 +28,9 @@ notes.txt
 .bash_history
 /.cache
 /data
+/simlink-test
 
 okta-*.json
+google-analytics.json
 
 

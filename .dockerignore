@@ -4,6 +4,12 @@ node_modules/
 .git/
 .github/
 
+# Runtime/generated directories in submodule (mounted as volumes)
+./hyrax-webapp/tmp/
+./hyrax-webapp/storage/
+./hyrax-webapp/spec/
+./hyrax-webapp/docs/
+
 # Temporary/cache directories
 public/uploads/
 public/assets/

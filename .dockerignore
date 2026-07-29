@@ -24,6 +24,8 @@ vendor/bundle/
 .DS_Store
 .env*
 *.log
+*.old
+*.bak
 .vscode/
 .idea/
 *.swp

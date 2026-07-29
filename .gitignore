@@ -5,6 +5,8 @@
 /tmp/
 scratch.md
 *~undo-tree~
+*.old
+*.bak
 .env.*
 !.env.*.example
 .DS_Store

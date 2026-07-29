@@ -30,4 +30,7 @@ ImageMagick*
 .DS_Store
 
 ./data
-./hyrax-webapp
+./hyrax-webapp/tmp
+./hyrax-webapp/storage
+./hyrax-webapp/spec
+./hyrax-webapp/docs

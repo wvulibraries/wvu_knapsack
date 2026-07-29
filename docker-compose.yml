@@ -115,6 +115,7 @@ services:
       service: initialize_app
     command:
       - >
+        rm -rf /app/samvera/hyrax-webapp/storage/files &&
         /app/samvera/bin/solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
         /app/samvera/bin/solrcloud-assign-configset.sh &&
         SOLR_COLLECTION_NAME=hydra-test /app/samvera/bin/solrcloud-assign-configset.sh &&

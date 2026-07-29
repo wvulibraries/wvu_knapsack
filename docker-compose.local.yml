@@ -19,13 +19,16 @@ x-app: &app
     - BUNDLE_BUNDLER_INJECT__GEM_PATH=/app/samvera/bundler.d
     - LOCAL_PRODUCTION_TEST=true
   volumes:
+    - ./google-analytics.json:/etc/hyku/google-analytics.json
     - ./data/bundle:/usr/local/bundle:cached
     - ./data/node_modules:/app/samvera/hyrax-webapp/node_modules:cached
     - ./data/uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - ./data/assets:/app/samvera/hyrax-webapp/public/assets:cached
-    - ./data/cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    - ./data/tmp:/app/samvera/hyrax-webapp/tmp:cached
+    - ./data/storage:/app/samvera/hyrax-webapp/storage/cache:cached    
     - ./data/logs/rails:/app/samvera/hyrax-webapp/log:cached
     - ./data/ingest:/app/samvera/ingest:cached
+    - ./data/storage:/app/samvera/hyrax-webapp/storage:cached
     - .:/app/samvera
   networks:
     - internal
@@ -155,6 +158,7 @@ services:
     command:
       - >
         rm -f /app/samvera/hyrax-webapp/config/initializers/disable_solr.rb &&
+        rm -rf /app/samvera/hyrax-webapp/storage/files &&
         TEST_SOLR_COLLECTION_NAME=hydra-production solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
         SOLR_COLLECTION_NAME=hydra-production solrcloud-assign-configset.sh &&
         bundle install &&
@@ -180,6 +184,11 @@ services:
     entrypoint: ["sh", "-c"]
     command:
       - bundle check || bundle install && ./bin/worker
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "3"
     depends_on:
       initialize_app:
         condition: service_completed_successfully
@@ -208,6 +217,11 @@ services:
       - BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
       - BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true
       - VIRTUAL_PORT=3000
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "3"
     depends_on:
       db:
         condition: service_started

@@ -33,7 +33,6 @@ vendor/bundle/
 README.md
 CONTRIBUTING.md
 *.md
-solr/
 docs/
 plans/
 spec/

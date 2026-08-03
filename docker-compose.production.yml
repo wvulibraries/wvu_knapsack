@@ -42,7 +42,7 @@ services:
 
   zoo:
     image: zookeeper:3.6.2
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zoo:2888:3888;2181
@@ -60,7 +60,7 @@ services:
   solr:
     container_name: solr
     image: ghcr.io/wvulibraries/wvu_knapsack/solr:${TAG:-latest}
-    restart: on-failure
+    restart: unless-stopped
     platform: linux/amd64
     env_file:
       - .env.solr
@@ -88,7 +88,7 @@ services:
 
   fcrepo:
     image: ghcr.io/samvera/fcrepo4:4.7.5
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - .env.fedora
     expose:
@@ -100,7 +100,7 @@ services:
 
   db:
     image: postgres:11.1
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - .env.db
     volumes:
@@ -110,7 +110,7 @@ services:
 
   redis:
     image: redis:5
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - .env.redis
     command: sh -c "redis-server --requirepass $$REDIS_PASSWORD"
@@ -126,7 +126,7 @@ services:
 
   fits:
     image: ghcr.io/samvera/fitsservlet:1.6.0
-    restart: on-failure
+    restart: unless-stopped
     expose:
       - 8080
     networks:
@@ -158,6 +158,7 @@ services:
 
   worker:
     <<: *app
+    restart: unless-stopped
     build:
       context: .
       target: hyku-worker
@@ -192,6 +193,7 @@ services:
   web:
     <<: *app
     image: ghcr.io/wvulibraries/wvu_knapsack/web:${TAG:-latest}
+    restart: unless-stopped
     entrypoint: ["sh", "-c"]
     command:
       - bundle check || bundle install && ./bin/web

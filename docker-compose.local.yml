@@ -164,6 +164,8 @@ services:
         bundle install &&
         RAILS_ENV=production bundle exec rails assets:precompile &&
         db-migrate-seed.sh
+    volumes:
+      - ./data/bundle:/usr/local/bundle
     depends_on:
       fix_permissions:
         condition: service_completed_successfully

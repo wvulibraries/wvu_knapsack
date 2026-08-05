@@ -1,0 +1,38 @@
+<%# Generic modal for browsing all facet values %>
+<div role="dialog" class="modal fade" id="facet-modal-<%= facet_field.key %>" tabindex="-1" aria-labelledby="facet_modal_<%= facet_field.key %>_title" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="facet_modal_<%= facet_field.key %>_title">
+          <%= t("more_#{field_name}_html", scope: 'blacklight.search.facets', default: facet_field.label, field_name: facet_field.label) %>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% paginator = facet_paginator(facet_field, display_facet) %>
+        <ul class="facet-values list-unstyled">
+          <% paginator.items.each do |item| %>
+            <li class="facet-value">
+              <% if facet_field.pivot? %>
+                <%= render_facet_limit_list(paginator, facet_field.key) %>
+              <% else %>
+                <% link = search_action_url(id: facet_field.key, "f[#{facet_field.key}][]" => item.value, only_path: true) %>
+                <%= link_to "#{item.label} (#{item.hits})", link, class: "facet-link" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <%= t('hyrax.collection.select_form.close', default: 'Close') %>
+        </button>
+        <%= link_to t('blacklight.search.facets.view_all', default: 'View All'),
+                    search_action_url(id: facet_field.key),
+                    class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>

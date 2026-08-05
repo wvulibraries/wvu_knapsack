@@ -28,6 +28,15 @@ module Hyrax
         safe_join(options[:value].map { |item| link_to_field(name, item, item) }, ", ")
       end
     end
+
+    # OVERRIDE Hyrax Hyrax::HyraxHelperBehavior#render_notifications
+    # Suppress rendering of the notifications component when realtime_notifications is disabled.
+    # This prevents WebSocket connection errors in the browser console when the feature is not configured.
+    def render_notifications(options = {})
+      return ''.html_safe unless Hyrax.config.realtime_notifications?
+      
+      super(options)
+    end
   end
 end
 

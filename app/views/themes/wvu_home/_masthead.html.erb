@@ -1,4 +1,4 @@
-<%# OVERRIDE: wvu_home theme - Render masthead with Root Menu (controls) for all pages %>
+<%# OVERRIDE: wvu_home theme - Render masthead with Root Menu (controls) for catalog/non-homepage pages %>
 
 <header aria-label="header" class="top-header">
   <nav id="masthead" class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between <%= placement_class %>" role="navigation" aria-label="masthead">
@@ -16,4 +16,8 @@
     </div>
   </nav>
 </header>
-<%= render '/controls' %>
+<%# Only render /controls on non-homepage pages (catalog, search, etc.) %>
+<%# Homepage layout handles /controls rendering separately %>
+<% unless current_page?(hyrax.root_path) %>
+  <%= render '/controls' %>
+<% end %>

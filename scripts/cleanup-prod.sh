@@ -35,20 +35,31 @@ echo "==> Stopping stack ($COMPOSE_FILE) and removing project volumes + images..
 docker compose $ENV_FILE_ARGS -f "$COMPOSE_FILE" down --rmi "$RMI_MODE" -v --remove-orphans 2>/dev/null || true
 
 echo "==> Wiping ./data bind mounts (DB, Solr, Fedora, uploads, bundle cache, etc.)..."
+echo "    Preserving ./data/ingest directory..."
 
 # Symlink-aware cleanup: if ./data is a symlink (VM with mounted volume), preserve it.
-# Otherwise, remove and recreate ./data.
+# Otherwise, remove and recreate ./data. In both cases, PRESERVE ./data/ingest.
 if [ -L ./data ]; then
-  # ./data is a symlink — preserve it and clean the target directory
+  # ./data is a symlink — preserve it and clean the target directory (except ingest)
   DATA_TARGET=$(readlink ./data)
   echo "  ./data is symlink to '$DATA_TARGET' — preserving symlink, cleaning target contents..."
-  rm -rf "$DATA_TARGET"/*
+  # Remove everything EXCEPT ingest subdirectory
+  find "$DATA_TARGET" -maxdepth 1 -not -name "ingest" -not -name "." | xargs rm -rf
   # Recreate bundle directory in target (for cached gems on next run)
   mkdir -p "$DATA_TARGET/bundle"
   chmod 777 "$DATA_TARGET/bundle"
 else
-  # ./data is a real directory or doesn't exist — remove and recreate
+  # ./data is a real directory or doesn't exist — remove and recreate (preserve ingest)
+  # First, save ingest if it exists
+  if [ -d ./data/ingest ]; then
+    mv ./data/ingest /tmp/ingest.backup
+  fi
   rm -rf ./data
+  # Restore ingest
+  if [ -d /tmp/ingest.backup ]; then
+    mkdir -p ./data
+    mv /tmp/ingest.backup ./data/ingest
+  fi
   # Pre-create ./data/bundle with world-writable permissions so the container's uid 1001
   # can write gems on first run regardless of whether any prior step ran as root.
   # (Docker Desktop creates bind-mount dirs as root:root on first mount; if the image was

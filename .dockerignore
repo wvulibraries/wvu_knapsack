@@ -32,30 +32,8 @@ vendor/bundle/
 *.swp
 *.swo
 
-# Documentation (not needed in image)
-README.md
-CONTRIBUTING.md
-*.md
-docs/
-plans/
-spec/
-ingest/
-templates/
-
-# CI/CD and build artifacts
-.github/
-.circleci/
-.travis.yml
-.hound.yml
-.ebextensions/
-.internal_test_app/
-artifacts/
-chart/
-docker/
-fcrepo/
-importer/
-pg/
-fcrepo_wrapper/
-*.rdb
-fits.log
-ImageMagick*
+./data
+./hyrax-webapp/tmp
+./hyrax-webapp/storage
+./hyrax-webapp/spec
+./hyrax-webapp/docs

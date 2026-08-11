@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Override the session store's secure flag when running without SSL.
 # hyrax-webapp's session_store.rb sets secure: true in production, which
 # marks the cookie as Secure — browsers refuse to send it over plain HTTP.

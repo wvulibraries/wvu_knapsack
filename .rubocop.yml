@@ -1,10 +1,6 @@
 inherit_gem:
   bixby: bixby_default.yml
 
-# Disable cops from rubocop-rspec_rails since knapsack doesn't depend on it
-RspecRails:
-  Enabled: false
-
 AllCops:
   NewCops: disable
   TargetRubyVersion: 3.2.2

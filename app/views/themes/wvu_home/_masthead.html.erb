@@ -16,8 +16,9 @@
     </div>
   </nav>
 </header>
-<%# Only render /controls on non-homepage pages (catalog, search, etc.) %>
-<%# Homepage layout handles /controls rendering separately %>
-<% unless current_page?(hyrax.root_path) %>
+<%# Only render /controls on catalog/search pages, NOT on pages/homepage layouts %>
+<%# Pages using 'homepage' layout (homepage, about, help, contact) handle search separately %>
+<%# Only render /controls on catalog, search, and other non-homepage pages %>
+<% unless current_page?(hyrax.root_path) || controller.controller_name == 'pages' || controller.controller_name == 'homepage' %>
   <%= render '/controls' %>
 <% end %>

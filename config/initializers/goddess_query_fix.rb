@@ -1,10 +1,11 @@
-# Defensive patch for Hyrax::Goddess::Query#model_class_for
+# Defensive patch for Goddess::Query::MethodMissingMachinations#model_class_for
 # Prevents NameError when Wings::ModelRegistry is not available
 # Issue: lib/goddess/query.rb:17 tries to access undefined constant
+# The method is in the Goddess module included in CustomQueryContainer
 
 Rails.application.config.to_prepare do
-  if defined?(Hyrax::Goddess::Query)
-    Hyrax::Goddess::Query.class_eval do
+  if defined?(Goddess::Query::MethodMissingMachinations)
+    Goddess::Query::MethodMissingMachinations.module_eval do
       def model_class_for(model)
         internal_resource = model.respond_to?(:internal_resource) ? model.internal_resource : nil
         

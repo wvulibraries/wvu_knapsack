@@ -5,12 +5,16 @@
 
 Rails.application.config.to_prepare do
   if defined?(Goddess::Query::MethodMissingMachinations)
-    Goddess::Query::MethodMissingMachinations.module_eval do
+    # Create a module to prepend that overrides model_class_for
+    # Prepending ensures this version is called first (before the original)
+    goddess_patch = Module.new do
       def model_class_for(model)
         internal_resource = model.respond_to?(:internal_resource) ? model.internal_resource : nil
         
         # Try to constantize internal_resource first
-        return internal_resource.safe_constantize if internal_resource&.safe_constantize
+        if internal_resource&.safe_constantize
+          return internal_resource.safe_constantize
+        end
         
         # Defensively check if Wings::ModelRegistry is available before using it
         if defined?(Wings::ModelRegistry)
@@ -21,5 +25,8 @@ Rails.application.config.to_prepare do
         end
       end
     end
+    
+    # Prepend ensures this patched version is invoked before the original
+    Goddess::Query::MethodMissingMachinations.prepend(goddess_patch)
   end
 end

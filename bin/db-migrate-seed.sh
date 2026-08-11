@@ -69,3 +69,4 @@ rescue => e
 end
 
 puts 'all migrations have been run'
+exit 0

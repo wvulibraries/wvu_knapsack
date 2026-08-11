@@ -6,6 +6,8 @@ AllCops:
   TargetRubyVersion: 3.2.2
   DisplayCopNames: true
   SuggestExtensions: false
+  # Disable rubocop-rspec_rails extension since knapsack doesn't depend on it
+  # (only hyrax-webapp does)
   Exclude:
   # NOTE: When we run knapsack's rubocop, we don't want to check the submodule
   #       for Hyku.  We'll assume it's okay and has it's own policing policies.

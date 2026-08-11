@@ -1,0 +1,59 @@
+<%# Modal for browsing all featured collections on homepage %>
+<div role="dialog" class="modal fade" id="browse-collections-modal" tabindex="-1" aria-labelledby="browse_collections_title" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="browse_collections_title">
+          <%= t('hyrax.homepage.admin_sets.browse_title', default: 'Browse Collections') %>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if @featured_collection_list.empty? %>
+          <p><%= t('hyrax.homepage.featured_collections.no_collections') %></p>
+        <% else %>
+          <div class="collections-grid">
+            <% @featured_collection_list.featured_collections.each do |fc| %>
+              <% featured_collection = fc.presenter %>
+              <div class="collection-item mb-3">
+                <div class="row">
+                  <div class="col-md-3">
+                    <%= link_to [hyrax, featured_collection] do %>
+                      <%= render_thumbnail_tag(featured_collection,
+                                               { class: 'img-fluid file_listing_thumbnail', alt: thumbnail_alt_text_for(featured_collection.solr_document, block_name: 'default_collection_image_text') },
+                                               {suppress_link: true}
+                      ) %>
+                    <% end %>
+                  </div>
+                  <div class="col-md-9">
+                    <h5>
+                      <%= link_to featured_collection.title.first, [hyrax, featured_collection] %>
+                    </h5>
+                    <p class="text-muted">
+                      <%= truncate(featured_collection.description.first, length: 150) if featured_collection.description.present? %>
+                    </p>
+                    <p>
+                      <%= link_to t('hyrax.homepage.admin_sets.view_link', default: 'View Collection'),
+                                  [hyrax, featured_collection],
+                                  class: 'btn btn-sm btn-primary' %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <%= t('hyrax.collection.select_form.close', default: 'Close') %>
+        </button>
+        <%= link_to t('hyrax.homepage.admin_sets.all_link', default: 'View All Collections'),
+                    main_app.search_catalog_path(f: { generic_type_sim: ['Collection']}),
+                    class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 set -e
 
 # Pull latest knapsack code before bringing up containers.
-#git pull
+# git pull
 
 
 # ---
@@ -22,31 +22,60 @@ set -e
 [ -f hyrax-webapp/.env.production ] || touch hyrax-webapp/.env.production
 
 
-# ---
-# NOTE: The following mkdir and chown commands are commented out intentionally.
-# Running 'chown -R' on every up.sh run is slow and unnecessary, as it processes all files recursively.
-# Only use these commands after a fresh clone or if you encounter permission errors (e.g.,
-# 'Permission denied @ dir_s_mkdir - /usr/local/bundle').
+# Pre-create bind-mount directories with symlink protection.
+# If data/ is a symlink (production VM with mounted volume), preserve it.
+# Otherwise, create directories if data/ is a real directory or doesn't exist yet.
 #
-# mkdir -p \
-#   ./data/bundle \
-#   ./data/node_modules \
-#   ./data/assets \
-#   ./data/cache \
-#   ./data/uploads \
-#   ./data/db \
-#   ./data/solr \
-#   ./data/zoo \
-#   ./data/zk \
-#   ./data/fcrepo \
-#   ./data/redis \
-#   ./data/logs/solr
-# chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache
-# ---
+# Note: mkdir -p ./data/bundle on a symlink resolves the symlink and converts it
+# to a real directory, breaking the mounted volume binding. This is the fix for
+# the symlink deletion issue where data/ would become a real dir after ./up.sh.
+if [ -d ./data ] && [ ! -L ./data ]; then
+  # data/ exists and is NOT a symlink — safe to create subdirectories
+  mkdir -p \
+    ./data/bundle \
+    ./data/node_modules \
+    ./data/assets \
+    ./data/cache \
+    ./data/uploads \
+    ./data/db \
+    ./data/solr \
+    ./data/zoo \
+    ./data/zk \
+    ./data/fcrepo \
+    ./data/redis \
+    ./data/logs/solr \
+    ./data/logs/rails \
+    ./data/tmp
+  chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache ./data/logs/rails ./data/tmp
+elif [ -L ./data ]; then
+  # data/ is a symlink (production with mounted volume)
+  echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
+  
+  DATA_TARGET=$(readlink ./data)
+  
+  # If target exists, create subdirectories and set permissions
+  if [ -d "$DATA_TARGET" ]; then
+    mkdir -p "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/uploads" "$DATA_TARGET/db" "$DATA_TARGET/solr" "$DATA_TARGET/zoo" "$DATA_TARGET/zk" "$DATA_TARGET/fcrepo" "$DATA_TARGET/redis" "$DATA_TARGET/logs/solr" "$DATA_TARGET/logs/rails" "$DATA_TARGET/tmp" 2>/dev/null
+    chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails" "$DATA_TARGET/tmp" 2>/dev/null || true
+  else
+    echo "⚠ data/ symlink target '$DATA_TARGET' not found — skipping directory creation (docker compose may handle this)"
+  fi
+fi
 
 # Remove broken initializer from hyrax-webapp submodule if present.
 # disable_solr.rb has a syntax error that aborts assets:precompile, and
 # we do not want Solr disabled in production regardless.
 rm -f ./hyrax-webapp/config/initializers/disable_solr.rb
+
+# ---
+# BuildKit Configuration — Phase 2 Build Optimization
+# Enables Docker BuildKit for parallel layer execution (~3-5 min additional savings)
+# DOCKER_BUILDKIT=1: Enable BuildKit backend (parallel builds, better caching)
+# DOCKER_BUILDKIT_PROGRESS=plain: Clear output without animation (easier debugging)
+# BUILDKIT_STEP_LOG_MAX_SIZE=10000000: Increase log buffer to prevent truncation (~10MB)
+# ---
+export DOCKER_BUILDKIT=1
+export DOCKER_BUILDKIT_PROGRESS=plain
+export BUILDKIT_STEP_LOG_MAX_SIZE=10000000
 
 docker compose --env-file .env.production -f docker-compose.production.yml up -d

@@ -22,6 +22,13 @@ Rails.application.config.after_initialize do
     config.register_curation_concern :medicine
     # Injected via `rails g hyku_knapsack:work_resource OralHistory --flexible`
     config.register_curation_concern :oral_history
+
+    # Disable real-time WebSocket notifications to prevent repeated connection errors.
+    # The JavaScript tries to connect to /notifications/endpoint even when the feature
+    # is disabled, causing console spam with "WebSocket connection failed" errors.
+    # Setting this explicitly to false ensures the route is not mounted and JS connection
+    # attempts are prevented.
+    config.realtime_notifications = false
   end
 
   # Ensure that only the registered concerns can be nested within each other

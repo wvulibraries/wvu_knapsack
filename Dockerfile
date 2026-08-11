@@ -13,13 +13,27 @@ ENV TESSDATA_PREFIX=/app/samvera/tessdata
 ADD https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata?raw=true /app/samvera/tessdata/eng_best.traineddata
 
 ############### KNAPSACK SPECIFIC CODE ###################
+# Phase 3 Optimization: Layer reordering for better Docker caching
+# Copy only Gemfile and Gemfile.lock first (stable, ~500KB)
+# This allows bundle install layer to be cached even when source code changes
+# Only after bundle completes do we copy the full source tree
+
 # This means bundler inject looks at /app/samvera/.bundler.d for overrides
 ENV HOME=/app/samvera
 # This is specifically NOT $APP_PATH but the parent directory
-COPY --chown=1001:101 . /app/samvera
+
+# Copy Gemfile, gemspec, and minimal lib (small, rarely changes)
+COPY --chown=1001:101 Gemfile* /app/samvera/
+COPY --chown=1001:101 *.gemspec /app/samvera/
+COPY --chown=1001:101 bundler.d/ /app/samvera/bundler.d/
+COPY --chown=1001:101 lib/hyku_knapsack/ /app/samvera/lib/hyku_knapsack/
+
 ENV BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
 ENV BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true
 RUN bundle install --jobs "$(nproc)"
+
+# Now copy full source tree (large, changes frequently, but reuses cached bundle)
+COPY --chown=1001:101 . /app/samvera
 
 # Remove broken initializer from hyrax-webapp submodule if it exists.
 # disable_solr.rb has a Ruby syntax error at line 16 that aborts assets:precompile.

@@ -1,0 +1,11 @@
+---
+en:
+  blacklight:
+    search:
+      fields:
+        facet:
+          people_represented_sim: People Represented
+        index:
+          people_represented_tesim: People Represented
+        show:
+          people_represented_tesim: People Represented

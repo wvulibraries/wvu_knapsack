@@ -1,33 +1,36 @@
-*.rdb
-./artifacts
-./chart
-./coverage
-./docker
-./fcrepo
-./importer
-./log
-./pg
-./public/assets
-./public/branding
-./public/packs
-./public/system
-./public/uploads
-./tmp
-.coveralls.yml
-.ebextensions
-.fcrepo_wrapper
-.hound.yml
-.idea
-.internal_test_app/*
-.solr_wrapper
+# Large runtime data — rebuilt/populated at container startup
+data/
+node_modules/
+.git/
+.github/
 
-node_modules/*
-solr/solr/*
-fcrpo/*
-pg/*
-fits.log
-ImageMagick*
+# Runtime/generated directories in submodule (mounted as volumes)
+./hyrax-webapp/tmp/
+./hyrax-webapp/storage/
+./hyrax-webapp/spec/
+./hyrax-webapp/docs/
+
+# Temporary/cache directories
+public/uploads/
+public/assets/
+public/packs*
+tmp/
+log/
+coverage/
+.bundle/
+vendor/bundle/
+
+# Hidden/system files
 .DS_Store
+.env*
+*.log
+*.old
+*.bak
+*.prev
+.vscode/
+.idea/
+*.swp
+*.swo
 
 ./data
 ./hyrax-webapp/tmp

@@ -5,6 +5,9 @@
 /tmp/
 scratch.md
 *~undo-tree~
+*.old
+*.bak
+*.prev
 .env.*
 !.env.*.example
 .DS_Store
@@ -28,6 +31,7 @@ notes.txt
 .bash_history
 /.cache
 /data
+/simlink-test
 
 okta-*.json
 google-analytics.json

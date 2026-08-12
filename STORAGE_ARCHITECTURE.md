@@ -4,12 +4,13 @@
 
 WVU Knapsack uses **three separate storage systems** to persist different types of data. Understanding where data actually lives is critical for backups, restores, and deployments.
 
+> **Note:** Fedora 4.7.5 was previously included but is being removed. It was only used as a discovery/presentation layer, not for preservation. The disk adapter (with PostgreSQL metadata) is the preservation system.
+
 | Component | Storage Location | Purpose | Persistence |
 |---|---|---|---|
 | **Metadata** | PostgreSQL (`./data/db`) | Works, files, tenants, users, permissions | Database tables |
 | **Search Index** | Solr (`./data/solr`) | Full-text search, facets | Inverted index |
-| **Binary Files** | Disk (`./data/storage/files/`) | Uploaded files, derivatives, IIIF images | Filesystem |
-| **Fedora Objects** | Fedora (`./data/fcrepo/`) + Fedora DB | Repository objects (minimal usage in disk-adapter setup) | Database + filesystem |
+| **Binary Files** | Disk (`./data/storage/files/`) | Uploaded files, derivatives, IIIF images | Filesystem (preservation) |
 | **Code** | Git repo (`.`) | Application source + hyrax-webapp submodule | Git history |
 
 ---
@@ -148,35 +149,7 @@ Returns file ID for search/display
 
 ---
 
-### 4. Fedora Objects (Repository Storage)
-
-**Location:** 
-- Files: `./data/fcrepo/` (object store)
-- Database: `./data/fcrepo_db/` (PostgreSQL backend)
-
-**What it contains:**
-- Fedora 4.7.5 repository objects and metadata
-- Backing store for Fedora's RDF triples and object relationships
-
-**Current usage:**
-- ⚠️ **Minimal** — Hyku defaults to disk adapter for files, not Fedora
-- Configured but not actively used as the file store
-- Kept for compatibility and potential legacy migration paths
-
-**Loss impact:**
-- ⚠️ If deleted during production, could lose object history
-- But does NOT directly impact current file access (disk adapter is primary)
-
-**Backup:** Include both directories when backing up production, even if not actively used
-
-**Why keep it?**
-- Legacy objects may reference Fedora
-- Some workflows (migrations, interoperability) may use it
-- Removing it could break existing configurations
-
----
-
-### 5. Source Code (Git)
+### 4. Source Code (Git)
 
 **Location:** `.` (git repository root)
 
@@ -256,7 +229,6 @@ All of `./data/`:
 ./data/db/           # PostgreSQL (critical)
 ./data/storage/      # Uploaded files (critical)
 ./data/solr/         # Solr index (optional, can regenerate)
-./data/fcrepo/       # Fedora objects (usually empty in disk-adapter setup)
 ./data/redis/        # Session/job state (optional, ephemeral)
 ```
 
@@ -349,8 +321,6 @@ volumes:
   - ./data/storage:/app/samvera/hyrax-webapp/storage:cached  # Bind mount → VAST (persistent)
   - ./data/db:/var/lib/postgresql/data               # Bind mount → VAST
   - ./data/solr:/var/solr/data                       # Bind mount → VAST
-  - ./data/fcrepo:/data/fcrepo                        # Bind mount → VAST
-  - ./data/fcrepo_db:/var/lib/postgresql/data_fcrepo # Bind mount → VAST
   # All other data in ./data, which on VAST
 ```
 

@@ -75,9 +75,21 @@ x-app: &app
 - ✅ On production, `./data/` mounts to VAST (network storage) — backed up separately
 - ✅ Clear separation of concerns
 
----
+## Why This Architecture Matters
 
-## Where Each Type of Data Lives
+### Migration from Fedora to Disk Storage
+
+WVU Knapsack has already migrated away from Fedora for file preservation. Instead of storing files in Fedora's object store, files now use **Rails standard storage** (Valkyrie disk adapter):
+
+- **Files**: Stored on disk at `./data/storage/files/` (standard Rails ActiveStorage pattern)
+- **Metadata**: PostgreSQL tracks which files exist and their properties
+- **Fedora**: Still in the stack due to legacy component dependencies, but **not actively used** for file storage
+
+This means Fedora's current role is minimal — it exists to satisfy existing dependencies, but the actual file preservation is entirely handled by the disk adapter + PostgreSQL combination.
+
+### Implication for File Removal Work
+
+As core components are refactored to remove Fedora dependencies, Fedora can be safely removed because **the actual file data is already independent of it**. The disk storage is the source of truth.
 
 ### 1. Metadata (PostgreSQL)
 

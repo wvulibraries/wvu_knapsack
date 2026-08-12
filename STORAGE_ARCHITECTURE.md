@@ -4,7 +4,7 @@
 
 WVU Knapsack uses **three separate storage systems** to persist different types of data. Understanding where data actually lives is critical for backups, restores, and deployments.
 
-> **Note:** Fedora 4.7.5 was previously included but is being removed. It was only used as a discovery/presentation layer, not for preservation. The disk adapter (with PostgreSQL metadata) is the preservation system.
+> **Fedora Status:** Fedora 4.7.5 is still in the stack but being phased out. It's only used as a discovery/presentation layer, not for preservation. Some core components still have dependencies on it; removal work is ongoing. The disk adapter (with PostgreSQL metadata) is the actual preservation system.
 
 | Component | Storage Location | Purpose | Persistence |
 |---|---|---|---|

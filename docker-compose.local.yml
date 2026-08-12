@@ -1,5 +1,9 @@
 # For local production smoke testing on Apple Silicon (arm64 Mac).
-# Pulled from the last known-working production compose (a5a2bd5).
+# Mirrors docker-compose.production.yml with minimal local-only changes:
+# - Removes platform: linux/amd64 (runs natively on arm64 Mac)
+# - Changes restart policy for local testing
+# - Adds fix_permissions service (Docker Desktop bind-mount issue on Mac)
+# - Simplifies Solr healthcheck (no credentials needed locally)
 # All configuration comes from .env.production (gitignored, see .env.production.example).
 
 x-app: &app
@@ -13,11 +17,11 @@ x-app: &app
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
+  pull_policy: build
   environment:
     - BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
     - BUNDLE_DISABLE_LOCAL_BRANCH_CHECK=true
     - BUNDLE_BUNDLER_INJECT__GEM_PATH=/app/samvera/bundler.d
-    - LOCAL_PRODUCTION_TEST=true
   volumes:
     - ./google-analytics.json:/etc/hyku/google-analytics.json
     - ./data/bundle:/usr/local/bundle:cached
@@ -56,10 +60,6 @@ services:
       timeout: "8s"
 
   solr:
-    # platform: linux/amd64 required — custom Solr image is amd64-only.
-    # Without this, Docker tries to run it natively on arm64 and fails silently.
-    platform: linux/amd64
-    # container_name: solr
     image: ghcr.io/wvulibraries/wvu_knapsack/solr:${TAG:-latest}
     restart: on-failure
     env_file:
@@ -74,12 +74,11 @@ services:
       - ./solr-setup:/solr-setup
       - ./startup-solr.sh:/scripts/startup.sh
     healthcheck:
-      # test: "curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@localhost:8983/solr/admin/collections?action=LIST"
-      # start_period: 600s
-      # interval: 10s
-      # timeout: 10s
-      # retries: 60
       test: ["CMD-SHELL", "curl -sf http://localhost:8983/solr/ || exit 1"]
+      start_period: 300s
+      interval: 10s
+      timeout: 10s
+      retries: 30
     depends_on:
       zoo:
         condition: service_healthy
@@ -157,13 +156,11 @@ services:
     command:
       - >
         rm -f /app/samvera/hyrax-webapp/config/initializers/disable_solr.rb &&
-        TEST_SOLR_COLLECTION_NAME=hydra-production solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
+        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
         SOLR_COLLECTION_NAME=hydra-production solrcloud-assign-configset.sh &&
         bundle install &&
         RAILS_ENV=production bundle exec rails assets:precompile &&
         db-migrate-seed.sh
-    volumes:
-      - ./data/bundle:/usr/local/bundle
     depends_on:
       fix_permissions:
         condition: service_completed_successfully
@@ -180,6 +177,12 @@ services:
 
   worker:
     <<: *app
+    restart: on-failure
+    build:
+      context: .
+      target: hyku-worker
+      args:
+        APP_PATH: ./hyrax-webapp
     image: ghcr.io/wvulibraries/wvu_knapsack/worker:${TAG:-latest}
     entrypoint: ["sh", "-c"]
     command:
@@ -204,10 +207,11 @@ services:
         condition: service_started
       zoo:
         condition: service_healthy
-    # Volumes inherited from x-app anchor for consistency
 
   web:
     <<: *app
+    image: ghcr.io/wvulibraries/wvu_knapsack/web:${TAG:-latest}
+    restart: on-failure
     entrypoint: ["sh", "-c"]
     command:
       - bundle check || bundle install && ./bin/web

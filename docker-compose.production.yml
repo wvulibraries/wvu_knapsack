@@ -136,7 +136,6 @@ services:
     command:
       - >
         rm -f /app/samvera/hyrax-webapp/config/initializers/disable_solr.rb &&
-        rm -rf /app/samvera/hyrax-webapp/storage/files &&
         solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
         SOLR_COLLECTION_NAME=hydra-production solrcloud-assign-configset.sh &&
         bundle install &&

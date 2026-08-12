@@ -25,7 +25,6 @@ x-app: &app
     - ./data/uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - ./data/assets:/app/samvera/hyrax-webapp/public/assets:cached
     - ./data/tmp:/app/samvera/hyrax-webapp/tmp:cached
-    - ./data/storage:/app/samvera/hyrax-webapp/storage/cache:cached    
     - ./data/logs/rails:/app/samvera/hyrax-webapp/log:cached
     - ./data/ingest:/app/samvera/ingest:cached
     - ./data/storage:/app/samvera/hyrax-webapp/storage:cached
@@ -158,7 +157,6 @@ services:
     command:
       - >
         rm -f /app/samvera/hyrax-webapp/config/initializers/disable_solr.rb &&
-        rm -rf /app/samvera/hyrax-webapp/storage/files &&
         TEST_SOLR_COLLECTION_NAME=hydra-production solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
         SOLR_COLLECTION_NAME=hydra-production solrcloud-assign-configset.sh &&
         bundle install &&

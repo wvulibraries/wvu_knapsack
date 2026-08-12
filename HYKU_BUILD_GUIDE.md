@@ -12,6 +12,19 @@ There are three workflows covered here:
 
 ---
 
+## Understanding Storage Architecture
+
+⚠️ **Critical concept:** Hyku stores uploaded files on disk (not Fedora), and this folder must be explicitly mounted to persist across restarts and deployments.
+
+See **[STORAGE_ARCHITECTURE.md](STORAGE_ARCHITECTURE.md)** for:
+- Where each type of data lives (metadata, files, search index)
+- Why the storage mount is critical
+- How the original setup caused data loss
+- Safe backup/restore procedures
+- Implications for submodule updates
+
+---
+
 ## Repository Layout
 
 ```

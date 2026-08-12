@@ -11,7 +11,9 @@ This is the [WVU Libraries](https://libraries.wvu.edu) instance of [Hyku](https:
 | **Production host** | `*.lib.wvu.edu` |
 | **APP_NAME** | `wvu-knapsack` |
 
-> **Full documentation** — setup, local smoke testing, and VM production deployment — is in [HYKU_BUILD_GUIDE.md](HYKU_BUILD_GUIDE.md).
+> **Full documentation:**
+> - [HYKU_BUILD_GUIDE.md](HYKU_BUILD_GUIDE.md) — Setup, local testing, and VM deployment
+> - [STORAGE_ARCHITECTURE.md](STORAGE_ARCHITECTURE.md) — Where data lives, backup/restore procedures
 
 ---
 

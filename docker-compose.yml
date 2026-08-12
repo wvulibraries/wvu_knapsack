@@ -22,7 +22,7 @@ x-app: &app
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
     - ./data/ingest:/app/samvera/ingest:cached
-    - ./data/storage:/app/samvera/hyrax-webapp/storage:cached
+    - storage:/app/samvera/hyrax-webapp/storage:cached
     - .:/app/samvera
 
 volumes:

@@ -14,25 +14,25 @@ module CatalogControllerDecorator
     # Hyku #3072 workaround: remove generic_type_sim (Type) facet — not needed for WVU theme
     config.facet_fields.delete('generic_type_sim') if config.facet_fields.key?('generic_type_sim')
 
-    # Add show_more: true to all visible facets so "More" links fetch ALL values (not just limit:5)
-    # This fixes the issue where modal boxes only showed first 5 results
-    facet_fields_to_update = %w[
-      resource_type_sim
-      creator_sim
-      contributor_sim
-      keyword_sim
-      subject_sim
-      language_sim
-      based_near_label_sim
-      publisher_sim
-      file_format_sim
-      contributing_library_sim
-      member_of_collections_ssim
-    ]
+    # Add labels + show_more: true to all visible facets so "More" links fetch ALL values
+    facet_config = {
+      resource_type_sim: { label: "Resource Type" },
+      creator_sim:       { label: "Creator" },
+      contributor_sim:   { label: "Contributor" },
+      keyword_sim:       { label: "Keyword" },
+      subject_sim:       { label: "Subject" },
+      language_sim:      { label: "Language" },
+      based_near_label_sim: { label: "Location" },
+      publisher_sim:     { label: "Publisher" },
+      file_format_sim:   { label: "File Format" },
+      contributing_library_sim: { label: "Contributing Library" },
+      member_of_collections_ssim: { label: "Collections" }
+    }
 
-    facet_fields_to_update.each do |field_name|
+    facet_config.each do |field_name, opts|
       next unless config.facet_fields.key?(field_name)
 
+      config.facet_fields[field_name].label = opts[:label]
       config.facet_fields[field_name].limit = 5
       config.facet_fields[field_name].show_more = true
     end

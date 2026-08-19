@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module CatalogControllerDecorator
+  def search_builder_class
+    CatalogSearchBuilder
+  end
+
   # Configuration for CatalogController's Blacklight setup
   # This code runs when the decorator is loaded (in to_prepare)
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
@@ -52,3 +56,5 @@ module CatalogControllerDecorator
     # Skip if Wings or other dependencies not yet initialized
   end
 end
+
+::CatalogController.prepend(CatalogControllerDecorator)

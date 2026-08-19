@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require 'wings/model_registry' if defined?(Wings)
+
 module CatalogControllerDecorator
   # Configuration for CatalogController's Blacklight setup
   # This code runs when the decorator is loaded (in to_prepare)
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
-  CatalogController.configure_blacklight do |config|
+  ::CatalogController.configure_blacklight do |config|
     config.advanced_search[:form_facet_partial] = "advanced_search_facets"
 
     # adjust pagination
@@ -15,6 +17,8 @@ module CatalogControllerDecorator
     config.facet_fields.delete('generic_type_sim') if config.facet_fields.key?('generic_type_sim')
 
     # Add labels + show_more: true to all visible facets so "More" links fetch ALL values
+    next unless respond_to?(:facet_fields) && facet_fields.is_a?(Hash)
+
     facet_config = {
       resource_type_sim: { label: "Resource Type" },
       creator_sim:       { label: "Creator" },

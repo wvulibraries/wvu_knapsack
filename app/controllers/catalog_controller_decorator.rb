@@ -1,6 +1,31 @@
 # frozen_string_literal: true
 
+# Module to decorate any search builder with facet limit enforcement
+module FacetLimitEnforcer
+  def build(user_params = {})
+    params = super
+    
+    # Enforce Solr facet limits for all searches to match Blacklight configuration
+    begin
+      blacklight_config.facet_fields.each do |field_name, facet_config|
+        limit = facet_config.limit || 5
+        params[:"f.#{field_name}.facet.limit"] = limit
+      end
+    rescue StandardError => e
+      Rails.logger.warn("FacetLimitEnforcer error: #{e.message}")
+    end
+    
+    params
+  end
+end
+
 module CatalogControllerDecorator
+  def search_builder_class
+    klass = super
+    klass.prepend(FacetLimitEnforcer) unless klass.include?(FacetLimitEnforcer)
+    klass
+  end
+
   # Configuration for CatalogController's Blacklight setup
   # This code runs when the decorator is loaded (in to_prepare)
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
@@ -45,6 +70,7 @@ module CatalogControllerDecorator
         when 'file_format_sim'    then facet_config.label = "File Format"
         when 'contributing_library_sim' then facet_config.label = "Contributing Library"
         when 'member_of_collections_ssim' then facet_config.label = "Collections"
+        when 'people_represented_sim' then facet_config.label = "People Represented"
         end
       end
     end

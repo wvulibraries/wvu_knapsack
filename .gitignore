@@ -30,7 +30,9 @@ ansible/ghcr-token.yml
 notes.txt
 .bash_history
 /.cache
-/data
+# Ignore /data except for setup_files (contains branding, m3 yml files, collection.yml)
+/data/*
+!/data/setup_files
 /simlink-test
 
 okta-*.json

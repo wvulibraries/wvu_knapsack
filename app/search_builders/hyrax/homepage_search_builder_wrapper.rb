@@ -2,26 +2,20 @@
 
 module Hyrax
   # Knapsack override: enforce facet limits on homepage
-  # Wraps the parent search builder to respect Blacklight facet config limits
+  # The HomepageSearchBuilder builds Solr params. We override it to set
+  # proper facet.limit values instead of -1 (unlimited) from parent
   class HomepageSearchBuilderWrapper < Hyrax::HomepageSearchBuilder
-    def initialize(context)
-      super
-      @facet_limit_processed = false
-    end
-
-    protected
-
-    def append_facets(solr_params)
-      super
+    def build(user_params = {})
+      params = super
       
-      # After parent class adds facets, override the limits to match Blacklight config
-      unless @facet_limit_processed
-        blacklight_config.facet_fields.each do |field_name, facet_config|
-          limit = facet_config.limit || 5
-          solr_params[:"f.#{field_name}.facet.limit"] = limit
-        end
-        @facet_limit_processed = true
+      # After super builds the params, override facet limits
+      # to match Blacklight configuration (default 5)
+      blacklight_config.facet_fields.each do |field_name, facet_config|
+        limit = facet_config.limit || 5
+        params[:"f.#{field_name}.facet.limit"] = limit
       end
+      
+      params
     end
   end
 end

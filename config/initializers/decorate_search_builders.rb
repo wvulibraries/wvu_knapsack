@@ -21,15 +21,27 @@ end
 
 Rails.application.config.to_prepare do
   # Decorate search builders to enforce facet limits
+  Rails.logger.info "=== FacetLimitEnforcer: Starting decorator setup ==="
+  
   begin
-    AdvSearchBuilder.prepend(FacetLimitEnforcer) unless AdvSearchBuilder.include?(FacetLimitEnforcer)
-  rescue NameError
-    # AdvSearchBuilder not yet defined, will try again on next load
+    if AdvSearchBuilder.include?(FacetLimitEnforcer)
+      Rails.logger.info "=== FacetLimitEnforcer: Already applied to AdvSearchBuilder ==="
+    else
+      AdvSearchBuilder.prepend(FacetLimitEnforcer)
+      Rails.logger.info "=== FacetLimitEnforcer: Successfully prepended to AdvSearchBuilder ==="
+    end
+  rescue NameError => e
+    Rails.logger.warn("=== FacetLimitEnforcer: AdvSearchBuilder not found: #{e.message} ===")
   end
   
   begin
-    IiifPrint::CatalogSearchBuilder.prepend(FacetLimitEnforcer) unless IiifPrint::CatalogSearchBuilder.include?(FacetLimitEnforcer)
-  rescue NameError, NoMethodError
-    # IiifPrint not yet defined, will try again on next load
+    if IiifPrint::CatalogSearchBuilder.include?(FacetLimitEnforcer)
+      Rails.logger.info "=== FacetLimitEnforcer: Already applied to IiifPrint::CatalogSearchBuilder ==="
+    else
+      IiifPrint::CatalogSearchBuilder.prepend(FacetLimitEnforcer)
+      Rails.logger.info "=== FacetLimitEnforcer: Successfully prepended to IiifPrint::CatalogSearchBuilder ==="
+    end
+  rescue NameError, NoMethodError => e
+    Rails.logger.warn("=== FacetLimitEnforcer: IiifPrint::CatalogSearchBuilder not found: #{e.message} ===")
   end
 end

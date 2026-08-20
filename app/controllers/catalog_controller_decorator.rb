@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 module CatalogControllerDecorator
+  # Override search_builder_class to use our wrapper that enforces facet limits
+  def search_builder_class
+    CatalogSearchBuilderWrapper
+  end
+
   # Configuration for CatalogController's Blacklight setup
   # This code runs when the decorator is loaded (in to_prepare)
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations

@@ -3,18 +3,22 @@
 # Module to decorate search builders with facet limit enforcement
 module FacetLimitEnforcer
   def build(user_params = {})
+    Rails.logger.info "FacetLimitEnforcer.build called on #{self.class.name}"
     params = super
     
     # Enforce Solr facet limits for all searches to match Blacklight configuration
     begin
+      Rails.logger.info "FacetLimitEnforcer: Processing facet fields"
       blacklight_config.facet_fields.each do |field_name, facet_config|
         limit = facet_config.limit || 5
+        Rails.logger.info "FacetLimitEnforcer: Setting f.#{field_name}.facet.limit = #{limit}"
         params[:"f.#{field_name}.facet.limit"] = limit
       end
     rescue StandardError => e
       Rails.logger.warn("FacetLimitEnforcer error: #{e.message}")
     end
     
+    Rails.logger.info "FacetLimitEnforcer: Final params = #{params.inspect}"
     params
   end
 end

@@ -4,7 +4,7 @@
 # The hyrax-webapp initializer sets this up, but Wings may not be available at certain times
 # This guard ensures the resolver is safe to call even if Wings isn't initialized yet
 
-after_init_proc = lambda do
+Rails.application.config.after_initialize do
   # Store the original resolver if it was set
   original_resolver = Valkyrie.config.resource_class_resolver
   
@@ -38,6 +38,3 @@ after_init_proc = lambda do
     end
   end
 end
-
-# Run after initialization completes
-Rails.application.config.after_initialize(&after_init_proc)

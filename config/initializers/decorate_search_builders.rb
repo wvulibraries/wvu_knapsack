@@ -3,57 +3,42 @@
 # Module to decorate search builders with facet limit enforcement
 module FacetLimitEnforcer
   def build(user_params = {})
-    Rails.logger.info "FacetLimitEnforcer.build called on #{self.class.name}"
+    Rails.logger.info "[FacetLimitEnforcer] build() called on #{self.class.name} with user_params: #{user_params.keys.inspect}"
     params = super
+    Rails.logger.info "[FacetLimitEnforcer] after super, params keys: #{params.keys.first(10).inspect}"
     
     # Enforce Solr facet limits for all searches to match Blacklight configuration
     begin
-      Rails.logger.info "FacetLimitEnforcer: Processing facet fields"
       blacklight_config.facet_fields.each do |field_name, facet_config|
         limit = facet_config.limit || 5
-        Rails.logger.info "FacetLimitEnforcer: Setting f.#{field_name}.facet.limit = #{limit}"
         params[:"f.#{field_name}.facet.limit"] = limit
       end
+      Rails.logger.info "[FacetLimitEnforcer] set facet limits, new params keys: #{params.keys.grep(/facet.limit/).inspect}"
     rescue StandardError => e
-      Rails.logger.warn("FacetLimitEnforcer error: #{e.message}")
+      Rails.logger.warn("[FacetLimitEnforcer] error: #{e.class} #{e.message}")
     end
     
-    Rails.logger.info "FacetLimitEnforcer: Final params = #{params.inspect}"
     params
   end
 end
 
-Rails.application.config.to_prepare do
-  # Decorate search builders to enforce facet limits
-  Rails.logger.info "=== FacetLimitEnforcer: Starting decorator setup ==="
+# Apply the decorator during initialization
+Rails.application.config.after_initialize do
+  Rails.logger.info "[FacetLimitEnforcer] after_initialize: decorating search builders"
   
-  # Check AdvSearchBuilder
   begin
-    Rails.logger.info "=== AdvSearchBuilder methods before prepend: #{AdvSearchBuilder.instance_methods(false).first(5).inspect} ==="
-    
-    if AdvSearchBuilder.include?(FacetLimitEnforcer)
-      Rails.logger.info "=== FacetLimitEnforcer: Already applied to AdvSearchBuilder ==="
-    else
-      AdvSearchBuilder.prepend(FacetLimitEnforcer)
-      Rails.logger.info "=== FacetLimitEnforcer: Successfully prepended to AdvSearchBuilder ==="
-      Rails.logger.info "=== AdvSearchBuilder methods after prepend: #{AdvSearchBuilder.instance_methods(false).first(5).inspect} ==="
-    end
-  rescue NameError => e
-    Rails.logger.warn("=== FacetLimitEnforcer: AdvSearchBuilder not found: #{e.message} ===")
+    # Don't check if already included - just prepend
+    AdvSearchBuilder.prepend(FacetLimitEnforcer) 
+    Rails.logger.info "[FacetLimitEnforcer] prepended to AdvSearchBuilder"
+  rescue StandardError => e
+    Rails.logger.warn("[FacetLimitEnforcer] failed to prepend to AdvSearchBuilder: #{e.class} #{e.message}")
   end
   
-  # Check IiifPrint::CatalogSearchBuilder
   begin
-    Rails.logger.info "=== IiifPrint::CatalogSearchBuilder methods before prepend: #{IiifPrint::CatalogSearchBuilder.instance_methods(false).first(5).inspect} ==="
-    
-    if IiifPrint::CatalogSearchBuilder.include?(FacetLimitEnforcer)
-      Rails.logger.info "=== FacetLimitEnforcer: Already applied to IiifPrint::CatalogSearchBuilder ==="
-    else
-      IiifPrint::CatalogSearchBuilder.prepend(FacetLimitEnforcer)
-      Rails.logger.info "=== FacetLimitEnforcer: Successfully prepended to IiifPrint::CatalogSearchBuilder ==="
-      Rails.logger.info "=== IiifPrint::CatalogSearchBuilder methods after prepend: #{IiifPrint::CatalogSearchBuilder.instance_methods(false).first(5).inspect} ==="
-    end
-  rescue NameError, NoMethodError => e
-    Rails.logger.warn("=== FacetLimitEnforcer: IiifPrint::CatalogSearchBuilder not found: #{e.message} ===")
+    # Don't check if already included - just prepend
+    IiifPrint::CatalogSearchBuilder.prepend(FacetLimitEnforcer)
+    Rails.logger.info "[FacetLimitEnforcer] prepended to IiifPrint::CatalogSearchBuilder"
+  rescue StandardError => e
+    Rails.logger.warn("[FacetLimitEnforcer] failed to prepend to IiifPrint::CatalogSearchBuilder: #{e.class} #{e.message}")
   end
 end

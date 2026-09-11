@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+puts "*** LOADING CatalogControllerDecorator module ***"
+
 module CatalogControllerDecorator
   # Configuration for CatalogController's Blacklight setup
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
@@ -93,4 +95,6 @@ module CatalogControllerDecorator
 end
 
 # Apply the decorator to CatalogController
+puts "*** PREPENDING CatalogControllerDecorator to CatalogController ***"
 ::CatalogController.prepend(CatalogControllerDecorator)
+puts "*** PREPEND COMPLETE ***"

@@ -62,11 +62,17 @@ module CatalogControllerDecorator
   # ========================================================================
 
   def search_results
+    # ENTRY POINT DEBUG
+    $stderr.puts "*** ENTERING CatalogControllerDecorator.search_results ***"
+    $stdout.flush
+    $stderr.flush
+    
     # Call the original search_results method from the parent class
     @response = super
 
     # Debug: Log what we're working with (use puts for Docker visibility)
     puts "=== CatalogControllerDecorator.search_results DEBUG ==="
+    $stderr.puts "=== CatalogControllerDecorator.search_results DEBUG ==="
     puts "Blacklight facet_fields: #{blacklight_config.facet_fields.keys.inspect}"
     puts "Solr facets returned: #{@response.facets.map(&:name).inspect}"
     puts "Total items in response:"

@@ -106,15 +106,47 @@ puts "*** PREPENDING CatalogControllerDecorator to CatalogController ***"
 puts "*** PREPEND COMPLETE ***"
 
 # ALSO directly patch search_results as a safety measure
-puts "*** DIRECTLY PATCHING search_results method ***"
-original_search_results = ::CatalogController.instance_method(:search_results)
+puts "*** DIRECTLY PATCHING search_results and index methods ***"
 
+# Store original search_results
+original_search_results = ::CatalogController.instance_method(:search_results) rescue nil
+
+# Patch the index action (this is what actually gets called for /catalog searches)
+original_index = ::CatalogController.instance_method(:index)
+
+::CatalogController.define_method(:index) do
+  puts "*** ENTERING PATCHED index method ***"
+  $stderr.puts "*** ENTERING PATCHED index method ***"
+  
+  # Call the original index which calls search_results internally
+  result = original_index.bind(self).call
+  
+  # Slice facets AFTER the response is populated
+  puts "=== index: Slicing facets in response ==="
+  if @response && @response.respond_to?(:facets)
+    @response.facets.each do |facet|
+      facet_config = blacklight_config.facet_fields[facet.name]
+      next unless facet_config
+      next if facet.name.to_s == 'generic_type_sim'
+      
+      limit = facet_config.limit || 5
+      original_count = facet.items.length rescue 0
+      if facet.items.respond_to?(:length) && facet.items.length > limit
+        puts "    #{facet.name}: #{facet.items.length} → #{limit}"
+        facet.items = facet.items.first(limit)
+      end
+    end
+  end
+  
+  result
+end
+
+# Also patch search_results as a backup
 ::CatalogController.define_method(:search_results) do
-  puts "*** ENTERING DIRECTLY PATCHED search_results ***"
-  $stderr.puts "*** ENTERING DIRECTLY PATCHED search_results ***"
+  puts "*** ENTERING PATCHED search_results method ***"
   
   # Call the original
-  @response = original_search_results.bind(self).call
+  @response = original_search_results.bind(self).call if original_search_results
   
   # Apply slicing
   puts "=== search_results: Slicing facets ==="

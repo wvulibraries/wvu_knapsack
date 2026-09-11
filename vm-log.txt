@@ -1,0 +1,987 @@
+web-1  | D, [2026-09-11T21:19:52.426557 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_search_sidebar.html.erb (Duration: 743.3ms | GC: 107.1ms)
+web-1  | D, [2026-09-11T21:19:52.437701 #28] DEBUG -- :   Rendered catalog/_search_form.html.erb (Duration: 5.3ms | GC: 0.2ms)
+web-1  | D, [2026-09-11T21:19:52.437764 #28] DEBUG -- :   Rendered /app/samvera/app/views/_controls.html.erb (Duration: 8.4ms | GC: 0.2ms)
+web-1  | D, [2026-09-11T21:19:52.440148 #28] DEBUG -- :   Rendering layouts/hyrax.html.erb
+web-1  | D, [2026-09-11T21:19:52.472752 #28] DEBUG -- :   Rendered shared/_appearance_styles.html.erb (Duration: 25.2ms | GC: 0.5ms)
+web-1  | D, [2026-09-11T21:19:52.515356 #28] DEBUG -- :   Rendered _head_tag_extras.html.erb (Duration: 41.2ms | GC: 0.8ms)
+web-1  | D, [2026-09-11T21:19:52.515418 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/layouts/_head_tag_content.html.erb (Duration: 73.3ms | GC: 1.3ms)
+web-1  | D, [2026-09-11T21:19:52.524483 #28] DEBUG -- :   Rendered _logo.html.erb (Duration: 5.7ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.527757 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/shared/_locale_picker.html.erb (Duration: 1.2ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.533765 #28] DEBUG -- :   Rendered _user_util_links.html.erb (Duration: 8.5ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.533855 #28] DEBUG -- :   Rendered _masthead.html.erb (Duration: 16.4ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.535513 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/_flash_msg.html.erb (Duration: 0.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.537564 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/shared/_modal.html.erb (Duration: 0.2ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:19:52.615444 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:52.626371 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.634319 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:52.712336 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:52.730455 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.738760 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:52.739208 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:52.739261 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:52.739364 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.739412 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:52.739479 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:52.739523 #28] DEBUG -- : [730df008-90b3-4ae3-a63d-e25d70a85e00] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:52.739151 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.751049 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:52.866665 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:52.867928 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.874668 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:52.879172 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:52.880404 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:52.881991 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:52.883447 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:52.883983 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.884170 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:52.885593 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:52.885780 #28] DEBUG -- : [ba8a0df7-0640-4bd1-b88a-2acba7aea9f6] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:52.908641 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.913441 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.917629 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:52.917908 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:52.931987 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:52.932177 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.132293 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.136329 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.140538 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.143147 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.144477 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.145906 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.148777 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.149098 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.149217 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.149714 #28] DEBUG -- : [ffb2af7a-4cc8-499b-b761-7be79b695e58] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.148954 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.150562 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.151123 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.153026 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.153086 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.153317 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.153420 #28] DEBUG -- : [2ace8e03-b84f-40bc-aa16-cc9add3c84ec] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.148505 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.151512 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.162188 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.162694 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.163365 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.164586 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.164794 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.165979 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.166762 #28] DEBUG -- : [4b3963c8-da59-4d5f-804e-9e58086a5da1] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.175463 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.185902 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.202900 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.245028 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.301590 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.312919 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.313698 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.314145 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.315014 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.316130 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.316645 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.316827 #28] DEBUG -- : [0160b12a-de58-4963-96c1-6bd63e84a362] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.350326 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.356349 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.361575 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.362638 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.366560 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.368156 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.369137 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.369384 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.369520 #28] DEBUG -- : [9b5b3f23-0868-4fb9-a1b5-7c98de3e32ed] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.377956 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.397222 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.406180 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.417274 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.423446 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.476234 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.510981 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.549342 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.550609 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.564710 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.565267 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.574934 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.576312 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.576456 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.578480 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.602210 #28] DEBUG -- : [30de834c-fcfa-4d8e-995b-aacbcbc0cdfe] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.578419 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.603510 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.612318 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.613091 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.615282 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.615839 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.616697 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.618001 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.618573 #28] DEBUG -- : [8d859fe4-4dce-44d9-b0b1-869a633acba6] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.631757 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.638230 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.639587 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.639773 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.639920 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.640752 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.642721 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.643175 #28] DEBUG -- : [3f4035f7-acc5-49b4-a76e-a5166afc34ba] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.643100 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.650904 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.665566 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:19:53.708157 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.713031 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.716628 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:19:53.716780 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.717888 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.746496 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.776469 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.776797 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.776931 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.777213 #28] DEBUG -- : [6c6589e9-4113-49f1-affe-64d9fd55a6a9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.825512 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.834887 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.834976 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.835022 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:19:53.835070 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:19:53.835127 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:19:53.835983 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:19:53.836056 #28] DEBUG -- : [25e7b13a-3bfc-4199-a7b8-a6b75d091f58] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:23:51.657948 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658076 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658099 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658126 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658143 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658156 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658168 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658180 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658192 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658206 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658219 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658232 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658244 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658267 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658278 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658289 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658307 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658318 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658331 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658342 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658355 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658365 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658433 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658470 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658483 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658511 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658524 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658536 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658549 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658560 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658574 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658586 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658596 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:23:51.658610 #28] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:26:43.237306 #28] DEBUG -- : [86335379-2374-4607-97bd-1c7d44ff30e0] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:43.366591 #28] DEBUG -- : [86335379-2374-4607-97bd-1c7d44ff30e0] Solr parameters: {"qt"=>"search", "rows"=>12, "qf"=>"description_tesim keyword_tesim subject_tesim creator_tesim contributor_tesim publisher_tesim based_near_label_tesim language_tesim date_uploaded_tesim date_modified_tesim date_created_tesim rights_statement_tesim license_tesim resource_type_tesim format_tesim identifier_tesim extent_tesim admin_note_tesim alternative_title_tesim related_url_tesim learning_resource_type_tesim education_level_tesim audience_tesim discipline_tesim date_tesim table_of_contents_tesim rights_holder_tesim additional_information_tesim oer_size_tesim accessibility_feature_tesim accessibility_hazard_tesim accessibility_summary_tesim previous_version_id_tesim newer_version_id_tesim related_item_id_tesim contributing_library_tesim library_catalog_identifier_tesim chronology_note_tesim title_tesim file_format_tesim all_text_tsimv all_text_tsimv depositor_tesim abstract_tesim rights_notes_tesim access_rights_tesim location_tesim bibliographic_citation_tesim source_tesim collection_tesim people_represented_tesim finding_aid_tesim repository_tesim digital_location_tesim digital_object_identifier_tesim technical_requirements_tesim congress_tesim policy_area_tesim roud_number_tesim bibliographical_information_tesim key_topics_tesim performance_media_tesim subject_mesh_tesim interviewer_tesim interviewee_tesim", "hl"=>true, "hl.simple.pre"=>"<span class='highlight'>", "hl.simple.post"=>"</span>", "hl.snippets"=>30, "hl.fragsize"=>100, "hl.maxAnalyzedChars"=>5100000, "pf"=>"title_tesim", "q"=>"", "facet"=>true, "facet.field"=>["resource_type_sim", "creator_sim", "keyword_sim", "subject_sim", "based_near_label_sim", "file_format_sim", "contributing_library_sim", "member_of_collections_ssim", "date_created_sim", "location_sim", "people_represented_sim"], "f.resource_type_sim.facet.limit"=>6, "f.creator_sim.facet.limit"=>6, "f.keyword_sim.facet.limit"=>6, "f.subject_sim.facet.limit"=>6, "f.based_near_label_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "f.contributing_library_sim.facet.limit"=>6, "f.member_of_collections_ssim.facet.limit"=>6, "sort"=>"score desc, system_create_dtsi desc", "fq"=>["({!terms f=edit_access_group_ssim}public) OR ({!terms f=discover_access_group_ssim}public) OR ({!terms f=read_access_group_ssim}public)"]}
+web-1  | D, [2026-09-11T21:26:43.366918 #28] DEBUG -- : [86335379-2374-4607-97bd-1c7d44ff30e0] Solr parameters: {"qt"=>"search", "rows"=>12, "qf"=>"description_tesim keyword_tesim subject_tesim creator_tesim contributor_tesim publisher_tesim based_near_label_tesim language_tesim date_uploaded_tesim date_modified_tesim date_created_tesim rights_statement_tesim license_tesim resource_type_tesim format_tesim identifier_tesim extent_tesim admin_note_tesim alternative_title_tesim related_url_tesim learning_resource_type_tesim education_level_tesim audience_tesim discipline_tesim date_tesim table_of_contents_tesim rights_holder_tesim additional_information_tesim oer_size_tesim accessibility_feature_tesim accessibility_hazard_tesim accessibility_summary_tesim previous_version_id_tesim newer_version_id_tesim related_item_id_tesim contributing_library_tesim library_catalog_identifier_tesim chronology_note_tesim title_tesim file_format_tesim all_text_tsimv all_text_tsimv depositor_tesim abstract_tesim rights_notes_tesim access_rights_tesim location_tesim bibliographic_citation_tesim source_tesim collection_tesim people_represented_tesim finding_aid_tesim repository_tesim digital_location_tesim digital_object_identifier_tesim technical_requirements_tesim congress_tesim policy_area_tesim roud_number_tesim bibliographical_information_tesim key_topics_tesim performance_media_tesim subject_mesh_tesim interviewer_tesim interviewee_tesim", "hl"=>true, "hl.simple.pre"=>"<span class='highlight'>", "hl.simple.post"=>"</span>", "hl.snippets"=>30, "hl.fragsize"=>100, "hl.maxAnalyzedChars"=>5100000, "pf"=>"title_tesim", "q"=>"", "facet"=>true, "facet.field"=>["resource_type_sim", "creator_sim", "keyword_sim", "subject_sim", "based_near_label_sim", "file_format_sim", "contributing_library_sim", "member_of_collections_ssim", "date_created_sim", "location_sim", "people_represented_sim"], "f.resource_type_sim.facet.limit"=>6, "f.creator_sim.facet.limit"=>6, "f.keyword_sim.facet.limit"=>6, "f.subject_sim.facet.limit"=>6, "f.based_near_label_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "f.contributing_library_sim.facet.limit"=>6, "f.member_of_collections_ssim.facet.limit"=>6, "sort"=>"score desc, system_create_dtsi desc", "fq"=>["({!terms f=edit_access_group_ssim}public) OR ({!terms f=discover_access_group_ssim}public) OR ({!terms f=read_access_group_ssim}public)", "{!terms f=has_model_ssim}Document,BornDigital,Congressional,FolkMusic,Medicine,OralHistory,Collection,Hyrax::PcdmCollection", "-suppressed_bsi:true", "({!terms f=edit_access_group_ssim}public) OR ({!terms f=discover_access_group_ssim}public) OR ({!terms f=read_access_group_ssim}public)"]}
+web-1  | D, [2026-09-11T21:26:43.413077 #28] DEBUG -- : [86335379-2374-4607-97bd-1c7d44ff30e0] Solr query: post select {"qt"=>"search", "rows"=>12, "qf"=>"description_tesim keyword_tesim subject_tesim creator_tesim contributor_tesim publisher_tesim based_near_label_tesim language_tesim date_uploaded_tesim date_modified_tesim date_created_tesim rights_statement_tesim license_tesim resource_type_tesim format_tesim identifier_tesim extent_tesim admin_note_tesim alternative_title_tesim related_url_tesim learning_resource_type_tesim education_level_tesim audience_tesim discipline_tesim date_tesim table_of_contents_tesim rights_holder_tesim additional_information_tesim oer_size_tesim accessibility_feature_tesim accessibility_hazard_tesim accessibility_summary_tesim previous_version_id_tesim newer_version_id_tesim related_item_id_tesim contributing_library_tesim library_catalog_identifier_tesim chronology_note_tesim title_tesim file_format_tesim all_text_tsimv all_text_tsimv depositor_tesim abstract_tesim rights_notes_tesim access_rights_tesim location_tesim bibliographic_citation_tesim source_tesim collection_tesim people_represented_tesim finding_aid_tesim repository_tesim digital_location_tesim digital_object_identifier_tesim technical_requirements_tesim congress_tesim policy_area_tesim roud_number_tesim bibliographical_information_tesim key_topics_tesim performance_media_tesim subject_mesh_tesim interviewer_tesim interviewee_tesim", "hl"=>true, "hl.simple.pre"=>"<span class='highlight'>", "hl.simple.post"=>"</span>", "hl.snippets"=>5, "hl.fragsize"=>100, "hl.maxAnalyzedChars"=>5100000, "pf"=>"title_tesim", "q"=>"", "facet"=>true, "facet.field"=>["resource_type_sim", "creator_sim", "keyword_sim", "subject_sim", "based_near_label_sim", "file_format_sim", "contributing_library_sim", "member_of_collections_ssim", "date_created_sim", "location_sim", "people_represented_sim"], "f.resource_type_sim.facet.limit"=>6, "f.creator_sim.facet.limit"=>6, "f.keyword_sim.facet.limit"=>6, "f.subject_sim.facet.limit"=>6, "f.based_near_label_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "f.contributing_library_sim.facet.limit"=>6, "f.member_of_collections_ssim.facet.limit"=>6, "sort"=>"score desc, system_create_dtsi desc", "fq"=>["({!terms f=edit_access_group_ssim}public) OR ({!terms f=discover_access_group_ssim}public) OR ({!terms f=read_access_group_ssim}public)", "{!terms f=has_model_ssim}Document,BornDigital,Congressional,FolkMusic,Medicine,OralHistory,Collection,Hyrax::PcdmCollection", "-suppressed_bsi:true", "({!terms f=edit_access_group_ssim}public) OR ({!terms f=discover_access_group_ssim}public) OR ({!terms f=read_access_group_ssim}public)", "-suppressed_bsi:true", "-is_child_bsi:[* TO *]", "-(hide_from_catalog_search_bsi:true)"], "f.member_of_collection_ids_ssim.facet.matches"=>"^$", "hl.fl"=>"*", "hl.requiredFieldMatch"=>true}
+web-1  | D, [2026-09-11T21:26:43.413184 #28] DEBUG -- : [86335379-2374-4607-97bd-1c7d44ff30e0] Solr fetch (49.2ms)
+web-1  | D, [2026-09-11T21:26:43.418962 #28] DEBUG -- :   Rendering layout /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/layouts/hyrax/1_column.html.erb
+web-1  | D, [2026-09-11T21:26:43.419144 #28] DEBUG -- :   Rendering /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/index.html.erb within layouts/hyrax/1_column
+web-1  | D, [2026-09-11T21:26:43.431627 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_opensearch_response_metadata.html.erb (Duration: 0.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.433971 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_search_results_header.html.erb (Duration: 0.2ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.441977 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_constraints.html.erb (Duration: 7.1ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.444786 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_did_you_mean.html.erb (Duration: 0.4ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.451698 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_paginate_compact.html.erb (Duration: 5.0ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.459224 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_sort_widget.html.erb (Duration: 5.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.463218 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_per_page_widget.html.erb (Duration: 2.8ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.477070 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_view_type_group.html.erb (Duration: 12.4ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.477209 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_sort_and_per_page.html.erb (Duration: 31.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.477259 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_search_header.html.erb (Duration: 33.8ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:43.479451 #28] DEBUG -- : Looking for document index partial document_gallery
+web-1  | D, [2026-09-11T21:26:45.265406 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_results_pagination.html.erb (Duration: 25.1ms | GC: 0.3ms)
+web-1  | D, [2026-09-11T21:26:45.265503 #28] DEBUG -- :   Rendered catalog/_search_results.html.erb (Duration: 1842.3ms | GC: 71.8ms)
+web-1  | D, [2026-09-11T21:26:45.330444 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 44.1ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:45.367862 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 37.0ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:45.397214 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 28.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:45.709032 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 310.6ms | GC: 68.6ms)
+web-1  | D, [2026-09-11T21:26:45.818585 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 109.0ms | GC: 38.9ms)
+web-1  | D, [2026-09-11T21:26:46.030512 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/catalog/_facet_limit.html.erb within catalog/_facet_layout (Duration: 211.4ms | GC: 17.5ms)
+web-1  | D, [2026-09-11T21:26:46.030850 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_facet_group.html.erb (Duration: 762.7ms | GC: 127.0ms)
+web-1  | D, [2026-09-11T21:26:46.030948 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_facets.html.erb (Duration: 764.2ms | GC: 127.0ms)
+web-1  | D, [2026-09-11T21:26:46.031009 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/catalog/_search_sidebar.html.erb (Duration: 764.8ms | GC: 127.0ms)
+web-1  | D, [2026-09-11T21:26:46.039834 #28] DEBUG -- :   Rendered catalog/_search_form.html.erb (Duration: 4.8ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.039902 #28] DEBUG -- :   Rendered /app/samvera/app/views/_controls.html.erb (Duration: 7.2ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.042100 #28] DEBUG -- :   Rendering layouts/hyrax.html.erb
+web-1  | D, [2026-09-11T21:26:46.075518 #28] DEBUG -- :   Rendered shared/_appearance_styles.html.erb (Duration: 27.3ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.117899 #28] DEBUG -- :   Rendered _head_tag_extras.html.erb (Duration: 41.6ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.117972 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/layouts/_head_tag_content.html.erb (Duration: 74.9ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.125883 #28] DEBUG -- :   Rendered _logo.html.erb (Duration: 5.7ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.130920 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/shared/_locale_picker.html.erb (Duration: 1.9ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.147071 #28] DEBUG -- :   Rendered _user_util_links.html.erb (Duration: 20.4ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.147176 #28] DEBUG -- :   Rendered _masthead.html.erb (Duration: 27.8ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.148023 #28] DEBUG -- :   Rendered /usr/local/bundle/bundler/gems/hyrax-0ee1ce251c0c/app/views/_flash_msg.html.erb (Duration: 0.4ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.149590 #28] DEBUG -- :   Rendered /usr/local/bundle/gems/blacklight-7.41.0/app/views/shared/_modal.html.erb (Duration: 0.2ms | GC: 0.0ms)
+web-1  | D, [2026-09-11T21:26:46.428278 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:46.495234 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.517027 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:46.594089 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:46.702564 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:46.708375 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:46.720461 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:46.740988 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.749202 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:46.749894 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:46.753104 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:46.753288 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.753457 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:46.755947 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:46.756144 #28] DEBUG -- : [28693f42-a82b-411e-bf81-2ccdea73ad48] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:46.772275 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.791570 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:46.791885 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.793511 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.793792 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:46.809032 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:46.813765 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:46.811375 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.046062 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.063767 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.067542 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.067862 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.075438 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.080475 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.081428 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.082115 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.082203 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.082255 #28] DEBUG -- : [0741dd32-7031-47b1-a1e4-345cf81a2629] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.079735 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.082989 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.085694 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.086449 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.086984 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.087052 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.087990 #28] DEBUG -- : [e9cd4978-d31f-47c4-bfd4-151526088c32] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.080753 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.080089 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.096836 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.097160 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.097311 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.098257 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.098425 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.098598 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.098824 #28] DEBUG -- : [6d79249e-e1e6-44f2-bd70-c3b8270313ef] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.097106 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.105441 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.105987 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.106291 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.106419 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.106775 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.107633 #28] DEBUG -- : [27f36cee-dad4-4805-bd2f-74656bf28f74] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.112822 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.117859 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.196798 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.205445 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.206020 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.206429 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.207843 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.208695 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.210198 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.211816 #28] DEBUG -- : [c3595457-191a-4bc8-a884-d805affed59b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.211724 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.246407 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.256371 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.259793 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.291663 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.302531 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.327976 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.332160 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.337186 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.379512 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.391933 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.399300 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.401684 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.473866 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.534739 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.542620 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.574849 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.581007 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.585429 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.590943 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.593494 #28] DEBUG -- : [508c8de0-63e2-4445-b530-0a8719311377] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.594118 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.602861 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.603574 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.603676 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.605452 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.605503 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.605527 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.605545 #28] DEBUG -- : [76d3d52c-46c2-4740-b5f1-fff1f49b7456] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.603270 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.608625 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.612392 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.613086 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.613188 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.613593 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.613670 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.613724 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.613912 #28] DEBUG -- : [040d1781-2a00-4179-8dbf-00e3a5199821] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.616589 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.616736 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.616852 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.617282 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.622804 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.623320 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.624155 #28] DEBUG -- : [89498f49-94de-44dc-aa52-fcc563279ad1] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.624384 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.632643 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.693014 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.696582 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.696697 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.696744 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.696770 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.696811 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.696833 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.696863 #28] DEBUG -- : [fbc58669-ed4e-46ad-ac67-c29d3338cc3a] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.846350 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:26:47.859158 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.867718 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:26:47.960914 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.967987 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.968046 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.968131 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:26:47.968180 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:26:47.968206 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:26:47.968522 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:26:47.968555 #28] DEBUG -- : [be4494bc-8600-4702-9cc4-7085a525e060] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:03.819758 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:03.831028 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:03.853469 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:03.877983 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:03.881607 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:03.933514 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:03.939659 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:03.946655 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:03.961837 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:03.962469 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:03.962800 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:03.965551 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.019862 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.037586 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.038806 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.255522 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.266458 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.266590 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.266639 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.266681 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.266716 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.266748 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.266776 #28] DEBUG -- : [e7487a1b-bcb5-4f85-8dc0-be752fa4d83b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.285101 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.286715 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.295165 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.295874 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.296000 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.296424 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.296852 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.296902 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.296938 #28] DEBUG -- : [f2dbbebf-2899-4aff-8102-41147ed4602b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.295478 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.297583 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.298062 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.298175 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.298276 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.298430 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.298635 #28] DEBUG -- : [011682f6-da9f-40a9-8d5e-c073433beba9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.295797 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.296299 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.307390 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.310421 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.310545 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.310893 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.311359 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.311855 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.312494 #28] DEBUG -- : [e8141df1-a7dc-424d-aa1e-2a94ce24fa8b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.310268 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.313927 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.314490 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.314887 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.315004 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.315141 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.315312 #28] DEBUG -- : [9bd2317d-4dfa-48f4-9c75-a9b4605cd2e0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.347901 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.385480 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.399553 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.430715 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.458969 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.464193 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.476505 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.485924 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.503433 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.511058 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.553847 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.585263 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.649374 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.652510 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.655185 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.660712 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.660814 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.660886 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.660936 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.663653 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.664266 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.666350 #28] DEBUG -- : [0e00f0a3-7f26-4978-b174-074b91689abf] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.666275 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.716423 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.720638 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.777471 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.781842 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.782004 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.782155 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.782225 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.784794 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.792687 #28] DEBUG -- : [a7e752ad-ab99-4fc0-8cb9-5e9607aa5346] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.792226 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.795482 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.804785 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.805369 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.806319 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.807022 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.807296 #28] DEBUG -- : [ba5ad3f2-5b12-4337-8c5a-06ca388fbbaf] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.805191 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.815916 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.819586 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.819975 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.820255 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.820552 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.820641 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.820710 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.821188 #28] DEBUG -- : [99c4e9e7-becc-4470-a46c-9b6df581ae97] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.824930 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.825467 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.826246 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.826581 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.827757 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.828359 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.828394 #28] DEBUG -- : [d1e598a8-5ef5-46ec-ae6a-b7a7d1bc7705] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.837802 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:04.853272 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.857977 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:04.911908 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.916323 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.916485 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.916600 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:04.916710 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:04.916810 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:04.916886 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:04.916956 #28] DEBUG -- : [1e752755-0f25-4cd7-bc4b-0bbd3a7d3df0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:05.037742 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:27:05.048078 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:05.054832 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:27:05.141400 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:05.149315 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:05.149372 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:05.149395 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:27:05.149419 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:27:05.149435 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:27:05.149898 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:27:05.149937 #28] DEBUG -- : [96b2995e-b992-4917-bb2e-7e5f6f32f64c] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:36:47.449648 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449769 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449793 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449809 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449821 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449851 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449865 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449882 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449902 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449917 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449931 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449945 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449958 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449974 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.449987 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450003 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450016 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450029 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450041 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450057 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450085 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450098 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450406 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450431 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450444 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450457 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450471 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450484 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450496 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450508 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450525 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450538 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450552 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:36:47.450567 #29] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:37:15.163092 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:15.163816 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:15.164186 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:15.164397 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:15.164824 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:15.369920 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.370501 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.370732 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.383047 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.383440 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.436270 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:15.437160 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:15.437758 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:15.438037 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:15.444045 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:15.789165 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.790118 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.791131 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.792992 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.800964 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.802687 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.803443 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.803804 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.803874 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.803931 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.803981 #29] DEBUG -- : [c2760a76-2a76-4230-b5f1-be8a77c24ad0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.801562 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.805222 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.806882 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.806967 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.807024 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.808369 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.808539 #29] DEBUG -- : [64675530-820b-49f7-ae3b-0062f328f630] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.806848 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.811259 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.813725 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.813931 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.813999 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.814090 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.814143 #29] DEBUG -- : [616e8149-2284-45c5-b7ef-5277343ee886] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.801187 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.814364 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.814405 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.814979 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.815048 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.815076 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.815098 #29] DEBUG -- : [7043cfa4-babe-48c9-a3f3-e19402405573] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.803759 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.821394 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.821438 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.821490 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.821522 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:15.821575 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:15.821598 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:15.821624 #29] DEBUG -- : [5de1c8c1-7be4-421d-bf6f-0c1aed1a431b] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:15.982366 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.016763 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.026122 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.032421 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.043082 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.117684 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.130174 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.139471 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.139910 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.145267 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.152950 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.153327 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.161834 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.172171 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.203745 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.450743 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.453659 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.466050 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.470493 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.470879 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.471181 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.471267 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.471311 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.471352 #29] DEBUG -- : [e6fafff3-c2e4-4158-96a2-a0dee3db7cf2] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.466197 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.471716 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.471786 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.471869 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.472001 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.473837 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.473940 #29] DEBUG -- : [478a68b9-e4f0-420d-8bef-b866a814f1ac] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.471118 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.470801 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.477468 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.479439 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.479670 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.480488 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.480590 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.480647 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.484876 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.491082 #29] DEBUG -- : [47579801-0d6c-4ed0-98ac-a0211dde2681] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.485231 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.492471 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.497439 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.497885 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.498142 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.498383 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.498484 #29] DEBUG -- : [0eca23c5-3bc4-45a6-9d0d-b7da54c3a4c9] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.485057 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.499154 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.499977 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.500189 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.500716 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.501133 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.501892 #29] DEBUG -- : [3819bac7-9bf7-4b13-97bb-167ed76d8734] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.527439 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.542154 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.548388 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.607838 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.611928 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.611997 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.612023 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.612059 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.612088 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.612384 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.612432 #29] DEBUG -- : [97a64ca0-ca1c-4b42-b5b5-4c5e710a0430] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.727252 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:37:16.741129 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.747529 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:37:16.809841 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.817599 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.817697 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.817748 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:37:16.817800 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:37:16.817841 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:37:16.818499 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:37:16.818569 #29] DEBUG -- : [cf0de5e7-0efd-4568-91d6-d653a7a64702] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:40:22.839536 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839646 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839667 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839681 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839695 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839708 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839719 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839731 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839744 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839761 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839773 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839786 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839799 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839811 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839825 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839837 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839851 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839866 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839884 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839899 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839911 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839929 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.839999 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840018 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840030 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840042 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840055 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840067 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840079 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840091 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840105 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840134 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840146 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:40:22.840160 #28] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:41:05.168211 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.171661 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.171975 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.172326 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.172838 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.377665 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.377985 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.378443 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.384612 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.391640 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.424092 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:05.424998 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:05.425391 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:05.425591 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:05.429711 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:05.762399 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.773576 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.774358 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.774725 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.774981 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.775226 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.775281 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.775322 #28] DEBUG -- : [6e5b7623-3fdb-4bd2-bde7-c7fa0e906f8c] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.774912 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.774647 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.775169 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.784062 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.785409 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.786928 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.787534 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.787940 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.788023 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.788095 #28] DEBUG -- : [db89bd82-deea-4a22-9914-340c1b43f4d0] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.787401 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.789351 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.790177 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.790291 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.790526 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.792335 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.794526 #28] DEBUG -- : [35f20da9-e07a-4ef9-a69f-0db706a05daa] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.792642 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.786167 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.797885 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.797994 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.798290 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.798359 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.798406 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.798452 #28] DEBUG -- : [ea31234c-20e4-41e6-a63f-202aa8e8c84f] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.800664 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.818761 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.819008 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.819238 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:05.819645 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:05.819835 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:05.820409 #28] DEBUG -- : [8df10353-1365-4824-a793-5a2987715f0a] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:05.944529 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:05.978897 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.051075 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.076702 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.109976 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.133857 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.149151 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.154877 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.168929 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.239697 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.271198 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.294451 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.294703 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.300913 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.302361 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.305169 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.307414 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.309229 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.354932 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.356039 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.356395 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.378032 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.409211 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.409894 #28] DEBUG -- : [e30f7ea6-711a-4822-b4e6-cc1afe268e06] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.355927 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.468705 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.475541 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.515177 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.518096 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.519084 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.526213 #28] DEBUG -- : [a43b296c-8716-4571-8d06-a40456162401] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.547191 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.551295 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.560167 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.560399 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.561222 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.564262 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.569590 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.571117 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.571173 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.571213 #28] DEBUG -- : [bf3b0090-5538-4910-b428-9cdc7ef51f65] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.569158 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.574094 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.574259 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.574423 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.574560 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.575551 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.575704 #28] DEBUG -- : [18d8cb13-6e23-48fd-8674-e0201eb49313] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.572650 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.576823 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.577224 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.577328 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.577459 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.577905 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.583532 #28] DEBUG -- : [fc7f8f46-3d05-4600-8252-70999025badd] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.617856 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.632478 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.638848 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.698429 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.703369 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.703490 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.703565 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.703651 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.703715 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.704382 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.704485 #28] DEBUG -- : [e173269e-cca5-4638-b076-262c50f97a80] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.798550 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] Usergroups are ["public"]
+web-1  | D, [2026-09-11T21:41:06.813272 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] Checking download permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.821547 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] download_groups: ["public", "work_editor", "admin"]
+web-1  | D, [2026-09-11T21:41:06.886860 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.893555 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.893629 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.893658 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:41:06.893773 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] Checking edit permissions for user:  with groups: ["public"]
+web-1  | D, [2026-09-11T21:41:06.893834 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] edit_groups: ["admin"]
+web-1  | D, [2026-09-11T21:41:06.894287 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] edit_users: []
+web-1  | D, [2026-09-11T21:41:06.894339 #28] DEBUG -- : [3032b73c-9e70-429b-8853-e3a8853910ef] [CANCAN] decision: false
+web-1  | D, [2026-09-11T21:52:34.305866 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.305978 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306000 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306013 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306025 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306037 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306048 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306059 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306070 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306082 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306093 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306105 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306131 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306142 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306152 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306167 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306186 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306206 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306217 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306230 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306240 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306251 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306325 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306341 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306351 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306361 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306371 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306381 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306392 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306402 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306414 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306433 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306444 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:52:34.306457 #29] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:54:46.278268 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278370 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278391 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278404 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278420 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278432 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278444 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278454 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278466 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278478 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278490 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278502 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278526 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278536 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278547 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278566 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278577 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278590 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278601 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278617 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278629 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278641 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278706 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278727 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278738 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278749 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278759 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278773 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278784 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278797 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278807 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278819 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278830 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:54:46.278846 #28] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:56:30.205826 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.205939 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.205961 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.205974 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.205986 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.205998 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206009 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206020 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206032 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206044 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206055 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206071 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206082 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206096 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206117 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206132 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206143 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206159 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206170 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206182 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206193 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206206 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206285 #29] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206306 #29] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206317 #29] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206328 #29] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206338 #29] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206350 #29] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206361 #29] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206372 #29] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206392 #29] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206403 #29] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206413 #29] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:56:30.206444 #29] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T21:58:09.902864 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.902967 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.902988 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903002 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903031 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903044 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903057 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903070 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903085 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903099 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903233 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903251 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903266 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903283 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903295 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903307 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903319 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903331 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903344 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903364 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903377 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903391 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903470 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903487 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903499 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903512 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903524 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903536 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903550 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903562 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903576 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903588 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903600 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T21:58:09.903616 #28] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+web-1  | D, [2026-09-11T22:01:45.076528 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077015 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077047 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077063 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077077 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077090 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077106 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077142 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077156 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077171 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077194 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077209 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077225 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077239 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077259 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077272 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077284 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077301 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077324 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077336 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077351 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077363 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077543 #28] DEBUG -- : Registering Local QA authority: congress - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077573 #28] DEBUG -- : Registering Local QA authority: resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077586 #28] DEBUG -- : Registering Local QA authority: accessibility_features - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077599 #28] DEBUG -- : Registering Local QA authority: accessibility_hazards - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077611 #28] DEBUG -- : Registering Local QA authority: audience - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077623 #28] DEBUG -- : Registering Local QA authority: discipline - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077640 #28] DEBUG -- : Registering Local QA authority: education_levels - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077652 #28] DEBUG -- : Registering Local QA authority: learning_resource_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077665 #28] DEBUG -- : Registering Local QA authority: licenses - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077677 #28] DEBUG -- : Registering Local QA authority: oer_types - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077690 #28] DEBUG -- : Registering Local QA authority: rights_statements - Qa::Authorities::Local::FileBasedAuthority
+web-1  | D, [2026-09-11T22:01:45.077705 #28] DEBUG -- : Registering Local QA authority: mesh - Qa::Authorities::Mesh
+[root@hykudev wvu_knapsack]# 

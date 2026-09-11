@@ -4,10 +4,6 @@ module CatalogControllerDecorator
   # Configuration for CatalogController's Blacklight setup
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
 
-  # ========================================================================
-  # 1. CONFIGURE FACETS AT BOOT TIME
-  #    Sets limit and labels on all facets that exist at initialization
-  # ========================================================================
   begin
     ::CatalogController.configure_blacklight do |config|
       config.advanced_search[:form_facet_partial] = "advanced_search_facets"
@@ -45,39 +41,4 @@ module CatalogControllerDecorator
   rescue NameError, LoadError
     # Skip if dependencies not yet initialized
   end
-
-  # ========================================================================
-  # 2. FORCE FACET LIMITS AT REQUEST TIME (search_builder level)
-  #    This ensures even facets added later by flexible-metadata get limit: 5
-  # ========================================================================
-
-  # Override search_builder_class to inject our facet-limit enforcement
-  def search_builder_class
-    CatalogControllerDecorator::FacetLimitingSearchBuilder
-  end
-
-  # Inner class: search builder that forces facet limits in Solr parameters
-  class FacetLimitingSearchBuilder < Hyrax::CatalogSearchBuilder
-    def build(user_params = {})
-      params = super
-
-      # For EVERY facet field that Blacklight knows about (including those
-      # added by M3 flexible-metadata AFTER configuration), ensure Solr
-      # gets facet.limit parameters
-      blacklight_config.facet_fields.each do |field_name, facet_config|
-        next if field_name.to_s == 'generic_type_sim'
-
-        # Determine the limit: use what's in the config, default to 5
-        limit = facet_config.limit || 5
-
-        # Set the Solr parameter: f.<fieldname>.facet.limit
-        params[:"f.#{field_name}.facet.limit"] = limit
-      end
-
-      params
-    end
-  end
 end
-
-# Apply the decorator to the actual controller
-::CatalogController.prepend(CatalogControllerDecorator)

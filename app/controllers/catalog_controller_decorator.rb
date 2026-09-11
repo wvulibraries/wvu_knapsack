@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 module CatalogControllerDecorator
-  # Override search_builder_class to use our wrapper that enforces facet limits
-  def search_builder_class
-    CatalogSearchBuilderWrapper
-  end
-
   # Configuration for CatalogController's Blacklight setup
   # This code runs when the decorator is loaded (in to_prepare)
   # Migrated from hyrax-webapp submodule changes — never modify submodule for customizations
@@ -26,32 +21,27 @@ module CatalogControllerDecorator
       # Apply consistent settings to ALL visible facet fields:
       # - limit: 5 (show first 5 values)
       # - show_more: true (enable "More" link to fetch all values)
-      # - label: ensure readable label exists (not Solr field name like "creator_sim")
+      # - label: auto-generate human-readable label if missing
       config.facet_fields.each do |field_name, facet_config|
         next if field_name.to_s == 'generic_type_sim'  # skip removed Type facet
 
-        # Set limit and show_more for ALL facets
+        # Set limit and show_more for ALL facets — works for both pre-registered
+        # and those added later by flexible metadata
         facet_config.limit = 5
-        facet_config.show_more = true
+        facet_config.show_more = true if facet_config.respond_to?(:show_more=)
 
-        # Add label if it's missing or matches the Solr field name (auto-generated)
+        # Generate a friendly label if it's missing or matches the Solr field name
         current_label = facet_config.respond_to?(:label) ? facet_config.label : nil
-        next unless current_label.nil? || current_label.to_s == field_name.to_s
+        next if current_label.present? && current_label.to_s != field_name.to_s
 
-        case field_name.to_s
-        when 'resource_type_sim'  then facet_config.label = "Resource Type"
-        when 'creator_sim'        then facet_config.label = "Creator"
-        when 'contributor_sim'    then facet_config.label = "Contributor"
-        when 'keyword_sim'        then facet_config.label = "Keyword"
-        when 'subject_sim'        then facet_config.label = "Subject"
-        when 'language_sim'       then facet_config.label = "Language"
-        when 'based_near_label_sim' then facet_config.label = "Location"
-        when 'publisher_sim'      then facet_config.label = "Publisher"
-        when 'file_format_sim'    then facet_config.label = "File Format"
-        when 'contributing_library_sim' then facet_config.label = "Contributing Library"
-        when 'member_of_collections_ssim' then facet_config.label = "Collections"
-        when 'people_represented_sim' then facet_config.label = "People Represented"
-        end
+        # Create a human-readable label from the Solr field name
+        # e.g., "date_created_sim" → "Date Created", "creator_sim" → "Creator"
+        humanized_label = field_name.to_s
+                                   .gsub(/_sim$|_ssim$|_tesim$/, '')  # Remove Solr suffixes
+                                   .gsub(/_label/, '')                 # Remove label suffix
+                                   .gsub(/_/, ' ')                     # Convert underscores to spaces
+                                   .titleize                           # Capitalize each word
+        facet_config.label = humanized_label
       end
     end
   rescue NameError, LoadError
@@ -59,4 +49,5 @@ module CatalogControllerDecorator
   end
 end
 
+# Apply the decorator to the actual controller
 ::CatalogController.prepend(CatalogControllerDecorator)

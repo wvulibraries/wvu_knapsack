@@ -41,4 +41,35 @@ module CatalogControllerDecorator
   rescue NameError, LoadError
     # Skip if dependencies not yet initialized
   end
+
+  # ========================================================================
+  # Override search_results to slice facet items after Solr response
+  # This ensures ALL facets (even late-registered M3 flexible-metadata ones)
+  # show only 5 items in the sidebar, regardless of config state
+  # ========================================================================
+
+  def search_results
+    # Call the original search_results method from the parent class
+    @response = super
+
+    # Slice facet items to their configured limits (default 5)
+    @response.facets.each do |facet|
+      facet_config = blacklight_config.facet_fields[facet.name]
+      next unless facet_config
+      next if facet.name.to_s == 'generic_type_sim'
+
+      # Get the limit (use config, default to 5)
+      limit = facet_config.limit || 5
+
+      # Slice the items if there are more than the limit
+      if facet.items.respond_to?(:length) && facet.items.length > limit
+        facet.items = facet.items.first(limit)
+      end
+    end
+
+    @response
+  end
 end
+
+# Apply the decorator to CatalogController
+::CatalogController.prepend(CatalogControllerDecorator)

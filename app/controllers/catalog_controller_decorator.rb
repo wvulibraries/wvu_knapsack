@@ -18,7 +18,18 @@ module CatalogControllerDecorator
       # Hyku #3072 workaround: remove generic_type_sim (Type) facet — not needed for WVU theme
       config.facet_fields.delete('generic_type_sim') if config.facet_fields.key?('generic_type_sim')
 
-      # Apply consistent settings to all facets present at boot
+      # Explicitly register M3 flexible-metadata facets if not already present
+      # These may not be in the boot-time config but are indexed by Solr
+      m3_facets = {
+        'date_created_sim' => 'Date Created',
+        'people_represented_sim' => 'People Represented'
+      }
+      m3_facets.each do |field_name, label|
+        next if config.facet_fields.key?(field_name)
+        config.add_facet_field field_name, label: label, limit: 5
+      end
+
+      # Apply consistent settings to ALL facets (both pre-registered and M3)
       config.facet_fields.each do |field_name, facet_config|
         next if field_name.to_s == 'generic_type_sim'
 

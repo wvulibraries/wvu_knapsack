@@ -104,3 +104,33 @@ end
 puts "*** PREPENDING CatalogControllerDecorator to CatalogController ***"
 ::CatalogController.prepend(CatalogControllerDecorator)
 puts "*** PREPEND COMPLETE ***"
+
+# ALSO directly patch search_results as a safety measure
+puts "*** DIRECTLY PATCHING search_results method ***"
+original_search_results = ::CatalogController.instance_method(:search_results)
+
+::CatalogController.define_method(:search_results) do
+  puts "*** ENTERING DIRECTLY PATCHED search_results ***"
+  $stderr.puts "*** ENTERING DIRECTLY PATCHED search_results ***"
+  
+  # Call the original
+  @response = original_search_results.bind(self).call
+  
+  # Apply slicing
+  puts "=== search_results: Slicing facets ==="
+  @response.facets.each do |facet|
+    facet_config = blacklight_config.facet_fields[facet.name]
+    next unless facet_config
+    next if facet.name.to_s == 'generic_type_sim'
+    
+    limit = facet_config.limit || 5
+    if facet.items.respond_to?(:length) && facet.items.length > limit
+      puts "    #{facet.name}: #{facet.items.length} → #{limit}"
+      facet.items = facet.items.first(limit)
+    end
+  end
+  
+  @response
+end
+
+puts "*** DIRECT PATCH COMPLETE ***"

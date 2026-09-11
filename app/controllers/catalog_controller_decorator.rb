@@ -105,64 +105,43 @@ puts "*** PREPENDING CatalogControllerDecorator to CatalogController ***"
 ::CatalogController.prepend(CatalogControllerDecorator)
 puts "*** PREPEND COMPLETE ***"
 
-# ALSO directly patch search_results as a safety measure
-puts "*** DIRECTLY PATCHING search_results and index methods ***"
-
-# Store original search_results
-original_search_results = ::CatalogController.instance_method(:search_results) rescue nil
-
-# Patch the index action (this is what actually gets called for /catalog searches)
-original_index = ::CatalogController.instance_method(:index)
-
-::CatalogController.define_method(:index) do
-  puts "*** ENTERING PATCHED index method ***"
-  $stderr.puts "*** ENTERING PATCHED index method ***"
-  
-  # Call the original index which calls search_results internally
-  result = original_index.bind(self).call
-  
-  # Slice facets AFTER the response is populated
-  puts "=== index: Slicing facets in response ==="
-  if @response && @response.respond_to?(:facets)
-    @response.facets.each do |facet|
-      facet_config = blacklight_config.facet_fields[facet.name]
-      next unless facet_config
-      next if facet.name.to_s == 'generic_type_sim'
-      
-      limit = facet_config.limit || 5
-      original_count = facet.items.length rescue 0
-      if facet.items.respond_to?(:length) && facet.items.length > limit
-        puts "    #{facet.name}: #{facet.items.length} → #{limit}"
-        facet.items = facet.items.first(limit)
-      end
-    end
-  end
-  
-  result
-end
-
-# Also patch search_results as a backup
-::CatalogController.define_method(:search_results) do
-  puts "*** ENTERING PATCHED search_results method ***"
-  
-  # Call the original
-  @response = original_search_results.bind(self).call if original_search_results
-  
-  # Apply slicing
-  puts "=== search_results: Slicing facets ==="
-  @response.facets.each do |facet|
-    facet_config = blacklight_config.facet_fields[facet.name]
-    next unless facet_config
-    next if facet.name.to_s == 'generic_type_sim'
+# Patch search_results method using alias_method (more reliable than define_method)
+puts "*** USING ALIAS_METHOD to wrap search_results ***"
+begin
+  # Alias the original search_results method
+  ::CatalogController.class_eval do
+    alias_method :original_search_results_undecorated, :search_results
     
-    limit = facet_config.limit || 5
-    if facet.items.respond_to?(:length) && facet.items.length > limit
-      puts "    #{facet.name}: #{facet.items.length} → #{limit}"
-      facet.items = facet.items.first(limit)
+    def search_results
+      puts "*** ENTERING ALIASED search_results method ***"
+      $stderr.puts "*** ENTERING ALIASED search_results method ***"
+      
+      # Call the original
+      @response = original_search_results_undecorated
+      
+      # Slice facets AFTER Solr returns but BEFORE view renders
+      puts "=== search_results: Slicing facets ==="
+      puts "Response facets: #{@response.facets.map(&:name).inspect}"
+      
+      @response.facets.each do |facet|
+        facet_config = blacklight_config.facet_fields[facet.name] rescue nil
+        next unless facet_config
+        next if facet.name.to_s == 'generic_type_sim'
+        
+        limit = facet_config.limit || 5
+        item_count = facet.items.length rescue 0
+        
+        if facet.items.respond_to?(:length) && facet.items.length > limit
+          puts "    → #{facet.name}: slicing #{facet.items.length} → #{limit} items"
+          facet.items = facet.items.first(limit)
+        end
+      end
+      
+      @response
     end
   end
-  
-  @response
+  puts "*** ALIAS_METHOD COMPLETE ***"
+rescue => e
+  puts "*** ERROR IN ALIAS_METHOD: #{e.message} ***"
+  $stderr.puts "*** ERROR IN ALIAS_METHOD: #{e.message} ***"
 end
-
-puts "*** DIRECT PATCH COMPLETE ***"

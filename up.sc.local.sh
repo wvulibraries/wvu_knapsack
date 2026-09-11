@@ -8,8 +8,9 @@ set -e
 # Usage:
 #   sh up.sc.local.sh
 #
-# Note: .ruby-version specifies 3.3.0 for Stack Car compatibility;
-# rbenv will auto-switch when you cd into this directory.
+# Prerequisites:
+#   - gem install stack_car (in your current Ruby version)
+#   - Docker & Docker Compose
 
 # Ensure submodule is initialised and up to date.
 git submodule update --init --recursive

@@ -63,6 +63,11 @@ module CatalogControllerDecorator
     # Call the original search_results method from the parent class
     @response = super
 
+    # Debug: Log what we're working with
+    Rails.logger.info "=== CatalogControllerDecorator.search_results DEBUG ==="
+    Rails.logger.info "Blacklight facet_fields: #{blacklight_config.facet_fields.keys}"
+    Rails.logger.info "Solr facets returned: #{@response.facets.map(&:name)}"
+
     # Slice facet items to their configured limits (default 5)
     @response.facets.each do |facet|
       facet_config = blacklight_config.facet_fields[facet.name]
@@ -71,10 +76,14 @@ module CatalogControllerDecorator
 
       # Get the limit (use config, default to 5)
       limit = facet_config.limit || 5
+      original_count = facet.items.length
 
       # Slice the items if there are more than the limit
       if facet.items.respond_to?(:length) && facet.items.length > limit
         facet.items = facet.items.first(limit)
+        Rails.logger.info "  #{facet.name}: sliced from #{original_count} to #{limit}"
+      else
+        Rails.logger.info "  #{facet.name}: #{original_count} items (no slicing needed)"
       end
     end
 

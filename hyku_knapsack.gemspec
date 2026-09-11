@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sentry-sidekiq"
 
   spec.add_development_dependency "rubocop-rake"
-  spec.add_development_dependency "rubocop-rspec_rails"
+  spec.add_development_dependency "rubocop-rspec_rails", "~> 2.12"
 end

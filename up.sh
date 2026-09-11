@@ -22,50 +22,56 @@ set -e
 [ -f hyrax-webapp/.env.production ] || touch hyrax-webapp/.env.production
 
 
-# Pre-create bind-mount directories with symlink protection.
-# If data/ is a symlink (production VM with mounted volume), preserve it.
-# Otherwise, create directories if data/ is a real directory or doesn't exist yet.
-#
-# Note: mkdir -p ./data/bundle on a symlink resolves the symlink and converts it
-# to a real directory, breaking the mounted volume binding. This is the fix for
-# the symlink deletion issue where data/ would become a real dir after ./up.sh.
-if [ -d ./data ] && [ ! -L ./data ]; then
-  # data/ exists and is NOT a symlink — safe to create subdirectories
-  mkdir -p \
-    ./data/bundle \
-    ./data/node_modules \
-    ./data/assets \
-    ./data/cache \
-    ./data/uploads \
-    ./data/db \
-    ./data/solr \
-    ./data/zoo \
-    ./data/zk \
-    ./data/fcrepo \
-    ./data/redis \
-    ./data/logs/solr \
-    ./data/logs/rails \
-    ./data/tmp
-  chown -R 1001:101 ./data/bundle ./data/node_modules ./data/assets ./data/cache ./data/logs/rails ./data/tmp
-elif [ -L ./data ]; then
-  # data/ is a symlink (production with mounted volume)
-  echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
-  
-  DATA_TARGET=$(readlink ./data)
-  
-  # If target exists, create subdirectories and set permissions
-  if [ -d "$DATA_TARGET" ]; then
-    mkdir -p "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/uploads" "$DATA_TARGET/db" "$DATA_TARGET/solr" "$DATA_TARGET/zoo" "$DATA_TARGET/zk" "$DATA_TARGET/fcrepo" "$DATA_TARGET/redis" "$DATA_TARGET/logs/solr" "$DATA_TARGET/logs/rails" "$DATA_TARGET/tmp" 2>/dev/null
-    chown -R 1001:101 "$DATA_TARGET/bundle" "$DATA_TARGET/node_modules" "$DATA_TARGET/assets" "$DATA_TARGET/cache" "$DATA_TARGET/logs/rails" "$DATA_TARGET/tmp" 2>/dev/null || true
-  else
-    echo "⚠ data/ symlink target '$DATA_TARGET' not found — skipping directory creation (docker compose may handle this)"
-  fi
+# Directories managed by this script. Any that are symlinks will be skipped.
+MANAGED_DIRS="
+bundle
+node_modules
+assets
+cache
+db
+solr
+zoo
+zk
+fcrepo
+redis
+logs/solr
+logs/rails
+"
+
+# If data/ is a symlink, operate on its target.
+if [ -L ./data ]; then
+    echo "✓ data/ is symlink ($(readlink ./data)) — preserving for mounted volume"
+    DATA_ROOT="$(readlink ./data)"
+else
+    DATA_ROOT="./data"
 fi
+
+# Create directories only if they are not symlinks.
+if [ -d "$DATA_ROOT" ]; then
+    for d in $MANAGED_DIRS; do
+        if [ -L "$DATA_ROOT/$d" ]; then
+            echo "✓ skipping symlink: $DATA_ROOT/$d"
+        else
+            mkdir -p "$DATA_ROOT/$d"
+        fi
+    done
+
+    chown -R 1001:101 \
+        "$DATA_ROOT/bundle" \
+        "$DATA_ROOT/node_modules" \
+        "$DATA_ROOT/assets" \
+        "$DATA_ROOT/cache" \
+        "$DATA_ROOT/logs/rails" 2>/dev/null || true
+else
+    echo "⚠ data directory '$DATA_ROOT' not found"
+fi
+
 
 # Remove broken initializer from hyrax-webapp submodule if present.
 # disable_solr.rb has a syntax error that aborts assets:precompile, and
 # we do not want Solr disabled in production regardless.
 rm -f ./hyrax-webapp/config/initializers/disable_solr.rb
+
 
 # ---
 # BuildKit Configuration — Phase 2 Build Optimization

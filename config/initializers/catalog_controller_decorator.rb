@@ -19,5 +19,20 @@ Rails.application.config.to_prepare do
 
     # Hyku #3072: Hide Type facet (not needed for WVU theme)
     config.facet_fields.delete('generic_type_sim')
+
+    # Register M3 flexible-metadata facets explicitly
+    # These facets are in Solr but not auto-added to blacklight_config
+    # Must explicitly configure them for Blacklight to show "more" links
+    m3_facets = {
+      'date_created_sim' => { label: 'Date Created', limit: 5, show_more: true },
+      'based_near_label_sim' => { label: 'Location', limit: 5, show_more: true },
+      'people_represented_sim' => { label: 'People Represented', limit: 5, show_more: true }
+    }
+
+    m3_facets.each do |field_name, facet_config|
+      # Only add if not already configured
+      next if config.facet_fields.key?(field_name)
+      config.add_facet_field field_name, facet_config
+    end
   end
 end

@@ -35,8 +35,9 @@ Rails.configuration.to_prepare do
               # Get the limit from config, default to 5
               limit = facet_config.limit || 5
 
-              # Set the Solr parameter
-              params[:"f.#{field_name}.facet.limit"] = limit
+              # CRITICAL: Set to limit+1 so Blacklight can detect "more" link
+              # Solr must return 1 extra item to trigger "more" link in UI
+              params[:"f.#{field_name}.facet.limit"] = (limit + 1).to_i
             end
           end
         end

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 # Knapsack override: enforce facet limits on catalog searches
+# Extends AdvSearchBuilder (the actual search builder used by the catalog)
 # Ensures Solr receives f.<field>.facet.limit parameters for all facets
 # This is necessary to limit facet response counts (default Solr limit is 100)
-class CatalogSearchBuilder < Blacklight::SearchBuilder
+class CatalogSearchBuilder < AdvSearchBuilder
   def add_facetting_to_solr(solr_params)
     # Call parent to set up base faceting
     super

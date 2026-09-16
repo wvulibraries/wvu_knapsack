@@ -10,13 +10,16 @@ Rails.application.config.to_prepare do
   ::CatalogController.configure_blacklight do |config|
     next unless config.respond_to?(:facet_fields) && config.facet_fields.is_a?(Hash)
     
+    # Remove Type facet (Hyku #3072 workaround)
+    config.facet_fields.delete('generic_type_sim') if config.facet_fields.key?('generic_type_sim')
+    
     # Set default for any unspecified facets
     config.default_facet_limit = 5
     
     # Force limit: 5 on ALL facets (catches dynamically-registered M3 facets)
     # Use integer values (not true/false) for Solr compatibility
     config.facet_fields.each do |field_name, facet_config|
-      next if field_name.to_s == 'generic_type_sim'  # Already deleted in decorator
+      next if field_name.to_s == 'generic_type_sim'  # Already deleted above
       
       # CRITICAL: Ensure limit is an integer (not boolean true from show_more)
       # This is crucial for the template logic: `limit = facet_field.limit || 5`

@@ -40,36 +40,34 @@ Rails.application.config.to_prepare do
         if schema&.profile
           properties = schema.profile.dig('properties') || {}
           
-          # Iterate all properties and ONLY register those marked as facetable
+          # Iterate all properties and register those with _sim fields
+          # NOTE: Do NOT filter by 'facetable' marker — many real facets lack that token
           properties.each do |property_name, property_def|
             next unless property_def.is_a?(Hash)
             
-            # Get indexing array (contains field names like creator_sim, creator_tesim, facetable)
+            # Get indexing array (contains field names like creator_sim, creator_tesim, etc.)
             indexing = property_def['indexing']
             next unless indexing.is_a?(Array)
             
-            # ONLY register if explicitly marked as facetable
-            next unless indexing.include?('facetable')
-            
-            # Find the _sim field for this property
-            sim_field = indexing.find { |f| f.to_s.end_with?('_sim') }
-            next unless sim_field
-            
-            # Skip if already configured in base Hyku config
-            next if config.facet_fields.key?(sim_field)
-            
-            # Extract human-readable label, avoiding i18n keys
-            # If display_label is a key like "blacklight.search.fields.show.xxx", use property name instead
-            label = property_def.dig('display_label', 'en') || 
-                    property_def.dig('display_label', 'default')
-            
-            # If label is an i18n key (starts with blacklight.), use human-readable property name
-            if label.nil? || label.to_s.start_with?('blacklight.')
-              label = property_name.gsub('_', ' ').titleize
+            # Find ALL _sim fields in this property's indexing
+            indexing.each do |field|
+              next unless field.to_s.end_with?('_sim')
+              
+              # Skip if already configured in base Hyku config
+              next if config.facet_fields.key?(field)
+              
+              # Extract human-readable label, avoiding i18n keys
+              label = property_def.dig('display_label', 'en') || 
+                      property_def.dig('display_label', 'default')
+              
+              # If label is an i18n key (starts with blacklight.), use human-readable property name
+              if label.nil? || label.to_s.start_with?('blacklight.')
+                label = property_name.gsub('_', ' ').titleize
+              end
+              
+              m3_facets[field] = label
+              Rails.logger.debug("Found M3 facet: #{field} => #{label}")
             end
-            
-            m3_facets[sim_field] = label
-            Rails.logger.debug("Found M3 facet: #{sim_field} => #{label}")
           end
           
           if m3_facets.any?

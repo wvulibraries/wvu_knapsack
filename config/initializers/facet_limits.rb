@@ -18,7 +18,10 @@ Rails.application.config.to_prepare do
     config.facet_fields.each do |field_name, facet_config|
       next if field_name.to_s == 'generic_type_sim'  # Already deleted in decorator
       
-      facet_config.limit = 5
+      # CRITICAL: Ensure limit is an integer (not boolean true from show_more)
+      # This is crucial for the template logic: `limit = facet_field.limit || 5`
+      # and for the search builder: `(limit + 1).to_i`
+      facet_config.limit = 5.to_i  # Explicit integer conversion
       facet_config.show_more = true
     end
   end

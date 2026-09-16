@@ -36,7 +36,14 @@ Rails.application.config.to_prepare do
     begin
       schema = Hyrax::FlexibleSchema.current_version
       if schema.present?
-        json_schema = schema.json_schema || {}
+        # Schema can be either an object with json_schema method or a Hash directly
+        json_schema = if schema.respond_to?(:json_schema)
+                        schema.json_schema || {}
+                      elsif schema.is_a?(Hash)
+                        schema
+                      else
+                        {}
+                      end
         properties = json_schema['properties'] || {}
         
         if properties.is_a?(Hash) && properties.any?

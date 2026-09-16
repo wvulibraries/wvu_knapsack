@@ -37,8 +37,19 @@ Rails.application.config.to_prepare do
                    Hyrax::FlexibleSchema.order("created_at asc").last
                  end
         
-        if schema&.profile
-          properties = schema.profile.dig('properties') || {}
+        # Handle both Hash and ActiveRecord model responses
+        profile_data = if schema.is_a?(Hash)
+                         # schema is already a Hash
+                         schema
+                       elsif schema.respond_to?(:profile)
+                         # schema is an ActiveRecord model with .profile method
+                         schema.profile
+                       else
+                         nil
+                       end
+        
+        if profile_data.is_a?(Hash)
+          properties = profile_data.dig('properties') || {}
           
           # Iterate all properties and register those with _sim fields
           # NOTE: Do NOT filter by 'facetable' marker — many real facets lack that token
@@ -73,16 +84,17 @@ Rails.application.config.to_prepare do
           if m3_facets.any?
             Rails.logger.info("Registered #{m3_facets.size} M3 facets from active FlexibleSchema")
           else
-            Rails.logger.warn("No facetable properties found in active FlexibleSchema")
+            Rails.logger.warn("No _sim properties found in active FlexibleSchema")
           end
         else
-          Rails.logger.warn("No active FlexibleSchema profile found")
+          Rails.logger.warn("Could not extract profile data from FlexibleSchema (got #{schema.class})")
         end
       else
         Rails.logger.warn("Flexible metadata not enabled (Hyrax.config.flexible? = false)")
       end
     rescue StandardError => e
-      Rails.logger.warn("Error loading facets from FlexibleSchema: #{e.message}")
+      Rails.logger.warn("Error loading facets from FlexibleSchema: #{e.message} (#{e.class})")
+      Rails.logger.debug(e.backtrace.join("\n"))
     end
     
     # Register all discovered M3 facets with Blacklight

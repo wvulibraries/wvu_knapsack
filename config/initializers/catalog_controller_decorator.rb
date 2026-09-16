@@ -107,6 +107,28 @@ Rails.application.config.to_prepare do
     end
     
     Rails.logger.info("Total M3 facets registered: #{m3_facets.size}")
+    
+    # Force-register critical WVU facet fields with explicit integer limit: 5
+    # FlexibleSchema discovery may miss these, so ensure they're in config
+    # with proper limits for CatalogSearchBuilder to set f.<field>.facet.limit = 6
+    critical_facets = {
+      'date_created_sim' => 'Date Created',
+      'location_sim' => 'Location',
+      'people_represented_sim' => 'People Represented'
+    }
+    
+    critical_facets.each do |field_name, label|
+      if config.facet_fields.key?(field_name)
+        # Field exists: update limit and label to ensure consistency
+        config.facet_fields[field_name].limit = 5
+        config.facet_fields[field_name].label = label
+        Rails.logger.info("Updated existing facet: #{field_name} => #{label} (limit: 5)")
+      else
+        # Field missing: add it with proper configuration
+        config.add_facet_field field_name, label: label, limit: 5, show_more: true
+        Rails.logger.info("Force-registered missing facet: #{field_name} => #{label} (limit: 5)")
+      end
+    end
   end
 end
 

@@ -23,6 +23,8 @@ Rails.application.config.to_prepare do
       # and for the search builder: `(limit + 1).to_i`
       facet_config.limit = 5.to_i  # Explicit integer conversion
       facet_config.show_more = true
+      
+      Rails.logger.debug("facet_limits.rb: Configured #{field_name} - limit: #{facet_config.limit}, show_more: #{facet_config.show_more}")
     end
   end
 end

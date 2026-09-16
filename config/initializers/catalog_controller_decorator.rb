@@ -57,6 +57,7 @@ Rails.application.config.to_prepare do
               # Use property_name as label (human-readable)
               label = property_name.gsub('_', ' ').titleize
               config.add_facet_field field, label: label, limit: 5, show_more: true
+              Rails.logger.debug("Registered M3 facet: #{field} (#{label}), limit: 5, show_more: true")
             end
           end
           Rails.logger.info("Registered #{config.facet_fields.size} facet fields from active M3 schema")

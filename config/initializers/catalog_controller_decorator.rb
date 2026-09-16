@@ -20,59 +20,33 @@ Rails.application.config.to_prepare do
     # Hyku #3072: Hide Type facet (not needed for WVU theme)
     config.facet_fields.delete('generic_type_sim')
 
-    # Dynamically register M3 flexible-metadata facets from YAML metadata profile
-    # Load from data/setup_files/metadata-profile-v.3.yml to ensure ALL facetable fields are registered
-    # This is more reliable than Hyrax::FlexibleSchema which may not have all properties loaded
-    
-    begin
-      profile_path = Rails.root.join('data', 'setup_files', 'metadata-profile-v.3.yml')
-      if File.exist?(profile_path)
-        profile_yaml = YAML.safe_load_file(profile_path) || {}
-        properties = profile_yaml['properties'] || {}
-        
-        facet_count = 0
-        if properties.is_a?(Hash) && properties.any?
-          properties.each do |property_name, property_config|
-            next unless property_config.is_a?(Hash)
-            
-            # Get the indexing array (contains field names like title_sim, title_tesim, facetable, etc.)
-            indexing_fields = property_config['indexing']
-            next unless indexing_fields.is_a?(Array)
-            
-            # Only process if this property is marked as facetable
-            next unless indexing_fields.include?('facetable')
-            
-            # Find _sim fields (Blacklight facets)
-            indexing_fields.each do |field|
-              next unless field.to_s.end_with?('_sim')
-              
-              # Only add if not already configured
-              next if config.facet_fields.key?(field)
-              
-              # Use property_name as label (human-readable)
-              label = property_name.gsub('_', ' ').titleize
-              config.add_facet_field field, label: label, limit: 5, show_more: true
-              Rails.logger.debug("Registered M3 facet: #{field} (#{label}), limit: 5, show_more: true")
-              facet_count += 1
-            end
-          end
-          Rails.logger.info("Registered #{facet_count} M3 facetable fields from metadata-profile-v.3.yml")
-          Rails.logger.info("Total facet fields now in config: #{config.facet_fields.size}")
-        else
-          Rails.logger.info("No properties found in metadata-profile-v.3.yml; using default facet configuration")
-        end
-      else
-        Rails.logger.warn("Metadata profile not found at #{profile_path}; using default facet configuration")
-      end
-    rescue StandardError => e
-      Rails.logger.warn("Error loading facets from metadata-profile-v.3.yml: #{e.message}")
+    # Register M3 flexible-metadata facets explicitly
+    # These facets are in Solr but not auto-added to blacklight_config
+    # Must explicitly configure them for Blacklight to show "more" links
+    m3_facets = {
+      'date_created_sim' => { label: 'Date Created', limit: 5, show_more: true },
+      'based_near_label_sim' => { label: 'Location', limit: 5, show_more: true },
+      'people_represented_sim' => { label: 'People Represented', limit: 5, show_more: true },
+      'location_sim' => { label: 'Location', limit: 5, show_more: true },
+      'keyword_sim' => { label: 'Keyword', limit: 5, show_more: true },
+      'subject_sim' => { label: 'Subject', limit: 5, show_more: true },
+      'publisher_sim' => { label: 'Publisher', limit: 5, show_more: true },
+      'policy_area_sim' => { label: 'Policy Area', limit: 5, show_more: true },
+      'key_topics_sim' => { label: 'Key Topics', limit: 5, show_more: true },
+      'performance_media_sim' => { label: 'Performance Media', limit: 5, show_more: true },
+      'interviewer_sim' => { label: 'Interviewer', limit: 5, show_more: true },
+      'interviewee_sim' => { label: 'Interviewee', limit: 5, show_more: true },
+      'subject_mesh_sim' => { label: 'Subject (MeSH)', limit: 5, show_more: true },
+      'repository_sim' => { label: 'Repository', limit: 5, show_more: true }
+    }
+
+    m3_facets.each do |field_name, facet_config|
+      # Only add if not already configured
+      next if config.facet_fields.key?(field_name)
+      config.add_facet_field field_name, facet_config
+      Rails.logger.debug("Registered M3 facet: #{field_name} with config: #{facet_config}")
     end
-    
-    # CRITICAL: Call this AFTER adding all M3 facets
-    # This tells Blacklight to add ALL facet_fields to each Solr request
-    # Without this, newly registered M3 facets won't appear in the facet.field parameter
-    config.add_facet_fields_to_solr_request!
-    Rails.logger.info("Called add_facet_fields_to_solr_request! - all #{config.facet_fields.size} facets will be included in Solr requests")
+    Rails.logger.info("Registered #{m3_facets.size} M3 flexible-metadata facet fields")
   end
 end
 

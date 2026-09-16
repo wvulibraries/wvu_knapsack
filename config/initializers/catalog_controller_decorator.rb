@@ -22,7 +22,8 @@ Rails.application.config.to_prepare do
 
     # Dynamically register M3 flexible-metadata facets from the ACTIVE metadata profile
     # Uses Hyrax::FlexibleSchema to get what's currently active (not static file in repo)
-    # This allows users to upload/adjust M3 profiles without dev changes
+    # CRITICAL: Register ALL _sim fields found, not just those marked 'facetable'
+    # Some M3 fields may only have _sim in indexing without explicit facetable marker
     
     m3_facets = {}
     
@@ -35,29 +36,36 @@ Rails.application.config.to_prepare do
         if schema&.profile
           properties = schema.profile.dig('properties') || {}
           
-          # Iterate all properties to find facetable ones
+          # Iterate all properties to find ANY with _sim fields
           properties.each do |property_name, property_def|
             next unless property_def.is_a?(Hash)
             
-            # Get indexing array (contains field names like creator_sim, creator_tesim, facetable)
+            # Get indexing array (contains field names like creator_sim, creator_tesim, facetable, etc.)
             indexing = property_def['indexing']
-            next unless indexing.is_a?(Array) && indexing.include?('facetable')
+            next unless indexing.is_a?(Array)
             
-            # Find the _sim field for this property
-            sim_field = indexing.find { |f| f.to_s.end_with?('_sim') }
-            next unless sim_field
-            
-            # Use property label or generate from name
-            label = property_def.dig('display_label', 'default') || 
-                    property_def.dig('display_label', 'en') ||
-                    property_name.gsub('_', ' ').titleize
-            m3_facets[sim_field] = label
+            # Find ALL _sim fields in this property's indexing
+            # NOTE: Don't filter by 'facetable' marker - register any _sim field
+            indexing.each do |field|
+              next unless field.to_s.end_with?('_sim')
+              
+              # Skip if already configured
+              next if config.facet_fields.key?(field)
+              
+              # Use property label or generate from name
+              label = property_def.dig('display_label', 'default') || 
+                      property_def.dig('display_label', 'en') ||
+                      property_name.gsub('_', ' ').titleize
+              
+              m3_facets[field] = label
+              Rails.logger.debug("Found M3 facet field: #{field} (#{label}) from property: #{property_name}")
+            end
           end
           
           if m3_facets.any?
-            Rails.logger.info("Registered #{m3_facets.size} M3 facets from active FlexibleSchema")
+            Rails.logger.info("Registered #{m3_facets.size} M3 facet fields from active FlexibleSchema")
           else
-            Rails.logger.warn("No facetable properties found in active FlexibleSchema")
+            Rails.logger.warn("No _sim fields found in active FlexibleSchema")
           end
         else
           Rails.logger.warn("No active FlexibleSchema profile found")

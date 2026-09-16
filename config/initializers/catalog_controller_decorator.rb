@@ -20,67 +20,47 @@ Rails.application.config.to_prepare do
     # Hyku #3072: Hide Type facet (not needed for WVU theme)
     config.facet_fields.delete('generic_type_sim')
 
-    # Dynamically register M3 flexible-metadata facets from YAML metadata profile
-    # This allows users to add new facetable fields without code changes
-    # Fallback to hardcoded list if YAML parsing fails
+    # Dynamically register M3 flexible-metadata facets from the ACTIVE metadata profile
+    # Uses Hyrax::FlexibleSchema to get what's currently active (not static file in repo)
+    # This allows users to upload/adjust M3 profiles without dev changes
     
     m3_facets = {}
     
-    # Hardcoded core facets (fallback if YAML parsing fails)
-    core_facets = {
-      'creator_sim' => 'Creator',
-      'date_created_sim' => 'Date Created',
-      'based_near_label_sim' => 'Location',
-      'location_sim' => 'Location',
-      'people_represented_sim' => 'People Represented',
-      'keyword_sim' => 'Keyword',
-      'subject_sim' => 'Subject',
-      'publisher_sim' => 'Publisher',
-      'policy_area_sim' => 'Policy Area',
-      'key_topics_sim' => 'Key Topics',
-      'performance_media_sim' => 'Performance Media',
-      'interviewer_sim' => 'Interviewer',
-      'interviewee_sim' => 'Interviewee',
-      'subject_mesh_sim' => 'Subject (MeSH)',
-      'repository_sim' => 'Repository'
-    }
-    
-    # Try to load dynamic facets from metadata profile YAML
+    # Try to load from active FlexibleSchema context (DB/system loaded M3 profile)
     begin
-      profile_path = Rails.root.join('data', 'setup_files', 'metadata-profile-v.3.yml')
-      if File.exist?(profile_path)
-        profile_yaml = YAML.safe_load_file(profile_path) || {}
-        properties = profile_yaml['properties'] || {}
+      if defined?(Hyrax::FlexibleSchema)
+        schema = Hyrax::FlexibleSchema.new
         
-        if properties.is_a?(Hash) && properties.any?
-          properties.each do |property_name, property_config|
-            next unless property_config.is_a?(Hash)
+        # Iterate all properties to find facetable ones
+        schema.properties.each do |property_name, property_def|
+          # Check if this property is marked as facetable
+          if property_def.is_a?(Hash) && 
+             property_def['indexing'].is_a?(Array) && 
+             property_def['indexing'].include?('facetable')
             
-            # Get indexing array (contains field names like creator_sim, creator_tesim, facetable)
-            indexing = property_config['indexing']
-            next unless indexing.is_a?(Array) && indexing.include?('facetable')
-            
-            # Find _sim field for this property
-            sim_field = indexing.find { |f| f.to_s.end_with?('_sim') }
+            # Find the _sim field for this property
+            sim_field = property_def['indexing'].find { |f| f.to_s.end_with?('_sim') }
             next unless sim_field
             
-            # Generate human-readable label from property name
-            label = property_name.gsub('_', ' ').titleize
+            # Use property label or generate from name
+            label = property_def['label'] || property_name.gsub('_', ' ').titleize
             m3_facets[sim_field] = label
           end
-          Rails.logger.debug("Dynamically loaded #{m3_facets.size} M3 facets from metadata profile YAML")
+        end
+        
+        if m3_facets.any?
+          Rails.logger.info("Registered #{m3_facets.size} M3 facets from active FlexibleSchema")
+        else
+          Rails.logger.warn("No facetable properties found in active FlexibleSchema")
         end
       else
-        Rails.logger.warn("Metadata profile not found at #{profile_path}; using fallback facet list")
+        Rails.logger.warn("Hyrax::FlexibleSchema not available")
       end
     rescue StandardError => e
-      Rails.logger.warn("Error loading facets from metadata YAML: #{e.message}; using fallback facet list")
+      Rails.logger.warn("Error loading facets from FlexibleSchema: #{e.message}")
     end
     
-    # Use dynamic facets if we found any, otherwise use hardcoded fallback
-    m3_facets = core_facets if m3_facets.empty?
-    
-    # Register all M3 facets with Blacklight
+    # Register all discovered M3 facets with Blacklight
     m3_facets.each do |field_name, label|
       # Skip if already configured (e.g., from hyrax-webapp base config)
       next if config.facet_fields.key?(field_name)
@@ -89,7 +69,7 @@ Rails.application.config.to_prepare do
       Rails.logger.debug("Registered M3 facet: #{field_name} => #{label}")
     end
     
-    Rails.logger.info("Registered #{m3_facets.size} M3 flexible-metadata facet fields")
+    Rails.logger.info("Total M3 facets registered: #{m3_facets.size}")
   end
 end
 

@@ -516,18 +516,29 @@ sh down.sh    # stops containers, data is preserved in ./data/
 
 ```bash
 sh down.sh
-git pull                    # Pulls parent repo changes, including new submodule references
+git pull --rebase           # Pulls parent repo changes, including new submodule references
+                            # --rebase handles divergent branches (local VM commits vs. remote)
 sh up.sh                    # Rebuilds containers with updated code
-                            # up.sh automatically runs: git submodule update --init --recursive
 ```
 
-The parent `.gitmodules` file specifies which commit of `hyrax-webapp` to use. When you `git pull`, the parent repo may have a new submodule reference. `up.sh` then runs `git submodule update --init --recursive` to check out that specified commit before rebuilding.
+The parent `.gitmodules` file specifies which commit of `hyrax-webapp` to use. When you `git pull`, the parent repo may have a new submodule reference. Git automatically checks out that specified commit in the submodule before rebuilding.
+
+**If the VM has local commits and `git pull` reports divergent branches:**
+
+```bash
+git pull --rebase
+# If there's a submodule conflict (commit not present locally):
+#   git add hyrax-webapp
+#   git rebase --continue
+```
+
+On production VMs, `--rebase` is safer than merge — it replays any local commits on top of the remote branch. This prevents accidental merge commits.
 
 **If a running instance already has the correct submodule commit** (no parent repo changes to submodule refs):
 
 ```bash
 sh down.sh
-git pull                    # May have knapsack code changes only
+git pull --rebase           # May have knapsack code changes only
 sh up.sh                    # Rebuilds containers; submodule unchanged
 ```
 
@@ -715,6 +726,7 @@ Okta can be pointed at this URL for automatic SP configuration.
 | 403 Blocked hosts | Host not in Rails allowed list | Verify `HYKU_ADMIN_HOST`/`HYKU_ROOT_HOST` match the request host; check `host_authorization.rb` |
 | Login fails "change was rejected" (422) | CSRF: session cookie has `Secure` flag, not sent over HTTP | Set `DISABLE_FORCE_SSL=true` — triggers `session_store_override.rb` to drop Secure flag |
 | Pages load with no CSS | Assets not precompiled or `RAILS_SERVE_STATIC_FILES` not set | Re-run `setup.sh` (step 1 is `assets:precompile`); ensure `RAILS_SERVE_STATIC_FILES=true` |
+| `git pull` fails: "divergent branches and need to specify how to reconcile" | VM has local commits; remote has different commits (diverged history) | Use `git pull --rebase` to replay local commits on top of remote. If submodule conflict: `git add hyrax-webapp && git rebase --continue` |
 | Solr unhealthy / dependency failed to start | `linux/amd64` Solr image running under QEMU on Apple Silicon (M1/M2/M3/M4) — JVM init is slow | Wait longer — M4 can take 10+ minutes. Local compose allows up to ~16 min total (`start_period: 600s` + 60 × 10s retries). A native arm64 Solr image is on Notch8's backlog. |
 | Solr not in SolrCloud mode | Wrong startup command | `startup-solr.sh` uses `solr start -f -c -z zoo:2181` — check logs |
 | `solr.xml does not exist` | Fresh bind mount, no `solr.xml` | `startup-solr.sh` seeds it automatically from `/opt/solr/server/solr/solr.xml` |

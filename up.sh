@@ -2,17 +2,28 @@
 set -e
 
 # Pull latest knapsack code before bringing up containers.
-# git pull
+# Use --rebase to handle divergent branches (local VM commits vs. remote).
+# This is safer than merge on a production VM — replays local commits on top of remote.
+git pull --rebase
 
-
-# ---
-# NOTE: The following submodule update command is commented out intentionally.
-# Running 'git submodule update --init --recursive' here would update the hyrax-webapp submodule
-# every time up.sh runs, which is NOT desired. The submodule should remain locked to the commit
-# specified in the parent repo, to avoid unexpected changes. Only run this manually after a fresh clone
-# or when intentionally updating the submodule:
-#   git submodule update --init --recursive
-#   cd hyrax-webapp && git fetch --tags && git checkout <desired-tag-or-branch>
+# After git pull --rebase, if there are submodule conflicts (e.g., when VM has local commits),
+# resolve with: git add hyrax-webapp && git rebase --continue
+#
+# Submodule update happens automatically after pull — git reads .gitmodules and checks out
+# the commit specified in the parent repo. No manual update command needed.
+#
+# To INTENTIONALLY UPDATE the submodule to a newer version (e.g., security patches):
+#
+# Option 1 — Update to remote branch HEAD (locally, then push):
+#   cd hyrax-webapp && git fetch origin && git checkout v7.1.3  # or main
+#   cd .. && git add hyrax-webapp && git commit -m "update to v7.1.3"
+#   git push
+#   # Then on VM: git pull --rebase && sh up.sh
+#
+# Option 2 — Update to remote branch HEAD without local commits (locally only):
+#   git submodule update --remote  # check out remote's HEAD
+#   git add hyrax-webapp && git commit -m "update to latest"
+#   git push
 # ---
 
 # hyrax-webapp/.env.production must exist because the submodule's docker-compose

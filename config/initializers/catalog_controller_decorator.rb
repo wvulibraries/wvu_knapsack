@@ -111,11 +111,14 @@ Rails.application.config.to_prepare do
     # YAML-driven configuration for critical WVU facets and defaults
     yaml_path = Rails.root.join('config', 'wvu_facet_defaults.yml')
     yml_config = File.exist?(yaml_path) ? YAML.load_file(yaml_path) : {}
+    Rails.logger.info("YAML config loaded from #{yaml_path}: #{yml_config.inspect}")
     
     force_fields = yml_config.fetch('force_registered_fields', {})
     defaults = yml_config.fetch('defaults', { limit: 5, show_more: true })
+    Rails.logger.info("Force-registered fields: #{force_fields.keys.join(', ')}, Defaults: #{defaults.inspect}")
 
     # 1. Handle critical fields defined in YAML
+    Rails.logger.info("Processing #{force_fields.size} force-registered fields...")
     force_fields.each do |field_name, label|
       if config.facet_fields.key?(field_name)
         config.facet_fields[field_name].limit = defaults['limit']
@@ -131,6 +134,7 @@ Rails.application.config.to_prepare do
     end
 
     # 2. Apply universal default limit to all dynamic _sim fields discovered via FlexibleSchema
+    Rails.logger.info("Processing #{config.facet_fields.size} total facet fields for universal limit application...")
     config.facet_fields.each do |key, field_config|
       next unless key.to_s.end_with?('_sim') && field_config.respond_to?(:limit=)
       # Only apply if the field has no explicit limit set yet

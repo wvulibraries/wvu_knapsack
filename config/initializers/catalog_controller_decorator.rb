@@ -109,10 +109,20 @@ Rails.application.config.to_prepare do
     Rails.logger.info("Total M3 facets registered: #{m3_facets.size}")
     
     # YAML-driven configuration for critical WVU facets and defaults
-    yaml_path = Rails.root.join('config', 'wvu_facet_defaults.yml')
-    yml_config = File.exist?(yaml_path) ? YAML.load_file(yaml_path) : {}
-    Rails.logger.info("YAML config loaded from #{yaml_path}: #{yml_config.inspect}")
+    # Fix: Use a relative path resolution based on the current file's location
+    # This ensures we find the YAML file at repo-root/config/ regardless of Rails.root
+    # (critical for Docker environments where Rails.root may not match actual file layout)
+    script_dir = File.expand_path('../../..', __FILE__)
+    yaml_path = File.join(script_dir, 'config', 'wvu_facet_defaults.yml')
     
+    if File.exist?(yaml_path)
+      yml_config = YAML.load_file(yaml_path)
+      Rails.logger.info("YAML config loaded successfully from #{yaml_path}")
+    else
+      Rails.logger.warn("WVU Facet Defaults YAML NOT FOUND at #{yaml_path}. Using empty defaults.")
+      yml_config = {}
+    end
+
     force_fields = yml_config.fetch('force_registered_fields', {})
     defaults = yml_config.fetch('defaults', { limit: 5, show_more: true })
     Rails.logger.info("Force-registered fields: #{force_fields.keys.join(', ')}, Defaults: #{defaults.inspect}")

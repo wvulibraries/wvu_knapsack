@@ -108,27 +108,38 @@ Rails.application.config.to_prepare do
     
     Rails.logger.info("Total M3 facets registered: #{m3_facets.size}")
     
-    # Force-register critical WVU facet fields with explicit integer limit: 5
-    # FlexibleSchema discovery may miss these, so ensure they're in config
-    # with proper limits for CatalogSearchBuilder to set f.<field>.facet.limit = 6
-    critical_facets = {
-      'date_created_sim' => 'Date Created',
-      'location_sim' => 'Location',
-      'people_represented_sim' => 'People Represented'
-    }
+    # YAML-driven configuration for critical WVU facets and defaults
+    yaml_path = Rails.root.join('config', 'wvu_facet_defaults.yml')
+    yml_config = File.exist?(yaml_path) ? YAML.load_file(yaml_path) : {}
     
-    critical_facets.each do |field_name, label|
+    force_fields = yml_config.fetch('force_registered_fields', {})
+    defaults = yml_config.fetch('defaults', { limit: 5, show_more: true })
+
+    # 1. Handle critical fields defined in YAML
+    force_fields.each do |field_name, label|
       if config.facet_fields.key?(field_name)
-        # Field exists: update limit and label to ensure consistency
-        config.facet_fields[field_name].limit = 5
+        config.facet_fields[field_name].limit = defaults['limit']
         config.facet_fields[field_name].label = label
-        Rails.logger.info("Updated existing facet: #{field_name} => #{label} (limit: 5)")
+        Rails.logger.info("Updated existing facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
       else
-        # Field missing: add it with proper configuration
-        config.add_facet_field field_name, label: label, limit: 5, show_more: true
-        Rails.logger.info("Force-registered missing facet: #{field_name} => #{label} (limit: 5)")
+        config.add_facet_field field_name, 
+                               label: label, 
+                               limit: defaults['limit'], 
+                               show_more: defaults['show_more']
+        Rails.logger.info("Force-registered missing facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
       end
     end
-  end
-end
+
+    # 2. Apply universal default limit to all dynamic _sim fields discovered via FlexibleSchema
+    config.facet_fields.each do |key, field_config|
+      next unless key.to_s.end_with?('_sim') && field_config.respond_to?(:limit=)
+      # Only apply if the field has no explicit limit set yet
+      if field_config.limit.nil? || field_config.limit.zero?
+        config.facet_fields[key].limit = defaults['limit']
+        Rails.logger.debug("Applied default limit #{defaults['limit']} to dynamic facet: #{key}")
+      end
+    end
+
+  end # configure_blacklight
+end # to_prepare
 

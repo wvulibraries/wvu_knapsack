@@ -544,7 +544,17 @@ cd hyrax-webapp && git describe --tags && cd ..   # Shows version tag
 If the submodule is still at the old version (e.g., v7.1.2 instead of v7.1.3), the rebase resolved the conflict by keeping the local commit instead of pulling the new version. Manually checkout the correct tag:
 
 ```bash
-cd hyrax-webapp && git checkout v7.1.3 && cd ..
+cd hyrax-webapp
+
+# ⚠️ IMPORTANT: Discard any local changes in the submodule (e.g., Gemfile.lock, tmp/)
+# These block checkout and can cause: "error: The following untracked working tree files 
+# would be overwritten by checkout" or similar
+git reset --hard HEAD
+git clean -fd          # Remove untracked files and directories
+
+git checkout v7.1.3
+cd ..
+
 git add hyrax-webapp && git commit -m "fix: pin hyrax-webapp to v7.1.3"
 # Then continue with: sh down.sh && sh up.sh
 ```
@@ -740,7 +750,8 @@ Okta can be pointed at this URL for automatic SP configuration.
 | Pages load with no CSS | Assets not precompiled or `RAILS_SERVE_STATIC_FILES` not set | Re-run `setup.sh` (step 1 is `assets:precompile`); ensure `RAILS_SERVE_STATIC_FILES=true` |
 | `git pull` fails: "divergent branches and need to specify how to reconcile" | VM has local commits; remote has different commits (diverged history) | Use `git pull --rebase` to replay local commits on top of remote. If submodule conflict: `git add hyrax-webapp && git rebase --continue` |
 | After `git pull --rebase`, submodule still at old version (e.g., v7.1.2 not v7.1.3) | Rebase resolved conflict by keeping local commit instead of pulling new version | Manually checkout correct version: `cd hyrax-webapp && git checkout v7.1.3 && cd .. && git add hyrax-webapp && git commit -m "fix: pin v7.1.3"` then restart with `sh down.sh && sh up.sh` |
-| Version in footer doesn't match expected (e.g., shows v7.1.2 after updating to v7.1.3) | Submodule wasn't updated before rebuild. Containers are running old code | Stop, verify submodule: `git submodule status && cd hyrax-webapp && git describe --tags && cd ..` — if old, checkout correct version and restart |
+| `git checkout v7.1.3` fails: "error: The following untracked working tree files would be overwritten by checkout" | Submodule has local changes (e.g., Gemfile.lock, tmp/ files) that block checkout | Clean the submodule: `cd hyrax-webapp && git reset --hard HEAD && git clean -fd && cd ..` then retry checkout |
+| Version in footer doesn't match expected (e.g., shows v7.1.2 after updating to v7.1.3) | Submodule wasn't updated before rebuild. Containers are running old code | Stop, verify submodule: `git submodule status && cd hyrax-webapp && git describe --tags && cd ..` — if old, clean and checkout correct version, then restart |
 | Solr unhealthy / dependency failed to start | `linux/amd64` Solr image running under QEMU on Apple Silicon (M1/M2/M3/M4) — JVM init is slow | Wait longer — M4 can take 10+ minutes. Local compose allows up to ~16 min total (`start_period: 600s` + 60 × 10s retries). A native arm64 Solr image is on Notch8's backlog. |
 | Solr not in SolrCloud mode | Wrong startup command | `startup-solr.sh` uses `solr start -f -c -z zoo:2181` — check logs |
 | `solr.xml does not exist` | Fresh bind mount, no `solr.xml` | `startup-solr.sh` seeds it automatically from `/opt/solr/server/solr/solr.xml` |

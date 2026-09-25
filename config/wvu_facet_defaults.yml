@@ -1,0 +1,15 @@
+# WVU Knapsack Facet Configuration
+# Defines default facet behavior and force-registered fields
+# Updated: 2026-09-17
+
+# Default settings applied to all _sim facets during registration
+defaults:
+  limit: 5
+  show_more: true
+
+# Fields that must be force-registered even if not in M3 profile
+# (Used for WVU-specific facets or facets from hardcoded base config)
+force_registered_fields:
+  date_created_sim: "Date Created"
+  location_sim: "Location"
+  people_represented_sim: "People Represented"

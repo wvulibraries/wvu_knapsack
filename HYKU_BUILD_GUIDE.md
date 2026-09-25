@@ -512,14 +512,39 @@ sh down.sh    # stops containers, data is preserved in ./data/
 
 ### Updating the application
 
-```bash
-# Pull latest code and restart — up.sh handles submodule update
-sh down.sh
-sh up.sh
+**When a submodule update is needed** (e.g., security patches, new Hyku release):
 
-# Run migrations, re-seed, and re-precompile assets if needed (all idempotent)
+```bash
+sh down.sh
+git pull                    # Pulls parent repo changes, including new submodule references
+sh up.sh                    # Rebuilds containers with updated code
+                            # up.sh automatically runs: git submodule update --init --recursive
+```
+
+The parent `.gitmodules` file specifies which commit of `hyrax-webapp` to use. When you `git pull`, the parent repo may have a new submodule reference. `up.sh` then runs `git submodule update --init --recursive` to check out that specified commit before rebuilding.
+
+**If a running instance already has the correct submodule commit** (no parent repo changes to submodule refs):
+
+```bash
+sh down.sh
+git pull                    # May have knapsack code changes only
+sh up.sh                    # Rebuilds containers; submodule unchanged
+```
+
+**Verify the submodule is at the correct commit:**
+
+```bash
+git submodule status       # Shows current commit of hyrax-webapp
+cd hyrax-webapp && git describe --tags && cd ..   # Shows version tag if available
+```
+
+**If migrations, asset recompilation, or DB changes are needed** (all idempotent):
+
+```bash
 docker compose -f docker-compose.production.yml exec web sh /app/samvera/scripts/setup.sh
 ```
+
+For running production instances with persistent data, migrations and asset pipelines are cached and only run if needed.
 
 ### Nuclear Option — complete wipe and rebuild
 

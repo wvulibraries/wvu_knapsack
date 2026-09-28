@@ -512,14 +512,72 @@ sh down.sh    # stops containers, data is preserved in ./data/
 
 ### Updating the application
 
-```bash
-# Pull latest code and restart — up.sh handles submodule update
-sh down.sh
-sh up.sh
+**When a submodule update is needed** (e.g., security patches, new Hyku release):
 
-# Run migrations, re-seed, and re-precompile assets if needed (all idempotent)
+```bash
+sh down.sh
+git pull --rebase           # Pulls parent repo changes, including new submodule references
+                            # --rebase handles divergent branches (local VM commits vs. remote)
+sh up.sh                    # Rebuilds containers with updated code
+```
+
+The parent `.gitmodules` file specifies which commit of `hyrax-webapp` to use. When you `git pull`, the parent repo may have a new submodule reference. Git automatically checks out that specified commit in the submodule before rebuilding.
+
+**If the VM has local commits and `git pull` reports divergent branches:**
+
+```bash
+git pull --rebase
+# If there's a submodule conflict (commit not present locally):
+#   git add hyrax-webapp
+#   git rebase --continue
+```
+
+On production VMs, `--rebase` is safer than merge — it replays any local commits on top of the remote branch. This prevents accidental merge commits.
+
+**⚠️ Gotcha: After rebase, verify the submodule updated to the correct version:**
+
+```bash
+git submodule status       # Shows current commit of hyrax-webapp
+cd hyrax-webapp && git describe --tags && cd ..   # Shows version tag
+```
+
+If the submodule is still at the old version (e.g., v7.1.2 instead of v7.1.3), the rebase resolved the conflict by keeping the local commit instead of pulling the new version. Manually checkout the correct tag:
+
+```bash
+cd hyrax-webapp
+
+# ⚠️ IMPORTANT: Discard any local changes in the submodule (e.g., Gemfile.lock, tmp/)
+# These block checkout and can cause: "error: The following untracked working tree files 
+# would be overwritten by checkout" or similar
+git reset --hard HEAD
+git clean -fd          # Remove untracked files and directories
+
+git checkout v7.1.3
+cd ..
+
+git add hyrax-webapp && git commit -m "fix: pin hyrax-webapp to v7.1.3"
+# Then continue with: sh down.sh && sh up.sh
+```
+
+**If a running instance already has the correct submodule commit** (no parent repo changes to submodule refs):
+
+```bash
+sh down.sh
+git pull --rebase           # May have knapsack code changes only
+sh up.sh                    # Rebuilds containers; submodule unchanged
+```
+
+**After restart, verify the version in the footer:**
+
+Visit `https://admin-hyku.lib.wvu.edu` and check the footer shows the correct version tag.
+
+**If migrations, asset recompilation, or DB changes are needed** (all idempotent):
+
+```bash
 docker compose -f docker-compose.production.yml exec web sh /app/samvera/scripts/setup.sh
 ```
+
+For running production instances with persistent data, migrations and asset pipelines are cached and only run if needed.
 
 ### Nuclear Option — complete wipe and rebuild
 
@@ -690,6 +748,10 @@ Okta can be pointed at this URL for automatic SP configuration.
 | 403 Blocked hosts | Host not in Rails allowed list | Verify `HYKU_ADMIN_HOST`/`HYKU_ROOT_HOST` match the request host; check `host_authorization.rb` |
 | Login fails "change was rejected" (422) | CSRF: session cookie has `Secure` flag, not sent over HTTP | Set `DISABLE_FORCE_SSL=true` — triggers `session_store_override.rb` to drop Secure flag |
 | Pages load with no CSS | Assets not precompiled or `RAILS_SERVE_STATIC_FILES` not set | Re-run `setup.sh` (step 1 is `assets:precompile`); ensure `RAILS_SERVE_STATIC_FILES=true` |
+| `git pull` fails: "divergent branches and need to specify how to reconcile" | VM has local commits; remote has different commits (diverged history) | Use `git pull --rebase` to replay local commits on top of remote. If submodule conflict: `git add hyrax-webapp && git rebase --continue` |
+| After `git pull --rebase`, submodule still at old version (e.g., v7.1.2 not v7.1.3) | Rebase resolved conflict by keeping local commit instead of pulling new version | Manually checkout correct version: `cd hyrax-webapp && git checkout v7.1.3 && cd .. && git add hyrax-webapp && git commit -m "fix: pin v7.1.3"` then restart with `sh down.sh && sh up.sh` |
+| `git checkout v7.1.3` fails: "error: The following untracked working tree files would be overwritten by checkout" | Submodule has local changes (e.g., Gemfile.lock, tmp/ files) that block checkout | Clean the submodule: `cd hyrax-webapp && git reset --hard HEAD && git clean -fd && cd ..` then retry checkout |
+| Version in footer doesn't match expected (e.g., shows v7.1.2 after updating to v7.1.3) | Submodule wasn't updated before rebuild. Containers are running old code | Stop, verify submodule: `git submodule status && cd hyrax-webapp && git describe --tags && cd ..` — if old, clean and checkout correct version, then restart |
 | Solr unhealthy / dependency failed to start | `linux/amd64` Solr image running under QEMU on Apple Silicon (M1/M2/M3/M4) — JVM init is slow | Wait longer — M4 can take 10+ minutes. Local compose allows up to ~16 min total (`start_period: 600s` + 60 × 10s retries). A native arm64 Solr image is on Notch8's backlog. |
 | Solr not in SolrCloud mode | Wrong startup command | `startup-solr.sh` uses `solr start -f -c -z zoo:2181` — check logs |
 | `solr.xml does not exist` | Fresh bind mount, no `solr.xml` | `startup-solr.sh` seeds it automatically from `/opt/solr/server/solr/solr.xml` |

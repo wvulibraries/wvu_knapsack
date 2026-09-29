@@ -47,4 +47,5 @@ file.sync = true
 dual_io = DualIO.new(file, STDOUT)
 logger = ActiveSupport::Logger.new(dual_io)
 logger.formatter = Rails.application.config.log_formatter
-Rails.logger = ActiveSupport::TaggedLogging.new(logger)
+# Rails.logger = ActiveSupport::TaggedLogging.new(logger)
+Rails.logger = ActiveSupport::BroadcastLogger.new(ActiveSupport::TaggedLogging.new(logger))

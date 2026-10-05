@@ -43,9 +43,25 @@ log_path = logs_dir.join(log_filename)
 file = File.open(log_path, "a")
 file.sync = true
 
-# Create dual logger
+# # Create dual logger
+# dual_io = DualIO.new(file, STDOUT)
+# logger = ActiveSupport::Logger.new(dual_io)
+# logger.formatter = Rails.application.config.log_formatter
+# # Rails.logger = ActiveSupport::TaggedLogging.new(logger)
+# Rails.logger = ActiveSupport::BroadcastLogger.new(ActiveSupport::TaggedLogging.new(logger))
+
 dual_io = DualIO.new(file, STDOUT)
 logger = ActiveSupport::Logger.new(dual_io)
 logger.formatter = Rails.application.config.log_formatter
-# Rails.logger = ActiveSupport::TaggedLogging.new(logger)
-Rails.logger = ActiveSupport::BroadcastLogger.new(ActiveSupport::TaggedLogging.new(logger))
+
+tagged_logger = ActiveSupport::TaggedLogging.new(logger)
+broadcast_logger = ActiveSupport::BroadcastLogger.new(tagged_logger)
+
+# BroadcastLogger's own #formatter doesn't automatically reflect what its broadcasts are
+# using, so anything reading Rails.logger.formatter directly (ActiveJob's tag_logger check,
+# among others) gets nil instead of the tag-aware formatter underneath — raising
+# `undefined method 'current_tags' for nil` on every perform_later call. Set it explicitly
+# so that top-level read is never nil.
+broadcast_logger.formatter = tagged_logger.formatter
+
+Rails.logger = broadcast_logger

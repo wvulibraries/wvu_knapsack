@@ -4,7 +4,7 @@ set -e
 # Pull latest knapsack code before bringing up containers.
 # Use --rebase to handle divergent branches (local VM commits vs. remote).
 # This is safer than merge on a production VM — replays local commits on top of remote.
-git pull --rebase
+#git pull --rebase
 
 # After git pull --rebase, if there are submodule conflicts (e.g., when VM has local commits),
 # resolve with: git add hyrax-webapp && git rebase --continue

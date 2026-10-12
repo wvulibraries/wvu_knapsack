@@ -1,0 +1,67 @@
+# frozen_string_literal: true
+# This configuration file will be evaluated by Puma. The top-level methods that
+# are invoked here are part of Puma's configuration DSL. For more information
+# about methods provided by the DSL, see https://puma.io/puma/Puma/DSL.html.
+
+# Puma starts a configurable number of processes (workers) and each process
+# serves each request in a thread from an internal thread pool.
+#
+# The ideal number of threads per worker depends both on how much time the
+# application spends waiting for IO operations and on how much you wish to
+# to prioritize throughput over latency.
+#
+# As a rule of thumb, increasing the number of threads will increase how much
+# traffic a given process can handle (throughput), but due to CRuby's
+# Global VM Lock (GVL) it has diminishing returns and will degrade the
+# response time (latency) of the application.
+#
+# The default is set to 3 threads as it's deemed a decent compromise between
+# throughput and latency for the average Rails application.
+#
+# Any libraries that use a connection pool or another resource pool should
+# be configured to provide at least as many connections as the number of
+# threads. This includes Active Record's `pool` parameter in `database.yml`.
+threads_count = ENV.fetch("RAILS_MAX_THREADS", 5)
+threads threads_count, threads_count
+
+# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
+port ENV.fetch("PORT", 3000)
+
+# Specifies the number of `workers` to boot in clustered mode.
+# Workers are forked web server processes. If using threads and workers together
+# the concurrency of the application would be max `threads` * `workers`.
+# Workers do not work on JRuby or Windows (both of which do not support
+# process forking).
+#
+# This host has 8+ CPU cores available but was previously running in single
+# (non-clustered) mode with no `workers` set, meaning only one core's worth
+# of Ruby execution was ever in use regardless of how many threads were
+# configured (CRuby's GVL prevents threads in the same process from running
+# Ruby code in true parallel). Setting workers here forks multiple independent
+# processes, each with its own GVL, so CPU-bound work (view rendering, GC)
+# can actually run concurrently across cores instead of queuing behind a
+# single process.
+workers ENV.fetch("WEB_CONCURRENCY", 4)
+
+# Preload the application before forking worker processes. This boots Rails
+# once in the master process; forked workers then share that already-loaded
+# memory via copy-on-write, which keeps per-worker memory overhead much lower
+# than each worker loading Rails independently. Also allows Puma to catch
+# boot-time errors in the master before forking.
+preload_app!
+
+# Allow puma to be restarted by `bin/rails restart` command.
+plugin :tmp_restart
+
+# Specify the PID file. Defaults to tmp/pids/server.pid in development.
+# In other environments, only set the PID file if requested.
+pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+# Connections established before forking (e.g. ActiveRecord's connection pool)
+# are not safe to share across forked worker processes. This reconnects
+# ActiveRecord fresh in each worker after it boots, so each worker gets its
+# own valid set of database connections rather than inheriting a
+# stale/shared one from the master process.
+on_worker_boot do
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord::Base)
+end

@@ -36,4 +36,9 @@ notes.txt
 okta-*.json
 google-analytics.json
 
+# VM-specific mount points and symlinks (created by DevOps/deployment)
+# These are either symlinks to mounted shares or runtime directories
+/ingest/
+/samvera/
+
 

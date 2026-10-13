@@ -13,7 +13,8 @@
 if defined?(Hyku) && Hyku.const_defined?(:VERSION)
   module Hyku
     # Store original version for reference
-    ORIGINAL_VERSION = VERSION
+    # NOTE: Must use Hyku::VERSION explicitly; bare VERSION inside module block looks for top-level constant
+    ORIGINAL_VERSION = Hyku::VERSION
     
     # Override to 7.2.0
     remove_const(:VERSION)

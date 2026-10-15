@@ -23,4 +23,4 @@ docker image prune -f
 docker builder prune -f
 
 echo ""
-echo "Done. To restart: sh up.local.sh"
+echo "Done. To restart: sh up.sc.local.sh"

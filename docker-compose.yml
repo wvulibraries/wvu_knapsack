@@ -21,6 +21,7 @@ x-app: &app
     - uploads:/app/samvera/hyrax-webapp/public/uploads:cached
     - assets:/app/samvera/hyrax-webapp/public/assets:cached
     - cache:/app/samvera/hyrax-webapp/tmp/cache:cached
+    - ./data/logs/rails:/app/samvera/hyrax-webapp/log:cached
     - ./data/ingest:/app/samvera/ingest:cached
     - storage:/app/samvera/hyrax-webapp/storage:cached
     - .:/app/samvera
@@ -59,6 +60,8 @@ services:
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: solr
+    volumes:
+      - ./data/logs/solr:/var/solr/logs      
     ports:
       - "8983:8983"
 

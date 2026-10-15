@@ -8,7 +8,7 @@
 # Usage:  sh scripts/cleanup-dev.sh
 #
 # After running, restart with:
-#   sh up.local.sh
+#   sh up.sc.local.sh
 
 set -euo pipefail
 

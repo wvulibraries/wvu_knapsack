@@ -3,31 +3,22 @@
 # Override the default facet limit for flexible/M3 metadata fields in Hyrax 7.2.
 # Hyrax::FlexibleCatalogBehavior.load_flexible_schema (a class method) calls
 # blacklight_config.add_facet_field(name, label:) with NO limit parameter →
-# Blacklight defaults to 10. This initializer prepends on the class method and
-# fixes flexible facets to limit: 5 (matching static catalog_controller facets),
-# ensuring Solr receives limit+1 so Blacklight can show a "More" link.
-
-module Hyrax
-  module FlexibleCatalogBehaviorDecorator
-    def load_flexible_schema(*)
-      super
-      # After Hyrax registers all flexible facets (with no limit → default 10),
-      # iterate through facet_fields and set limit to 5 for fields added by this method.
-      # Static fields in catalog_controller already have limit: 5 and won't change.
-      CatalogController.blacklight_config.facet_fields.each_value do |field_config|
-        # Only override fields that got Blacklight's default (10); preserve explicit limits
-        field_config.limit = 5 if field_config.limit == 10
-      end
-    rescue => e
-      Rails.logger.warn "[knapsack] FlexibleCatalogBehaviorDecorator: #{e.message}"
-    end
-  end
-end
+# Blacklight defaults to 10. Since load_flexible_schema may have already been
+# called during Rails boot (before this initializer runs), we fix the limits
+# directly on the already-instantiated facet_fields.
 
 if defined?(Hyrax::FlexibleCatalogBehavior) && Hyrax.config.flexible?
-  # load_flexible_schema is a class method inside class_methods do; prepend on
-  # the singleton_class to override the class method (not instance method).
-  Hyrax::FlexibleCatalogBehavior.singleton_class.prepend(
-    Hyrax::FlexibleCatalogBehaviorDecorator
-  )
+  begin
+    # Iterate through facet_fields and set limit: 5 for any with no explicit limit.
+    # This catches flexible facets that were registered with no limit (defaults to 10
+    # in Blacklight), while preserving static catalog_controller facets (already 5).
+    CatalogController.blacklight_config.facet_fields.each_value do |field_config|
+      # Convert nil or missing limit to 5 for flexible facets
+      # Static facets from catalog_controller already have explicit limit: 5
+      field_config.limit = 5 if field_config.limit.nil?
+    end
+    Rails.logger.info "[knapsack] Fixed flexible facet limits to 5"
+  rescue => e
+    Rails.logger.warn "[knapsack] Error fixing flexible facet limits: #{e.message}"
+  end
 end

@@ -6,6 +6,8 @@
 # This is necessary to limit facet response counts (default Solr limit is 100)
 class CatalogSearchBuilder < AdvSearchBuilder
   def add_facetting_to_solr(solr_params)
+    Rails.logger.warn("CatalogSearchBuilder#add_facetting_to_solr: METHOD CALLED!")
+    
     # Call parent to set up base faceting
     super
     
@@ -13,7 +15,7 @@ class CatalogSearchBuilder < AdvSearchBuilder
     # Ensures Solr returns only the configured number of values (usually 5)
     # Blacklight uses limit+1 to detect "more" link in UI
     if blacklight_config.respond_to?(:facet_fields)
-      Rails.logger.info("CatalogSearchBuilder#add_facetting_to_solr: Processing #{blacklight_config.facet_fields.size} facet fields")
+      Rails.logger.warn("CatalogSearchBuilder#add_facetting_to_solr: Processing #{blacklight_config.facet_fields.size} facet fields")
       
       blacklight_config.facet_fields.each do |field_name, facet_config|
         # Get limit, handling cases where it might be Boolean or non-Integer
@@ -29,6 +31,10 @@ class CatalogSearchBuilder < AdvSearchBuilder
           Rails.logger.info("CatalogSearchBuilder: Setting #{field_name} facet.limit = #{(limit + 1).to_i}")
         end
       end
+      
+      # Log the final Solr params for verification
+      facet_limit_params = solr_params.select { |k, v| k.to_s.include?('facet.limit') }
+      Rails.logger.info("CatalogSearchBuilder: Final facet.limit params: #{facet_limit_params.inspect}")
     else
       Rails.logger.warn("CatalogSearchBuilder: blacklight_config does not respond_to :facet_fields")
     end

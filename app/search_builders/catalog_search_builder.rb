@@ -16,7 +16,11 @@ class CatalogSearchBuilder < AdvSearchBuilder
       Rails.logger.info("CatalogSearchBuilder#add_facetting_to_solr: Processing #{blacklight_config.facet_fields.size} facet fields")
       
       blacklight_config.facet_fields.each do |field_name, facet_config|
-        limit = facet_config.limit || blacklight_config.default_facet_limit || 5
+        # Get limit, handling cases where it might be Boolean or non-Integer
+        limit = facet_config.limit if facet_config.respond_to?(:limit) && facet_config.limit.is_a?(Integer) && facet_config.limit > 0
+        limit ||= blacklight_config.default_facet_limit || 5
+        limit = limit.to_i  # Ensure it's always an integer
+        
         # Set to limit+1 so Blacklight can detect if there are more results
         solr_params["f.#{field_name}.facet.limit"] = (limit + 1).to_i
         

@@ -116,18 +116,18 @@ Rails.application.config.to_prepare do
     defaults = yml_config.fetch('defaults', { limit: 5, show_more: true })
 
     # 1. Handle critical fields defined in YAML
+    # NOTE: Must delete and re-add to ensure limit is properly set in Hyku 7.2
+    # (direct assignment to existing field objects doesn't work reliably)
     force_fields.each do |field_name, label|
-      if config.facet_fields.key?(field_name)
-        config.facet_fields[field_name].limit = defaults['limit']
-        config.facet_fields[field_name].label = label
-        Rails.logger.info("Updated existing facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
-      else
-        config.add_facet_field field_name, 
-                               label: label, 
-                               limit: defaults['limit'], 
-                               show_more: defaults['show_more']
-        Rails.logger.info("Force-registered missing facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
-      end
+      # Remove existing field if present (forces reconfiguration with correct limit)
+      config.facet_fields.delete(field_name)
+      
+      # Re-add with YAML-defined label and default limit
+      config.add_facet_field field_name, 
+                             label: label, 
+                             limit: defaults['limit'], 
+                             show_more: defaults['show_more']
+      Rails.logger.info("Force-registered facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
     end
 
     # 2. Apply universal default limit to all dynamic _sim fields discovered via FlexibleSchema

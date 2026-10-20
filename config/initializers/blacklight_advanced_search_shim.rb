@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-# SHIM: Define BlacklightAdvancedSearch::RenderConstraintsOverride if missing
-# This module is expected by SearchHistoryController in hyrax-webapp but may not exist
-# in all versions of blacklight_advanced_search (particularly 8+).
-# This shim ensures the module exists so the controller can include it without errors.
+# SHIM: Define missing BlacklightAdvancedSearch classes
+# These are expected by various parts of the application but may not exist in all
+# versions of the blacklight_advanced_search gem (particularly 8.x).
+# This shim ensures they exist so decorators can check for them without NameError.
 
 unless defined?(BlacklightAdvancedSearch::RenderConstraintsOverride)
   module BlacklightAdvancedSearch
@@ -13,3 +13,14 @@ unless defined?(BlacklightAdvancedSearch::RenderConstraintsOverride)
     end
   end
 end
+
+unless defined?(BlacklightAdvancedSearch::AdvancedController)
+  module BlacklightAdvancedSearch
+    # Stub AdvancedController - actual implementation may come from gem or not be needed
+    class AdvancedController < CatalogController
+      # Minimal implementation - just inherits from CatalogController
+      # Real advanced search logic comes from blacklight_advanced_search gem
+    end
+  end
+end
+

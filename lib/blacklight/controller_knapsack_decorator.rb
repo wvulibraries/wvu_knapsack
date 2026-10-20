@@ -14,8 +14,13 @@
 module Blacklight
   module ControllerKnapsackDecorator
     def search_facet_path(options = {})
-      return super unless is_a?(BlacklightAdvancedSearch::AdvancedController)
+      # Check if AdvancedController is defined (guards against gem version mismatches)
+      unless defined?(BlacklightAdvancedSearch::AdvancedController) && is_a?(BlacklightAdvancedSearch::AdvancedController)
+        return super
+      end
 
+      # For AdvancedSearch, route to CatalogController since AdvancedController
+      # doesn't have a facet action
       opts = search_state
              .to_h
              .merge(action: "facet", controller: "catalog", only_path: true)

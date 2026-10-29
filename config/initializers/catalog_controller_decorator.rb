@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
-# Configure CatalogController to use our custom search builder
-# This must run AFTER hyrax-webapp's catalog controller initializes
 Rails.application.config.to_prepare do
   next unless defined?(::CatalogController)
 
-  # Override the Blacklight configuration to use our custom search builder
   ::CatalogController.configure_blacklight do |config|
-    # Set custom search builder that injects facet limit parameters
-    config.search_builder_class = ::CatalogSearchBuilder
-
     # Advanced search facet partial
     config.advanced_search[:form_facet_partial] = "advanced_search_facets"
 
@@ -107,39 +101,6 @@ Rails.application.config.to_prepare do
     end
     
     Rails.logger.info("Total M3 facets registered: #{m3_facets.size}")
-    
-    # YAML-driven configuration for critical WVU facets and defaults
-    yaml_path = Rails.root.join('config', 'wvu_facet_defaults.yml')
-    yml_config = File.exist?(yaml_path) ? YAML.load_file(yaml_path) : {}
-    
-    force_fields = yml_config.fetch('force_registered_fields', {})
-    defaults = yml_config.fetch('defaults', { limit: 5, show_more: true })
-
-    # 1. Handle critical fields defined in YAML
-    # NOTE: Must delete and re-add to ensure limit is properly set in Hyku 7.2
-    # (direct assignment to existing field objects doesn't work reliably)
-    force_fields.each do |field_name, label|
-      # Remove existing field if present (forces reconfiguration with correct limit)
-      config.facet_fields.delete(field_name)
-      
-      # Re-add with YAML-defined label and default limit
-      config.add_facet_field field_name, 
-                             label: label, 
-                             limit: defaults['limit'], 
-                             show_more: defaults['show_more']
-      Rails.logger.info("Force-registered facet: #{field_name} => #{label} (limit: #{defaults['limit']})")
-    end
-
-    # 2. Apply universal default limit to all dynamic _sim fields discovered via FlexibleSchema
-    config.facet_fields.each do |key, field_config|
-      next unless key.to_s.end_with?('_sim') && field_config.respond_to?(:limit=)
-      # Only apply if the field has no explicit limit set yet
-      if field_config.limit.nil? || field_config.limit.zero?
-        config.facet_fields[key].limit = defaults['limit']
-        Rails.logger.debug("Applied default limit #{defaults['limit']} to dynamic facet: #{key}")
-      end
-    end
-
   end # configure_blacklight
 end # to_prepare
 

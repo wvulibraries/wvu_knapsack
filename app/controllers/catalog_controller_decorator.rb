@@ -5,11 +5,10 @@ module CatalogControllerDecorator
     config.per_page = [6, 12, 24, 48, 96]
     config.default_per_page = 12
 
-    # Hyku #3072: Hide Type facet — remove BEFORE base config registers it
-    # to avoid race condition with to_prepare load order.
-    # Must be done inside configure_blacklight (not to_prepare) so it
-    # executes during config evaluation, not boot time.
-    config.add_facet_field 'generic_type_sim', show: false
+    # Hyku #3072: Hide Type facet (not needed for WVU theme).
+    # Delete before re-add attempts — base Hyku config may already have
+    # registered this field, causing "already exists" collision errors.
+    config.facet_fields.delete('generic_type_sim')
 
     # date_created_years_ssim holds every year a record's date_created
     # covers, populated by date_created_years_indexer_decorator.rb. One

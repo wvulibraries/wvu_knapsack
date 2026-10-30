@@ -127,8 +127,8 @@ Rails.application.config.to_prepare do
     # 2. Apply universal default limit to all dynamic _sim fields discovered via FlexibleSchema
     config.facet_fields.each do |key, field_config|
       next unless key.to_s.end_with?('_sim') && field_config.respond_to?(:limit=)
-      # Only apply if the field has no explicit limit set yet
-      if field_config.limit.nil? || field_config.limit.zero?
+      # Only apply if the field has no explicit limit set yet (nil or 0, but not true/false)
+      if field_config.limit.nil? || field_config.limit == 0
         config.facet_fields[key].limit = defaults['limit']
         Rails.logger.debug("Applied default limit #{defaults['limit']} to dynamic facet: #{key}")
       end

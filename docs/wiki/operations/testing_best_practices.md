@@ -19,20 +19,23 @@ Before major version testing (7.2.0, 7.3, etc.):
 - [ ] Facet counts loading correctly
 - [ ] Take snapshot with clear label: `2026-11-05-v7.1.3-clean-baseline`
 
-## Using Snapshots
+## Requesting Snapshots
 
-```bash
-# Before upgrading
-snapshot create "v7.1.3-clean-baseline"
+WVU does not provide direct snapshot CLI access. Instead, request snapshots through the appropriate channel (hykudev admin or infrastructure team).
 
-# Test upgrade (7.2.0 branch)
-# If it fails badly
-snapshot restore "v7.1.3-clean-baseline"
+### How to Request a Snapshot
 
-# To compare two versions
-snapshot list
-# Apply diff: git diff main feature/hyku-v7.2.0-upgrade
-```
+1. **Identify what needs checkpointing:** running version, gem versions, data state
+2. **Provide a clear label:** e.g., `v7.1.3-clean-baseline`
+3. **Confirm the baseline is stable** before requesting (records displaying, facets loading)
+4. **Document the request** in agent-tasks so the next session knows what was captured
+
+### Restoring from Snapshot
+
+When a test fails badly:
+1. Request restoration of the labeled snapshot
+2. Verify the restored state matches expectations
+3. Document any differences from the baseline
 
 ## When to Snapshot
 

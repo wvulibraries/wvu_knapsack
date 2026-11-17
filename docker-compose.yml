@@ -61,6 +61,12 @@ services:
       service: solr
     ports:
       - "8983:8983"
+    healthcheck:
+      test: curl -sf http://$$SOLR_ADMIN_USER:$$SOLR_ADMIN_PASSWORD@solr:8983/solr/admin/cores?action=STATUS || exit 1
+      start_period: 60s
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   fcrepo:
     extends:

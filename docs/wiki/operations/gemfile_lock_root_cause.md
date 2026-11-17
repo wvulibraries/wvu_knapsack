@@ -83,55 +83,17 @@ RUN bundle install --jobs "$(nproc)"
 
 However, this risks copying unwanted submodule runtime files. **Option 1 is cleaner.**
 
-## Why We're Using the Prod Copy Now (Workaround)
+## Why We're Using the Prod Copy Now (Local Cache)
 
-- Production has a **known-working Gemfile.lock** from successful deploys
-- Copying it guarantees the same versions local builds use
-- It's not ideal, but it's reliable until we implement a proper fix
-- **This backup is essential as insurance** while the root cause remains
+Since your team intentionally **discards Gemfile.lock and rebuilds on submodule updates**, the issue isn't the deletion policy. The issue is that fresh `bundle install` resolves differently on local machines vs prod VMs.
 
-## The Real Issue: Why Does Fresh Bundle Install Differ Locally vs Prod?
+This cached Gemfile.lock is a **pragmatic safety measure**:
+- Keeps a known-working version on hand for quick recovery
+- Prevents needing to re-download from the prod VM if local builds fail
+- Doesn't change the team's policy of rebuilding on updates
+- Useful for testing fixes without repeated manual downloads
 
-Since your team intentionally **discards Gemfile.lock and rebuilds on submodule updates**, the issue isn't the lockfile deletion itself. The issue is:
-
-**When Docker does a fresh `bundle install` without a lockfile:**
-- ✅ Prod VM resolves to compatible gems → build succeeds
-- ❌ Local machine resolves to incompatible gems → build fails
-
-This suggests environmental differences:
-
-1. **Different Docker base images?** Check `FROM ghcr.io/samvera/hyrax/hyrax-base:` version
-2. **Different Ruby versions in base image?** Even minor versions affect gem resolution
-3. **Different gem source availability?** Network, gem server mirrors, cached gems
-4. **Different Bundler versions?** Bundler resolution algorithm changed in v2.x
-5. **Build environment state?** Stale Docker volumes, conflicting cached gems
-
-## Diagnosing the Real Build Failure
-
-To understand what gems conflict locally:
-
-```bash
-# On your local machine, trigger a full rebuild
-docker compose down --volumes
-docker system prune -a  # Remove all dangling images/volumes
-
-# Rebuild and capture the error
-docker compose build --no-cache 2>&1 | tee build.log
-
-# Search for the actual bundle error
-grep -A 20 "bundle install" build.log
-grep -i "conflict\|incompatible\|version" build.log
-```
-
-**Key question:** When you copied Gemfile.lock from prod, did the **exact same gem versions** resolve locally without conflict? If so, that tells us what the resolution algorithm is picking differently.
-
-## Next Steps
-
-1. **Don't remove the prod Gemfile.lock backup** — it's your safety net
-2. **Document the actual bundle error** when fresh resolution fails locally
-3. **Compare environments:** Check if Dockerfile base image, Ruby version, or Bundler version differs between local and prod
-4. **Test hypothesis:** Force a specific Bundler version locally and see if resolution changes
-5. **Consider:** If prod resolves cleanly each time but local doesn't, the issue is local build environment, not policy
+The root cause (why fresh resolutions diverge between environments) remains unresolved, but this backup makes it survivable.
 
 ## References
 

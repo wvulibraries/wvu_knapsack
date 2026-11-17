@@ -2,24 +2,20 @@
 
 **Category:** Operations  
 **Date Created:** 2026-11-17  
-**Status:** Critical Procedure  
+**Status:** Local Cache for Quick Recovery  
 **Last Updated:** 2026-11-17
 
-## The Issue
+## The Purpose
 
-The `hyrax-webapp/Gemfile.lock` file is in a **git submodule** (pointing to upstream samvera/hyrax). However:
+This backup allows you to **quickly restore a known-working Gemfile.lock from production** without needing to download it again from the prod VM.
 
-- Local development requires a **specific, pinned version** of dependencies
-- Simply checking out the submodule doesn't guarantee the right Gemfile.lock state
-- **DevOps had to manually copy Gemfile.lock from production VMs** to get hykudev and local environments working
-- Removing or regenerating this Gemfile.lock causes bundle install failures and incompatible gem versions
+It's a **safety cache**, not a permanent replacement for the team's rebuild-on-update policy.
 
-## Why This Happens
+## Why We Need It
 
-- The submodule SHA points to a specific Hyku version
-- That version's Gemfile.lock may have drifted from what's in the git tree
-- Running `bundle install` or `bundle update` locally can generate incompatible versions
-- **This is why we don't modify the submodule** — to preserve this exact state
+- When you rebuild on submodule updates (intentional policy), fresh `bundle install` can resolve incompatibly on local machines
+- If local builds fail due to gem conflicts, you can quickly restore the prod-tested version without re-downloading
+- This keeps you unblocked while maintaining the policy of discarding old lockfiles on updates
 
 ## Backup Location
 
@@ -29,7 +25,7 @@ The `hyrax-webapp/Gemfile.lock` file is in a **git submodule** (pointing to upst
 
 ## Recovery Procedure
 
-If Gemfile.lock becomes corrupted or missing:
+If Gemfile.lock becomes corrupted or missing **and local builds fail with gem conflicts**:
 
 ```bash
 cd /Users/tam0013/Documents/git/wvu_knapsack/hyrax-webapp
@@ -37,23 +33,29 @@ cd /Users/tam0013/Documents/git/wvu_knapsack/hyrax-webapp
 # Check if Gemfile.lock is missing or broken
 ls -la Gemfile.lock
 
-# Restore from backup (if available)
+# Restore from cached backup
 cp /Users/tam0013/.copilot/session-state/4e01e37b-32bd-427f-b787-c7a4cd5ff972/files/Gemfile.lock.backup Gemfile.lock
 
-# Verify it matches production
+# Verify it matches production's version
 md5sum Gemfile.lock
-# Compare with output from: md5sum /path/to/prod/hyrax-webapp/Gemfile.lock
+# Should output: 7b4ed53d782f8f0103bcd2537d0d6052
 
-# DO NOT commit this file (it's in .gitignore for good reason)
-git status  # should show no changes
+# Rebuild locally
+docker compose down --volumes
+docker compose build --no-cache
+sh up.sc.local.sh
 ```
 
-## Never Do This
+## Important Notes
 
-- ❌ Run `bundle update` in hyrax-webapp directory
-- ❌ Delete or move Gemfile.lock
-- ❌ Commit changes to Gemfile.lock locally
-- ❌ Copy a different version from another dev's machine
+- **Only use this if:**
+  - Local docker build fails with gem conflicts
+  - You can't re-download from the prod VM
+  - You need to get building again quickly
+
+- **Don't commit this Gemfile.lock** to git — the team policy is to rebuild on submodule updates
+- **After production VMs are updated** with new submodule versions, download a fresh backup to replace this one
+- **Keep the prod VM as the source of truth** — this is just a local cache
 
 ## Related Procedures
 

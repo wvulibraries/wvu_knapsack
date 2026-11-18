@@ -706,6 +706,151 @@ Okta can be pointed at this URL for automatic SP configuration.
 
 ---
 
+## 4. Upgrading to a New Hyku Version (VM Production)
+
+When upgrading to a new Hyku version (e.g., 7.1.3 → 7.2.0), use the **production upgrade script** to ensure data preservation and safe gem dependency resolution.
+
+### Why a dedicated upgrade script?
+
+During major version upgrades (Rails, Hyrax, Hyku), gem dependency resolution can produce different versions when done fresh vs. from a cached Gemfile.lock. This can cause:
+- Gem conflicts on startup (e.g., `NameError` from incompatible gems)
+- Stale gem cache interfering with fresh resolution
+- Data loss if cleanup is too aggressive
+
+The upgrade script handles all this safely: **data is preserved, gem cache is cleared, images rebuild with fresh dependencies, and services restart with verification.**
+
+### Pre-upgrade checklist
+
+Before running the upgrade:
+
+1. **Backup the current state:**
+   ```bash
+   # Optional — save a Gemfile.lock snapshot for rollback reference
+   cp hyrax-webapp/Gemfile.lock hyrax-webapp/Gemfile.lock.backup.7.1.3
+   ```
+
+2. **Verify the upgrade branch exists locally or on the remote:**
+   ```bash
+   git branch -a | grep feature/hyku
+   # e.g., feature/hyku-v7.2.0-upgrade
+   ```
+
+3. **Test locally first (optional but recommended):**
+   - Switch to the upgrade branch on a developer machine
+   - Run `sh up.sc.local.sh`
+   - Verify the app starts and data loads correctly
+   - Confirm admin version shows the new Hyku release
+
+### Running the upgrade
+
+**Option 1: Upgrade on current branch (branch already switched)**
+```bash
+sh scripts/upgrade-prod.sh
+```
+
+**Option 2: Switch branch and upgrade in one step**
+```bash
+sh scripts/upgrade-prod.sh feature/hyku-v7.2.0-upgrade
+```
+
+The script will:
+1. Optionally switch to the specified branch and update submodules
+2. Record pre-upgrade data state (record counts, etc.)
+3. Stop all services gracefully (preserves Docker volumes)
+4. Remove stale Docker images and gem cache (keeps `./data` intact)
+5. Rebuild images with fresh gem dependencies
+6. Start services and wait for readiness
+7. Verify post-upgrade data integrity (compare record counts)
+8. Display next steps
+
+### What gets preserved
+
+✅ **Data preserved across upgrade:**
+- PostgreSQL database (all tables, records, users, tenants)
+- Solr search index
+- Fedora repository objects
+- Redis state
+- ZooKeeper state
+- All uploaded files (`./data/uploads/` and `./data/storage/`)
+- Ingest staging files (`./data/ingest/`)
+
+❌ **Data not preserved:**
+- Gem cache (`./data/bundle/`) — intentionally cleared for fresh resolution
+- Locally built Docker images — rebuilt with new dependencies
+- Running containers — restarted fresh
+
+### Post-upgrade verification
+
+After the script completes, verify the upgrade:
+
+```bash
+# 1. Check the new version in the admin UI
+docker compose -f docker-compose.production.yml exec web curl -s http://localhost:3000/admin | grep -i "hyku version"
+
+# 2. Run a quick test import
+# (create a small CSV with 1-2 records and import via the UI)
+
+# 3. Monitor for errors
+docker compose -f docker-compose.production.yml logs -f web
+docker compose -f docker-compose.production.yml logs -f worker
+
+# 4. Test all core workflows
+# - Login as admin
+# - View dashboard
+# - Browse catalog
+# - Create a test work
+# - Verify thumbnails/derivatives load
+```
+
+### Rollback (if needed)
+
+If the upgrade fails or you need to revert:
+
+```bash
+# 1. Switch back to the previous branch
+git checkout main
+git submodule update --init --recursive
+
+# 2. Run the upgrade script again (restores previous version)
+sh scripts/upgrade-prod.sh
+
+# 3. All data remains intact — only the app code changes
+```
+
+### Troubleshooting
+
+**Q: The upgrade script hangs waiting for web service.**
+- Check logs: `docker compose -f docker-compose.production.yml logs web`
+- Verify Solr is healthy: `docker compose -f docker-compose.production.yml logs solr`
+- If Solr is slow, let it finish starting (can take 2-3 min on first upgrade)
+- Press `Ctrl+C` and check logs, then `docker compose -f docker-compose.production.yml restart web`
+
+**Q: "Gem::FilePermissionError" after upgrade.**
+- The upgrade script automatically handles permission fixes, but if the error persists:
+  ```bash
+  sudo chown -R 1001:101 ./data/bundle
+  sudo chmod -R 777 ./data/bundle
+  docker compose -f docker-compose.production.yml restart web
+  ```
+
+**Q: Records are missing after upgrade.**
+- This should not happen — the upgrade script preserves all data volumes.
+- Verify the database: `docker compose -f docker-compose.production.yml exec db psql -U postgres -d hyku_production -c "SELECT COUNT(*) FROM generic_works;"`
+- Verify Solr index: `docker compose -f docker-compose.production.yml exec solr curl -s http://solr:8983/solr/hyku/select | grep numFound`
+- If counts differ, trigger a full reindex: See [Solr Reindexing](#solr-reindexing) below.
+
+**Q: I want a complete data wipe before upgrade (for dev/test only).**
+- Use the **cleanup script** instead:
+  ```bash
+  sh scripts/cleanup-prod.sh vm
+  git checkout feature/hyku-v7.2.0-upgrade
+  sh up.sh
+  docker compose -f docker-compose.production.yml exec web sh /app/samvera/scripts/setup.sh
+  ```
+- ⚠️ **This deletes all data permanently.**
+
+---
+
 ## Quick Reference
 
 ### Stack Car (local dev)
@@ -736,6 +881,8 @@ docker compose -f docker-compose.local.yml exec web bundle exec rails console
 ```bash
 sh up.sh                          # git pull + build + start
 sh down.sh                        # stop
+sh scripts/upgrade-prod.sh                        # safe upgrade (preserve data, fresh gems)
+sh scripts/upgrade-prod.sh feature/hyku-v7.2.0-upgrade  # switch branch + upgrade
 
 # Manual equivalents:
 docker compose -f docker-compose.production.yml up -d

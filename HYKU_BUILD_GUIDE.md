@@ -703,6 +703,8 @@ Okta can be pointed at this URL for automatic SP configuration.
 | `Permission denied @ dir_s_mkdir - /usr/local/bundle` or bundler can't write to `Gemfile.lock` | `./data/bundle` or hyrax-webapp directory created by root (fresh clone, or prior `--build` run wrote gems as root) | Handled automatically by the `fix_permissions` service in `docker-compose.local.yml`. On the VM, `up.sh` does `chown -R 1001:101 ./data/bundle` before compose up. If initialize_app fails with "can't write to Gemfile.lock", contact DevOps to fix directory permissions for UID `1001` GID `101` (nagios:101 on the VM). Manual fix: `sudo chown -R 1001:101 ./data hyrax-webapp` then restart. |
 | Bundle install slow on every start | Gems reinstall into container-local paths | Expected on first run; `./data/bundle` is cached so subsequent restarts are fast |
 | `up.sc.local.sh` takes a long time | `--no-cache` rebuild | Normal — use `sc up -d` directly when you don't need a clean rebuild |
+| App shows old version after switching branches (VM production) | Production compose caches images; switching branches doesn't trigger rebuild | Run `docker compose -f docker-compose.production.yml build --no-cache web worker` before `./up.sh`. Production uses `pull_policy: build` which only builds if the image doesn't exist — existing cached images are reused even if the code changed. |
+| Submodule at wrong commit on VM after branch switch | Branch submodule reference not fetched locally on VM | Run `git fetch origin` then `git submodule update --init --recursive` to sync submodule to what the branch expects. The submodule ref must be pushed to origin first from the dev machine. |
 
 ---
 
@@ -742,6 +744,39 @@ Before running the upgrade:
    - Confirm admin version shows the new Hyku release
 
 ### Running the upgrade
+
+**⚠️ Critical: Before running the upgrade script on hykudev (production VM), ensure:**
+
+1. **Push the submodule update to origin first** (from local dev machine):
+   ```bash
+   # Locally, verify the submodule commit is correct
+   cd hyrax-webapp && git describe --tags && cd ..
+   
+   # Push any branch commits that include submodule updates
+   git push origin feature/hyku-v7.2.0-upgrade
+   ```
+
+2. **On hykudev, manually sync the submodule before running the script:**
+   ```bash
+   # Fetch latest from origin
+   git fetch origin
+   
+   # Update submodule to what the branch expects
+   git submodule update --init --recursive
+   
+   # Verify it matches the local dev machine
+   cd hyrax-webapp && git describe --tags && cd ..
+   ```
+
+3. **Fix permissions if Gemfile.lock is read-only:**
+   ```bash
+   chmod 644 hyrax-webapp/Gemfile.lock
+   ```
+
+**Why these steps matter:**
+- Production compose uses cached Docker images (`pull_policy: build`). Switching branches does NOT auto-rebuild — the old code stays in the image until you explicitly rebuild.
+- The upgrade script rebuilds images, but only if you've synced the submodule first.
+- The submodule reference in the branch must be pushed to origin before hykudev can fetch it.
 
 **Option 1: Upgrade on current branch (branch already switched)**
 ```bash
